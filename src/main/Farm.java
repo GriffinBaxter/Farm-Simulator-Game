@@ -1,7 +1,7 @@
 package main;
 import java.util.ArrayList;
 
-public class Farm {
+public class Farm  extends GameEnvironment{
 	
 	private String farmName;
 	private String farmType;
@@ -16,7 +16,7 @@ public class Farm {
 	{
         farmName = name;
         farmType = type;
-        farmer = farmer
+        farmer = farmer;
     }
 	
 	/**
