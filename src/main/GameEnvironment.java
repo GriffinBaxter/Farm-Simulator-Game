@@ -31,7 +31,6 @@ public class GameEnvironment {
 		}
 		while (numDays < 5 || numDays > 10);
 		
-		
 		//Getting farmer name
 		String farmerName = null;
 		do
@@ -45,23 +44,27 @@ public class GameEnvironment {
 		while (farmerName == null);
 
 		
-		
+		scanner.next();
 		String typeString = null;
 		//Selecting farm type
 		do
 		{
-			System.out.println("Please select a farm type from below by typing the corresponding number");
-			System.out.println("1: More starting money, Slower crop growing speed");
-			System.out.println("2: Less starting money, Faster crop growing speed");
-			System.out.println("3: Normal, the default farm");
+			System.out.println("Please select a farm type from below by typing the corresponding number\n" + 
+					"1: More starting money, Slower crop growing speed.\n" + 
+					"2: Less starting money, Faster crop growing speed.\n" + 
+					"3: Normal, the default farm.");
+			/*
+			System.out.println("1: More starting money, Slower crop growing speed.");
+			System.out.println("2: Less starting money, Faster crop growing speed.");
+			System.out.println("3: Normal, the default farm.");*/
+
 			if (scanner.hasNext())
 			{
 				typeString = scanner.nextLine();
 			}
 			
 		}
-		while(typeString != "1" || typeString != "2" || typeString != "3");
-		
+		while(typeString != "1" && typeString != "2" && typeString != "3");
 		System.out.println(typeString);
 		
 		String farmName = null;
