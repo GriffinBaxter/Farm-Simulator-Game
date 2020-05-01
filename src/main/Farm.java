@@ -10,14 +10,39 @@ public class Farm  extends GameEnvironment{
 	private ArrayList<Animal> animal;
 	private double money;
 	private int freeSpace;
+	private Double cropGrowthSpeed;
 	
 	
-	public Farm(String name, String type, Farmer farmer) 
+	
+	public Farm(String name, String type, Farmer newfarmer) 
 	{
         farmName = name;
-        farmType = type;
-        farmer = farmer;
+        setFarmType(type);
+        farmer = newfarmer;
+        System.out.println("money = $" + money + "cropGrowthSpeed =" + cropGrowthSpeed);
     }
+	
+	public void setFarmType(String type) 
+	{
+		if (type == "1") 
+		{
+			money = 10000;
+			cropGrowthSpeed = 0.5;
+		}
+		else if (type == "2") 
+		{
+			money = 6000;
+			cropGrowthSpeed = 1.5;
+		}
+		else if (type == "3") 
+		{
+			money = 8000;
+			cropGrowthSpeed = 1.0;
+		}
+		
+	}
+	
+	
 	
 	/**
 	 *	Tends to the Farm to make animals happier and increase space available
@@ -34,10 +59,10 @@ public class Farm  extends GameEnvironment{
 		
 		for(Crop crop: crops) 
 		{
-			if (crop.harvestDays == 0)
+			if (crop.canHarvest())
 			{
 				//Harvest here
-				moneyMade += crop.sellPrice;
+				moneyMade += crop.getSellPrice();
 			}
 		}
 		
