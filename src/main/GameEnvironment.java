@@ -7,6 +7,7 @@ public class GameEnvironment {
 	
 	private Farm farm;
 	private Farmer farmer;
+	private int numDays;
 	
 	
 	/**
@@ -15,7 +16,6 @@ public class GameEnvironment {
 	public void startGame() {
 		Scanner scanner = new Scanner(System.in);
 		
-		int numDays = 0;//have to set it to something...
 		do
 		{//loops forever when you put a string in the input
 			System.out.println("How many days would you like the game to last? (Enter a number between 5 and 10)");
@@ -76,13 +76,21 @@ public class GameEnvironment {
 		
 	}
 	
+	public void mainGame()
+	{
+		
+	}
+	
 	public boolean isAlpha(String name) {
 	    return name.matches("[a-zA-Z]+");
 	}
 	
 	
 	public void nextDay() {
-		
+		farmer.increaseAge();
+		//Grow crops
+		farm.growCrops();
+		farm.increaseMoney(farm.collectAnimalMoney());
 	}
 	
 	public void randomEvent() {
@@ -93,6 +101,7 @@ public class GameEnvironment {
 		System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");
 		GameEnvironment game = new GameEnvironment();
 		game.startGame();
+		game.mainGame();
 
 	}
 
