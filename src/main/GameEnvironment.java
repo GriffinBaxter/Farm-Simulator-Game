@@ -16,7 +16,7 @@ public class GameEnvironment {
 	/**
 	 * Sets the number of days
 	 */
-	public void setNumDays() {
+	public void inputNumDays() {
 		do
 		{
 			scanner = new Scanner(System.in);
@@ -39,7 +39,7 @@ public class GameEnvironment {
 	/**
 	 * Sets the farmer's name
 	 */
-	public void setFarmerName() {
+	public void inputFarmerName() {
 		do
 		{
 			scanner = new Scanner(System.in);
@@ -65,7 +65,7 @@ public class GameEnvironment {
 	/**
 	 * Sets the farm type
 	 */
-	public void setFarmType() { // We need 4 farm types as per the specifications, 4th one will be added later
+	public void inputFarmType() { // We need 4 farm types as per the specifications, 4th one will be added later
 		do
 		{
 			scanner = new Scanner(System.in);
@@ -102,7 +102,7 @@ public class GameEnvironment {
 	/**
 	 * Sets the farm's name
 	 */
-	public void setFarmName() {
+	public void inputFarmName() {
 		do
 		{
 			scanner = new Scanner(System.in);
@@ -122,18 +122,30 @@ public class GameEnvironment {
 	public void startGame() {
 		
 		// Might use a single function for some of these with varying inputs, as their functions are quite similar to each other
-		setNumDays();
-		setFarmerName();
-		setFarmType();
-		setFarmName();
+		inputNumDays();
+		inputFarmerName();
+		inputFarmType();
+		inputFarmName();
 		
-		farmer = new Farmer(farmerName, 0); //Age is 0
+		farmer = new Farmer(farmerName, 1); //Age is 1, first day
 		farm = new Farm(farmName, farmType, farmer);
 	}
 	
 	public void mainGame()
 	{
-		
+		//Command line Application
+		int option = printOptions();
+		//System.out.println("you have selected option " + option);//for testing
+		//use a switch to carry out selected option
+		switch(option)
+		{
+		case 1:
+			//buy some cool items
+			break;
+		case 2:
+			nextDay();
+			break;
+		}
 	}
 	
 	public boolean isAlpha(String name) {
@@ -142,15 +154,58 @@ public class GameEnvironment {
 	
 	
 	public void nextDay() {
+		//if the game is finished
+		System.out.println("You have slept.");
 		farmer.increaseAge();
-		//Grow crops
-		farm.growCrops();
-		farm.increaseMoney(farm.collectAnimalMoney());
+		if (farmer.getAge() == numDays)
+		{
+			finishGame();
+		}
+		else
+		{
+			//Grow crops
+			farm.growCrops();
+			farm.increaseMoney(farm.collectAnimalMoney());
+			mainGame();
+		}
+	}
+
+	public void finishGame()
+	{
+		System.out.println("The game has finished!\n"
+				+ farmerName + "\n"
+				+ farmer.getAge() + " days have passed.\n"
+				+ "You ended with " + farm.getProfit() + "\n"
+				+ "Score: ");
 	}
 	
-	public void randomEvent() {
+	public int printOptions()
+	{
+		int option = -1;//nothing chosen yet
+		int numOptions = 2;//change this depending on the number of options available
+		do
+		{
+			scanner = new Scanner(System.in);
+			System.out.println("Please chose an option from below:\n"
+					+ "1. Buy items\n"
+					+ "2. Sleep");
+
+			if (scanner.hasNextInt())
+			{
+				option = scanner.nextInt();
+				if (option < 1 || option > numOptions) {
+					System.out.println("That was not an option, please try again");
+				}
+			}
+			else {
+				System.out.println("That is not an integer number, please try again");
+			}
+		}
+		while(option < 1 || option > numOptions);
 		
+		return option;
 	}
+	
 	
 	public static void main(String[] args) {
 		System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");

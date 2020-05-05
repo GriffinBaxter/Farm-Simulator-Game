@@ -3,11 +3,11 @@ package main;
 public class Crop extends Store{
 
 	private String cropName;
-	private Double purchasePrice;
-	private Double sellPrice;
+	private double purchasePrice;
+	private double sellPrice;
 	private int harvestDays;
 	
-	public Crop(String name, Double initPurchasePrice,Double initSellPrice, int initHarvestDays)
+	public Crop(String name, double initPurchasePrice,double initSellPrice, int initHarvestDays)
 	{
 		cropName = name;
 		purchasePrice = initPurchasePrice;
@@ -24,12 +24,12 @@ public class Crop extends Store{
 		return false;
 	}
 	
-	public Double getPurchasePrice()
+	public double getPurchasePrice()
 	{
 		return purchasePrice;
 	}	
 	
-	public Double getSellPrice()
+	public double getSellPrice()
 	{
 		return sellPrice;
 	}

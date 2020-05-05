@@ -14,4 +14,9 @@ public class Farmer {
 	{
 		farmerAge ++;
 	}
+	
+	public int getAge()
+	{
+		return farmerAge;
+	}
 }
