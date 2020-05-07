@@ -1,23 +1,24 @@
 package main;
 
-public class Crop extends Store{
+public class Crop{
 
 	private String cropName;
 	private double purchasePrice;
 	private double sellPrice;
-	private int harvestDays;
+	private int daysToGrow;
+	private int daysGrown = 0;
 	
-	public Crop(String name, double initPurchasePrice,double initSellPrice, int initHarvestDays)
+	public Crop(String name, double initPurchasePrice,double initSellPrice, int initDaysToGrow)
 	{
 		cropName = name;
 		purchasePrice = initPurchasePrice;
 		sellPrice = initSellPrice;
-		harvestDays = initHarvestDays;
+		daysToGrow = initDaysToGrow;
 	}
 	
 	public Boolean canHarvest() 
 	{
-		if (harvestDays <= 0)
+		if (daysGrown == daysToGrow)
 		{
 			return true;
 		}
@@ -36,7 +37,15 @@ public class Crop extends Store{
 	
 	public void grow()
 	{
-		harvestDays--;
+		daysGrown++;
+	}
+	
+	public void printCrop()
+	{
+		System.out.println(cropName + " Has been growing for " + daysGrown 
+				+ " days, it needs " + (daysToGrow - daysGrown) 
+				+ " more days to be harvested");
+				
 	}
 	
 	

@@ -1,6 +1,6 @@
 package main;
 
-public class Item extends Store{
+public class Item{
 
 	private String itemName;
 	private String type;//Type item can be used on (crop or sheep)

@@ -1,6 +1,6 @@
 package main;
 
-public class Animal extends Store{
+public class Animal{
 
 	private String animalName;
 	private Double purchasePrice;
@@ -20,9 +20,16 @@ public class Animal extends Store{
 		happiness++;
 	}
 	
-	public Double makeMoney()//Called at the end of each day
+	public Double returnDailyProfit()//Called at the end of each day
 	{
 		return happiness * dailyMoneyMade;
+	}
+	
+	public void printAnimal()
+	{
+		System.out.println(animalName + " has a happiness level of " 
+	+ happiness + ". This equates to $" + returnDailyProfit() + " per day");
+				
 	}
 	
 }

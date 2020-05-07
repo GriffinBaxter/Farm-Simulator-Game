@@ -4,9 +4,9 @@ import java.util.ArrayList;
 public class Store{
 
 	
-	private ArrayList<Crop> cropsForSale;
-	private ArrayList<Animal> animalForSale;
-	private ArrayList<Item> itemsForSale;
+	private ArrayList<Crop> cropsForSale = new ArrayList<Crop>();
+	private ArrayList<Animal> animalForSale = new ArrayList<Animal>();
+	private ArrayList<Item> itemsForSale = new ArrayList<Item>();
 	
 	public Store()
 	{
@@ -25,7 +25,7 @@ public class Store{
 		animalForSale.add(new Animal("Goat", 25.0, 1.0, 30.0));
 		
 		//Name, Type(for crops or animals), Bonus
-		itemsForSale.add(new Item("fertilizer", "Crop", 10.0, 2.0));
+		itemsForSale.add(new Item("Fertilizer", "Crop", 10.0, 2.0));
 		//5 others
 	}
 	

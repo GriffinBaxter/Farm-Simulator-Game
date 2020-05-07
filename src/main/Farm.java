@@ -6,6 +6,7 @@ public class Farm  extends GameEnvironment{
 	private String farmName;
 	private String farmType;
 	private Farmer farmer;
+	private Store store = new Store();
 	private ArrayList<Crop> crops = new ArrayList<Crop>();
 	private ArrayList<Animal> animals = new ArrayList<Animal>();
 	private double money;
@@ -20,6 +21,9 @@ public class Farm  extends GameEnvironment{
         farmName = name;
         setFarmType(type);
         farmer = newfarmer;
+        //For testing
+        //crops.add(store.cropsForSale.get(1));
+        //animals.add(store.animalForSale.get(1));
     }
 	
 	public void setFarmType(String type) 
@@ -39,6 +43,7 @@ public class Farm  extends GameEnvironment{
 			money = 1500;
 			startCropGrowthSpeed = 1.0;
 		}
+		initMoney = money;
 		//System.out.println(money + "  " + startCropGrowthSpeed);
 		
 	}
@@ -105,10 +110,29 @@ public class Farm  extends GameEnvironment{
 		double moneyMade = 0.0;
 		for(Animal animal: animals) 
 		{
-			moneyMade += animal.makeMoney();
+			moneyMade += animal.returnDailyProfit();
 		}
 		return moneyMade;
 	}
 	
+	public void printCropStatus()
+	{
+		System.out.println("You have " + crops.size() + " Crops");
+		for(Crop crop: crops) 
+		{
+			crop.printCrop();
+		}
+		System.out.println("");
+	}
+	
+	public void printAnimalStatus()
+	{
+		System.out.println("You have " + crops.size() + " Animals");
+		for(Animal animal: animals) 
+		{
+			animal.printAnimal();
+		}
+		System.out.println("");
+	}
 	
 }

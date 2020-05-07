@@ -12,6 +12,7 @@ public class GameEnvironment {
 	private int typeInt = 0;
 	private String farmType;
 	private String farmName = null;
+	private int actionsPerformed = 0;
 	
 	/**
 	 * Sets the number of days
@@ -133,6 +134,7 @@ public class GameEnvironment {
 	
 	public void mainGame()
 	{
+
 		//Command line Application
 		int option = printOptions();
 		//System.out.println("you have selected option " + option);//for testing
@@ -140,55 +142,91 @@ public class GameEnvironment {
 		switch(option)
 		{
 		case 1:
-			//buy some cool items
+			//View status of Crops and Animals
+			farm.printCropStatus();
+			farm.printAnimalStatus();
 			break;
 		case 2:
+			//View status of Farm
+			break;
+		case 3:
+			//Visit Store
+			break;
+		case 4:
+			//Sleep
 			nextDay();
 			break;
+		case 5:
+			//Tend to Crops
+			if(actionsPerformed++ >= 2)
+			{
+				System.out.println("You can not do this as you have no actions left");
+				break;
+			}
+			//Do something here
+			break;
+		case 6:
+			//Feed Animals
+			if(actionsPerformed++ >= 2)
+			{
+				System.out.println("You can not do this as you have no actions left");
+				break;
+			}
+			//Do something here
+			break;
+		case 7:
+			//Play with Animals
+			if(actionsPerformed++ >= 2)
+			{
+				System.out.println("You can not do this as you have no actions left");
+				break;
+			}
+			//Do something here
+			break;
+		case 8:
+			//Harvest Crops
+			if(actionsPerformed++ >= 2)
+			{
+				System.out.println("You can not do this as you have no actions left");
+				break;
+			}
+			//Do something here
+			break;
+		case 9:
+			//Tend to Farm land
+			if(actionsPerformed++ >= 2)
+			{
+				System.out.println("You can not do this as you have no actions left");
+				break;
+			}
+			//Do something here
+			break;
+			
 		}
-	}
-	
-	public boolean isAlpha(String name) {
-	    return name.matches("[a-zA-Z]+");
-	}
-	
-	
-	public void nextDay() {
-		//if the game is finished
-		System.out.println("You have slept.");
-		farmer.increaseAge();
-		if (farmer.getAge() == numDays)
+		if (farmer.getAge() != numDays)
 		{
-			finishGame();
-		}
-		else
-		{
-			//Grow crops
-			farm.growCrops();
-			farm.increaseMoney(farm.collectAnimalMoney());
 			mainGame();
 		}
-	}
-
-	public void finishGame()
-	{
-		System.out.println("The game has finished!\n"
-				+ farmerName + "\n"
-				+ farmer.getAge() + " days have passed.\n"
-				+ "You ended with " + farm.getProfit() + "\n"
-				+ "Score: ");
 	}
 	
 	public int printOptions()
 	{
 		int option = -1;//nothing chosen yet
-		int numOptions = 2;//change this depending on the number of options available
+		int numOptions = 9;//change this depending on the number of options available
 		do
 		{
 			scanner = new Scanner(System.in);
 			System.out.println("Please chose an option from below:\n"
-					+ "1. Buy items\n"
-					+ "2. Sleep");
+					+ "1. View status of Crops and Animals\n"
+					+ "2. View status of Farm\n"
+					+ "3. Visit Store\n"
+					+ "4. Sleep\n"
+					//Actions required
+					+ "5. Tend to Crops\n"
+					+ "6. Feed Animals\n"
+					+ "7. Play with Animals\n"
+					+ "8. Harvest Crops\n"
+					+ "9. Tend to Farm land");
 
 			if (scanner.hasNextInt())
 			{
@@ -207,6 +245,37 @@ public class GameEnvironment {
 	}
 	
 	
+	public boolean isAlpha(String name) {
+	    return name.matches("[a-zA-Z]+");
+	}
+	
+	
+	public void nextDay() {
+		//if the game is finished
+		System.out.println("You have slept.");
+		farmer.increaseAge();
+		actionsPerformed = 0;
+		if (farmer.getAge() == numDays)
+		{
+			finishGame();
+		}
+		else
+		{
+			//Grow crops
+			farm.growCrops();
+			farm.increaseMoney(farm.collectAnimalMoney());
+		}
+	}
+
+	public void finishGame()
+	{
+		System.out.println("The game has finished!\n"
+				+ farmerName + "\n"
+				+ farmer.getAge() + " days have passed.\n"
+				+ "You made $" + farm.getProfit() + "\n"
+				+ "Score: ");
+	}	
+	
 	public static void main(String[] args) {
 		System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");
 		GameEnvironment game = new GameEnvironment();
@@ -214,5 +283,7 @@ public class GameEnvironment {
 		game.mainGame();
 
 	}
+	
+
 
 }
