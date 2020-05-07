@@ -141,23 +141,35 @@ public class GameEnvironment {
 		//use a switch to carry out selected option
 		switch(option)
 		{
-		case 1:
-			//View status of Crops and Animals
-			farm.printCropStatus();
-			farm.printAnimalStatus();
+		case 1: //View status of Crops and Animals
+			
+			System.out.println(farm.getFarmName() + " has " + farm.getCrops().size() + " crops");
+			for(Crop crop: farm.getCrops()) 
+			{
+				System.out.println(crop.getCropName() + " Has been growing for " + crop.getDaysGrown() 
+						+ " days, it needs " + (crop.getDaysToGrow() - crop.getDaysGrown())
+						+ " more days to be harvested");
+			}
+			
+			System.out.println(farm.getFarmName() + " has " + farm.getAnimals().size() + " animals");
+			for(Animal animal: farm.getAnimals()) 
+			{
+				System.out.println(animal.getAnimalName() + " has a happiness level of " 
+						+ animal.getHappiness() + ". This equates to $" + animal.dailyProfit() + " per day");
+			}
+			System.out.println("");
+			
 			break;
-		case 2:
-			//View status of Farm
+			
+		case 2: //View status of Farm
+			System.out.println(farm.getFarmName() + " currently has $" + farm.getMoney() + " available"); // Probably will fix this to format dollars and cents properly
 			break;
-		case 3:
-			//Visit Store
+		case 3: //Visit Store
 			break;
-		case 4:
-			//Sleep
+		case 4: //Sleep
 			nextDay();
 			break;
-		case 5:
-			//Tend to Crops
+		case 5: //Tend to Crops
 			if(actionsPerformed++ >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
@@ -165,8 +177,7 @@ public class GameEnvironment {
 			}
 			//Do something here
 			break;
-		case 6:
-			//Feed Animals
+		case 6: //Feed Animals
 			if(actionsPerformed++ >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
@@ -174,8 +185,7 @@ public class GameEnvironment {
 			}
 			//Do something here
 			break;
-		case 7:
-			//Play with Animals
+		case 7: //Play with Animals
 			if(actionsPerformed++ >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
@@ -183,8 +193,7 @@ public class GameEnvironment {
 			}
 			//Do something here
 			break;
-		case 8:
-			//Harvest Crops
+		case 8: //Harvest Crops
 			if(actionsPerformed++ >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
@@ -192,8 +201,7 @@ public class GameEnvironment {
 			}
 			//Do something here
 			break;
-		case 9:
-			//Tend to Farm land
+		case 9: //Tend to Farm land
 			if(actionsPerformed++ >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");

@@ -20,16 +20,26 @@ public class Animal{
 		happiness++;
 	}
 	
-	public Double returnDailyProfit()//Called at the end of each day
+	public Double dailyProfit() //Called at the end of each day
 	{
 		return happiness * dailyMoneyMade;
 	}
 	
+	public String getAnimalName() {
+		return animalName;
+	}
+	
+	public Double getHappiness() {
+		return happiness;
+	}
+	
+	// Deprecated, now using getter methods from the GameEnvironment class, keeping here for now just in case testing is required
+	/*
 	public void printAnimal()
 	{
 		System.out.println(animalName + " has a happiness level of " 
 	+ happiness + ". This equates to $" + returnDailyProfit() + " per day");
 				
-	}
+	}*/
 	
 }

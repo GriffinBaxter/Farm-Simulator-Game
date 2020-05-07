@@ -80,6 +80,18 @@ public class Farm  extends GameEnvironment{
 		return money - initMoney;
 	}
 	
+	public String getFarmName() {
+		return farmName;
+	}
+	
+	public ArrayList<Crop> getCrops() {
+		return crops;
+	}
+	
+	public ArrayList<Animal> getAnimals() {
+		return animals;
+	}
+	
 	
 	public double harvestCrops()
 	{
@@ -110,11 +122,13 @@ public class Farm  extends GameEnvironment{
 		double moneyMade = 0.0;
 		for(Animal animal: animals) 
 		{
-			moneyMade += animal.returnDailyProfit();
+			moneyMade += animal.dailyProfit();
 		}
 		return moneyMade;
 	}
 	
+	// Deprecated, now using getter methods from the GameEnvironment class, keeping here for now just in case testing is required
+	/*
 	public void printCropStatus()
 	{
 		System.out.println("You have " + crops.size() + " Crops");
@@ -133,6 +147,6 @@ public class Farm  extends GameEnvironment{
 			animal.printAnimal();
 		}
 		System.out.println("");
-	}
+	}*/
 	
 }

@@ -35,18 +35,32 @@ public class Crop{
 		return sellPrice;
 	}
 	
+	public String getCropName() {
+		return cropName;
+	}
+	
+	public int getDaysGrown() {
+		return daysGrown;
+	}
+	
+	public int getDaysToGrow() {
+		return daysToGrow;
+	}
+	
 	public void grow()
 	{
 		daysGrown++;
 	}
 	
+	// Deprecated, now using getter methods from the GameEnvironment class, keeping here for now just in case testing is required
+	/*
 	public void printCrop()
 	{
 		System.out.println(cropName + " Has been growing for " + daysGrown 
 				+ " days, it needs " + (daysToGrow - daysGrown) 
 				+ " more days to be harvested");
 				
-	}
+	}*/
 	
 	
 }
