@@ -233,6 +233,7 @@ public class GameEnvironment {
 			}
 			else {
 				System.out.println("Please select what type of crops you would like to tend to:"); // Need to finish properly according to specifications
+				tendToCrops();
 				/*
 				for(Crop crop: farm.getCrops()) {
 					crop.grow();
@@ -347,6 +348,8 @@ public class GameEnvironment {
 			for(Item item: store.getItemsForSale()) 
 			{
 				//Getting the quantities of items brought
+				
+				//Make new function in farm class that checks quantities and returns a list with items, maybe use sets or something
 				int numOwned = 0;
 				for(Item checkItem: farm.getItems()) 
 				{
@@ -392,69 +395,60 @@ public class GameEnvironment {
 	
 	public void purchase(String purchaseCategory) {
 		System.out.println("Please select what " + purchaseCategory + " you would like to buy:");
-		String purchaseString = "";
-		int purchaseIndex = 1;
+		int purchaseIndex = 0;
+		String purchaseString = purchaseIndex + ". Don't buy anything\n";
+		
 		
 		if (purchaseCategory == "crop") {
-			for(Crop crop: store.getCropsForSale()) 
-			{
-				purchaseString += purchaseIndex + ". " + crop.getName() + "\n";
-				purchaseIndex++;
-			}
 			
-			purchaseString += purchaseIndex + ". None";
-			int purchaseOption = printOptions(purchaseString, purchaseIndex);
+			int purchaseOption = printOptions(farm.returnCropsString("0. Don't buy anything\n", store.getCropsForSale()), store.getCropsForSale().size());
 			
-			if (purchaseOption <= store.getItemsForSale().size()) //If the player did not choose None
+			if (purchaseOption != 0) //If the player did not choose None
 			{
 				farm.increaseCrops(store.getCropsForSale().get(purchaseOption - 1));
 				System.out.println(store.getCropsForSale().get(purchaseOption - 1).getName() + " bought!");
 			}
 			else //If the player chose None
 			{
-				visitStore();
+				//visitStore();
 			}
 		}
 		
 		else if (purchaseCategory == "animal") {
 			for(Animal animal: store.getAnimalsForSale()) 
 			{
-				purchaseString += purchaseIndex + ". " + animal.getName() + "\n";
 				purchaseIndex++;
+				purchaseString += purchaseIndex + ". " + animal.getName() + "\n";
 			}
-			
-			purchaseString += purchaseIndex + ". None";
 			int purchaseOption = printOptions(purchaseString, purchaseIndex);
 			
-			if (purchaseOption <= store.getAnimalsForSale().size()) //If the player did not choose None
+			if (purchaseOption != 0) //If the player did not choose None
 			{
 				farm.increaseAnimals(store.getAnimalsForSale().get(purchaseOption - 1));
 				System.out.println(store.getAnimalsForSale().get(purchaseOption - 1).getName() + " bought!");
 			}
 			else //If the player chose None
 			{
-				visitStore();
+				//visitStore();
 			}
 		}
 		
 		else if (purchaseCategory == "item") {
 			for(Item item: store.getItemsForSale()) 
 			{
-				purchaseString += purchaseIndex + ". " + item.getName() + "\n";
 				purchaseIndex++;
+				purchaseString += purchaseIndex + ". " + item.getName() + "\n";
 			}
-			
-			purchaseString += purchaseIndex + ". None";
 			int purchaseOption = printOptions(purchaseString, purchaseIndex);
 			
-			if (purchaseOption <= store.getItemsForSale().size()) //If the player did not choose None
+			if (purchaseOption != 0) //If the player did not choose None
 			{
 				farm.increaseItems(store.getItemsForSale().get(purchaseOption - 1));
 				System.out.println(store.getItemsForSale().get(purchaseOption - 1).getName() + " bought!");
 			}
 			else //If the player chose None
 			{
-				visitStore();
+				//visitStore();
 			}
 		}
 	}
@@ -487,7 +481,18 @@ public class GameEnvironment {
 				+ farmer.getAge() + " days have passed.\n"
 				+ "You made $" + farm.getProfit() + "\n"
 				+ "Score: ");
-	}	
+	}
+	
+	public void tendToCrops()
+	{
+		int tendOption = printOptions(farm.returnCropsString("0. Don't tend to anything\n", farm.getCrops()), farm.getCrops().size());
+		if (tendOption != 0)
+		{
+			//when the user selects a crop, loop through all owned crops and only tend to the crops that have the same name
+			System.out.println();
+		}
+	}
+	
 	
 	public static void main(String[] args) {
 		System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");

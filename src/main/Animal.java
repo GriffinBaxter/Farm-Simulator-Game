@@ -24,7 +24,7 @@ public class Animal implements StoreItem{
 	
 	public Double dailyProfit() //Called at the end of each day
 	{
-		return happiness * dailyMoneyMade;
+		return happiness * health * dailyMoneyMade;
 	}
 	
 	public String getName() {

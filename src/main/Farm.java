@@ -156,6 +156,17 @@ public class Farm  extends GameEnvironment{
 		items.remove(items.indexOf(item));
 	}
 	
+	public String returnCropsString(String cropsString, ArrayList<Crop> crops) 
+	{
+		int index = 0;
+		for(Crop crop: crops) 
+		{
+			index++;
+			cropsString += index + ". " + crop.getName() + "\n";
+		}
+		return cropsString;
+	}
+	
 	
 	// Deprecated, now using getter methods from the GameEnvironment class, keeping here for now just in case testing is required
 	/*
