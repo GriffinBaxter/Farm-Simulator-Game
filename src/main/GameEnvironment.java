@@ -1,4 +1,5 @@
 package main;
+import java.util.ArrayList;
 //import java.util.ArrayList; // Re-add this if needed, otherwise will delete
 import java.util.Scanner;
 
@@ -485,11 +486,39 @@ public class GameEnvironment {
 	
 	public void tendToCrops()
 	{
-		int tendOption = printOptions(farm.returnCropsString("0. Don't tend to anything\n", farm.getCrops()), farm.getCrops().size());
+		ArrayList<Crop> differentCrops = farm.returnDifferentCropsOwned();
+		int tendOption = printOptions(farm.returnCropsString("0. Don't tend to anything\n", differentCrops), farm.getCrops().size());
 		if (tendOption != 0)
 		{
-			//when the user selects a crop, loop through all owned crops and only tend to the crops that have the same name
-			System.out.println();
+			String cropName = differentCrops.get(tendOption-1).getName();
+			String itemString = "0. Don't use anything\n"
+					+ "1. Water (free)\n";
+			
+			int itemOption = printOptions(farm.returnItemsString(itemString, "Crop", 1), farm.getItems().size() + 1);
+			
+			if (itemOption != 0)
+			{
+				if (itemOption == 1)//Watered crops
+				{
+					farm.tendSpecificCrops(cropName, 1.0);
+					System.out.println("Tended to " + differentCrops.get(tendOption-1).getName() 
+							+ "By watering it");
+				}
+				else//If used an item on the crop
+				{
+					Item itemUsed = farm.getItems().get(itemOption-2);
+					farm.tendSpecificCrops(cropName, itemUsed.getBonus());
+					//Remove the item from the users inventory
+					farm.decreaseItems(itemUsed);
+
+					System.out.println("Tended to " + differentCrops.get(tendOption-1).getName() 
+							+ " by using " + itemUsed.getName() + " on it");
+				}
+			}
+			//Get what item the user would like to use on the type of crop, 
+			//then call farm.tendSpecificCrops(String cropName, double daysToIncrease)
+			//The days to increase would be the bonus for the item and if the crop is just watered then make daysToIncrease 1?
+			
 		}
 	}
 	

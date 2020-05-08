@@ -17,6 +17,19 @@ public class Animal implements StoreItem{
 		health = 1;
 	}
 	
+	/**
+	 * for copying an animal class (this is used when you buy an animal)
+	 * @param animal
+	 */
+	public Animal(Animal animal)
+	{
+		animalName = animal.getName();
+		purchasePrice = animal.getPurchasePrice();
+		happiness = animal.getHappiness();
+		dailyMoneyMade = animal.getDailyMoneyMade();
+		health = 1;
+	}
+	
 	public void increaseHappiness()
 	{
 		happiness++;

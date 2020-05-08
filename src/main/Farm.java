@@ -123,6 +123,22 @@ public class Farm  extends GameEnvironment{
 		}
 	}
 	
+	/**
+	 * Tends to specific crops with the name cropName and increases their growth time by daysToIncrease
+	 * @param cropName
+	 * @param daysToIncrease
+	 */
+	public void tendSpecificCrops(String cropName, double daysToIncrease)
+	{
+		for(Crop crop: crops) 
+		{
+			if (crop.getName() == cropName)
+			{
+				crop.tend(daysToIncrease);
+			}
+		} 
+	}
+	
 	public double collectAnimalMoney()
 	{
 		double moneyMade = 0.0;
@@ -135,19 +151,19 @@ public class Farm  extends GameEnvironment{
 	
 	public void increaseCrops(Crop crop)
 	{
-		crops.add(crop);
+		crops.add(new Crop(crop));//Creates a new instance of the crop as i was  having problems with crops linking to the same class
 		money -= crop.getPurchasePrice();
 	}
 	
 	public void increaseAnimals(Animal animal)
 	{
-		animals.add(animal);
+		animals.add(new Animal(animal));
 		money -= animal.getPurchasePrice();
 	}
 	
 	public void increaseItems(Item item)
 	{
-		items.add(item);
+		items.add(new Item(item));
 		money -= item.getPurchasePrice();
 	}
 	
@@ -165,6 +181,39 @@ public class Farm  extends GameEnvironment{
 			cropsString += index + ". " + crop.getName() + "\n";
 		}
 		return cropsString;
+	}
+	
+	public String returnItemsString(String cropsString, String itemType, int index) 
+	{
+		for(Item item: items) 
+		{
+			if (item.getType() == itemType)
+			{
+				index++;
+				cropsString += index + ". " + item.getName() + "\n";
+			}
+		}
+		return cropsString;
+	}
+	
+	
+	/**
+	 * Returns the different types of crops owned by their Name
+	 */
+	public ArrayList<Crop> returnDifferentCropsOwned()
+	{
+		ArrayList<Crop> differentCrops = new ArrayList<Crop>();
+		for(Crop crop: store.getCropsForSale())
+		{
+			for(Crop cropCheck: crops) 
+			{
+				if (crop.getName() == cropCheck.getName() && !differentCrops.contains(crop))
+				{
+					differentCrops.add(crop);
+				}
+			}
+		}
+		return differentCrops;
 	}
 	
 	

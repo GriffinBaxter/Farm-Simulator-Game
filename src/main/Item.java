@@ -16,6 +16,19 @@ public class Item implements StoreItem{
 		
 	}
 	
+	/**
+	 * for copying an item class (this is used when you buy an item)
+	 * @param item
+	 */
+	public Item(Item item)
+	{
+		itemName = item.getName();
+		type = item.getType();
+		purchasePrice = item.getPurchasePrice();
+		bonus = item.getBonus();
+		
+	}
+	
 	public String getName()
 	{
 		return itemName;

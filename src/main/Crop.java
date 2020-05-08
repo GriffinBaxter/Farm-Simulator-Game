@@ -16,6 +16,19 @@ public class Crop implements StoreItem{
 		daysToGrow = initDaysToGrow;
 	}
 	
+	/**
+	 * for copying an crop class (this is used when you buy an crop)
+	 * @param crop
+	 */
+	public Crop(Crop crop)
+	{
+		cropName = crop.getName();
+		purchasePrice = crop.getPurchasePrice();
+		sellPrice = crop.getSellPrice();
+		daysToGrow = crop.getDaysToGrow();
+		daysGrown = 0;
+	}
+	
 	public Boolean canHarvest() 
 	{
 		if (daysGrown == daysToGrow)
@@ -50,6 +63,11 @@ public class Crop implements StoreItem{
 	public void grow()
 	{
 		daysGrown++;
+	}
+	
+	public void tend(double daysToIncrease)
+	{
+		daysGrown += daysToIncrease;
 	}
 	
 	// Deprecated, now using getter methods from the GameEnvironment class, keeping here for now just in case testing is required
