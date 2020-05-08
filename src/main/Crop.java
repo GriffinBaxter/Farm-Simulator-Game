@@ -1,6 +1,6 @@
 package main;
 
-public class Crop{
+public class Crop implements StoreItem{
 
 	private String cropName;
 	private double purchasePrice;
@@ -35,7 +35,7 @@ public class Crop{
 		return sellPrice;
 	}
 	
-	public String getCropName() {
+	public String getName() {
 		return cropName;
 	}
 	

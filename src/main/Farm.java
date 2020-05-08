@@ -9,6 +9,7 @@ public class Farm  extends GameEnvironment{
 	private Store store = new Store();
 	private ArrayList<Crop> crops = new ArrayList<Crop>();
 	private ArrayList<Animal> animals = new ArrayList<Animal>();
+	private ArrayList<Item> items = new ArrayList<Item>();
 	private double money;
 	private double initMoney;
 	private int freeSpace;
@@ -23,7 +24,7 @@ public class Farm  extends GameEnvironment{
         farmer = newfarmer;
         //For testing
         //crops.add(store.cropsForSale.get(1));
-        //animals.add(store.animalForSale.get(1));
+        //animals.add(store.animalsForSale.get(1));
     }
 	
 	public void setFarmType(String type) 
@@ -92,6 +93,10 @@ public class Farm  extends GameEnvironment{
 		return animals;
 	}
 	
+	public ArrayList<Item> getItems() {
+		return items;
+	}
+	
 	
 	public double harvestCrops()
 	{
@@ -102,6 +107,7 @@ public class Farm  extends GameEnvironment{
 			if (crop.canHarvest())
 			{
 				//Harvest here
+				crops.remove(crops.indexOf(crop));
 				moneyMade += crop.getSellPrice();
 			}
 		}
@@ -126,6 +132,30 @@ public class Farm  extends GameEnvironment{
 		}
 		return moneyMade;
 	}
+	
+	public void increaseCrops(Crop crop)
+	{
+		crops.add(crop);
+		money -= crop.getPurchasePrice();
+	}
+	
+	public void increaseAnimals(Animal animal)
+	{
+		animals.add(animal);
+		money -= animal.getPurchasePrice();
+	}
+	
+	public void increaseItems(Item item)
+	{
+		items.add(item);
+		money -= item.getPurchasePrice();
+	}
+	
+	public void decreaseItems(Item item)
+	{
+		items.remove(items.indexOf(item));
+	}
+	
 	
 	// Deprecated, now using getter methods from the GameEnvironment class, keeping here for now just in case testing is required
 	/*
