@@ -1,7 +1,6 @@
 package main;
 //import java.util.ArrayList; // Re-add this if needed, otherwise will delete
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class GameEnvironment {
 	
@@ -18,7 +17,7 @@ public class GameEnvironment {
 	private int actionsPerformed = 0;
 	
 	/**
-	 * Sets the number of days
+	 * Sets the number of days via input from the user
 	 */
 	public void inputNumDays() {
 		do
@@ -41,7 +40,7 @@ public class GameEnvironment {
 	}
 	
 	/**
-	 * Sets the farmer's name
+	 * Sets the farmer's name via input from the user
 	 */
 	public void inputFarmerName() {
 		do
@@ -67,7 +66,7 @@ public class GameEnvironment {
 	}
 	
 	/**
-	 * Sets the farm type
+	 * Sets the farm type via input from the user
 	 */
 	public void inputFarmType() { // We need 4 farm types as per the specifications, 4th one will be added later
 		do
@@ -104,7 +103,7 @@ public class GameEnvironment {
 	}
 	
 	/**
-	 * Sets the farm's name
+	 * Sets the farm's name via input from the user
 	 */
 	public void inputFarmName() {
 		do
@@ -142,15 +141,16 @@ public class GameEnvironment {
 	 * A modular method that takes a String <code>optionString</code> and an int <code>numOptions</code>,
 	 * prints out the <code>optionString</code> and takes in an input of an int from the user
 	 * the optionString must have format: 
+	 * 0. exit
 	 * 1. option1
 	 * 2. option2
-	 * ect.
+	 * etc.
 	 * the int inputed by the user must be an option from the <code>optionString</code>,
 	 * if it is not the method will ask again
      */
 	public int printOptions(String optionsString, int numOptions)
 	{
-		int option = -1;//nothing chosen yet
+		int option = -1; //nothing chosen yet
 		do
 		{
 			scanner = new Scanner(System.in);
@@ -159,7 +159,7 @@ public class GameEnvironment {
 			if (scanner.hasNextInt())
 			{
 				option = scanner.nextInt();
-				if (option < 1 || option > numOptions) {
+				if (option < 0 || option > numOptions) {
 					System.out.println("That was not an option, please try again");
 				}
 			}
@@ -167,7 +167,7 @@ public class GameEnvironment {
 				System.out.println("That is not an integer number, please try again");
 			}
 		}
-		while(option < 1 || option > numOptions);
+		while(option < 0 || option > numOptions);
 		
 		return option;
 	}
@@ -177,10 +177,11 @@ public class GameEnvironment {
 
 		//Command line Application
 		String optionsString = "Please chose an option from below:\n"
+				+ "0. Exit Game\n"
 				+ "1. View status of Crops and Animals\n"
 				+ "2. View status of Farm\n"
 				+ "3. Visit Store\n"
-				+ "4. Sleep\n"
+				+ "4. Sleep (Move to the next day)\n"
 				//Actions required
 				+ "5. Tend to Crops\n"
 				+ "6. Feed Animals\n"
@@ -194,6 +195,8 @@ public class GameEnvironment {
 		//use a switch to carry out selected option
 		switch(option)
 		{
+		case 0: // Exit game
+			System.exit(0);
 		case 1: //View status of Crops and Animals
 			
 			System.out.println(farm.getFarmName() + " has " + farm.getCrops().size() + " crops");
@@ -227,9 +230,16 @@ public class GameEnvironment {
 			if(actionsPerformed++ >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
-				break;
 			}
-			//Do something here
+			else {
+				System.out.println("Please select what type of crops you would like to tend to:"); // Need to finish properly according to specifications
+				/*
+				for(Crop crop: farm.getCrops()) {
+					crop.grow();
+				}
+				
+				System.out.println("Crops have been tended to");*/
+			}
 			break;
 		case 6: //Feed Animals
 			if(actionsPerformed++ >= 2)
@@ -276,21 +286,23 @@ public class GameEnvironment {
 	{
 		boolean stayInStore = true;
 		String optionsString = "You are at the General Store. Please chose an option from below:\n"
+				+ "0. Exit Store\n"
 				+ "1. View Crops for sale\n"
 				+ "2. View Animals for sale\n"
 				+ "3. View Items for sale\n"
 				+ "4. View currently owned items\n"
 				+ "5. Purchase Crops\n"
 				+ "6. Purchase Animals\n"
-				+ "7. Purchase Items\n"
-				+ "8. Exit Store";
-		int numOptions = 8;
+				+ "7. Purchase Items\n";
+		int numOptions = 7;
 		
 		int option = printOptions(optionsString, numOptions);
 		switch(option)
 		{
-		case 1:
-			//View Crops for sale
+		case 0: //Exit store
+			stayInStore = false;
+			break;
+		case 1: //View Crops for sale
 			System.out.println("Crops for sale:");
 			for(Crop crop: store.getCropsForSale()) 
 			{
@@ -301,8 +313,7 @@ public class GameEnvironment {
 			}
 			System.out.println("");
 			break;
-		case 2:
-			//View Animals for sale
+		case 2: //View Animals for sale
 			System.out.println("Animals for sale:");
 			for(Animal animal: store.getAnimalsForSale()) 
 			{
@@ -312,8 +323,7 @@ public class GameEnvironment {
 			}
 			System.out.println("");
 			break;
-		case 3:
-			//View Items for sale
+		case 3: //View Items for sale
 			System.out.println("Items for sale:");
 			for(Item item: store.getItemsForSale()) 
 			{
@@ -321,19 +331,18 @@ public class GameEnvironment {
 				System.out.println("Purchase price: " + item.getPurchasePrice());
 				if (item.getType() == "Crop")
 				{
-					System.out.println("Benifit: Speeds up crop growth speed by " 
+					System.out.println("Benefit: Speeds up crop growth speed by " 
 					+ (item.getBonus()*100) + "%");
 				}
 				if (item.getType() == "Animal")
 				{
-					System.out.println("Benifit: Increases an animals health by " 
+					System.out.println("Benefit: Increases an animal's health by " 
 					+ (item.getBonus()*100) + "%");
 				}
 			}
 			System.out.println("");
 			break;
-		case 4:
-			//View currently owned items
+		case 4: //View currently owned items
 			System.out.println("You own " + farm.getItems().size() + " types of items. They are:");
 			for(Item item: farm.getItems()) 
 			{
@@ -341,91 +350,24 @@ public class GameEnvironment {
 				System.out.println("You own " + item.getNumOwned() + " of these");
 				if (item.getType() == "Crop")
 				{
-					System.out.println("Benifit: Speeds up crop growth speed by " 
+					System.out.println("Benefit: Speeds up crop growth speed by " 
 					+ (item.getBonus()*100) + "%");
 				}
 				if (item.getType() == "Animal")
 				{
-					System.out.println("Benifit: Increases an animals health by " 
+					System.out.println("Benefit: Increases an animal's health by " 
 					+ (item.getBonus()*100) + "%");
 				}
 			}
 			break;
-		case 5:
-			//Purchase crops
-			System.out.println("Please select what crop you would like to buy:");
-			String cropsString = "";
-			int cropIndex = 1;
-			for(Crop crop: store.getCropsForSale()) 
-			{
-				cropsString += cropIndex + ". " + crop.getName() + "\n";
-				cropIndex++;
-			}
-			cropsString += cropIndex + ". None";
-			
-			int cropOption = printOptions(cropsString, cropIndex);
-			if (cropOption <= store.getCropsForSale().size())//If the player did not choose None
-			{
-				farm.increaseCrops(store.getCropsForSale().get(cropOption - 1));
-				System.out.println(store.getCropsForSale().get(cropOption - 1).getName() + " brought!");
-			}
-			else//If the player chose None
-			{
-				visitStore();
-			}
-			
-			
-			
+		case 5: //Purchase crops
+			purchase("crop");
 			break;
-		case 6:
-			//Purchase animals
-			System.out.println("Please select what animal you would like to buy:");
-			String animalString = "";
-			int animalIndex = 1;
-			for(Animal animal: store.getAnimalsForSale()) 
-			{
-				animalString += animalIndex + ". " + animal.getName() + "\n";
-				animalIndex++;
-			}
-			animalString += animalIndex + ". None";
-			
-			int animalOption = printOptions(animalString, animalIndex);
-			if (animalOption <= store.getAnimalsForSale().size())//If the player did not choose None
-			{
-				farm.increaseAnimals(store.getAnimalsForSale().get(animalOption - 1));
-				System.out.println(store.getAnimalsForSale().get(animalOption - 1).getName() + " brought!");
-			}
-			else//If the player chose None
-			{
-				visitStore();
-			}
+		case 6: //Purchase animals
+			purchase("animal");
 			break;
-		case 7:
-			//Purchase items
-			System.out.println("Please select what item you would like to buy:");
-			String itemsString = "";
-			int itemIndex = 1;
-			for(Item item: store.getItemsForSale()) 
-			{
-				itemsString += itemIndex + ". " + item.getName() + "\n";
-				itemIndex++;
-			}
-			itemsString += itemIndex + ". None";
-			
-			int itemOption = printOptions(itemsString, itemIndex);
-			if (itemOption <= store.getItemsForSale().size())//If the player did not choose None
-			{
-				farm.increaseItems(store.getItemsForSale().get(itemOption - 1));
-				System.out.println(store.getItemsForSale().get(itemOption - 1).getName() + " brought!");
-			}
-			else//If the player chose None
-			{
-				visitStore();
-			}
-			break;
-		case 8:
-			//Exit store
-			stayInStore = false;
+		case 7: //Purchase items
+			purchase("item");
 			break;
 		}
 		if (stayInStore)
@@ -435,7 +377,76 @@ public class GameEnvironment {
 		
 		
 	}
-
+	
+	public void purchase(String purchaseCategory) {
+		System.out.println("Please select what " + purchaseCategory + " you would like to buy:");
+		String purchaseString = "";
+		int purchaseIndex = 1;
+		
+		if (purchaseCategory == "crop") {
+			for(Crop crop: store.getCropsForSale()) 
+			{
+				purchaseString += purchaseIndex + ". " + crop.getName() + "\n";
+				purchaseIndex++;
+			}
+			
+			purchaseString += purchaseIndex + ". None";
+			int purchaseOption = printOptions(purchaseString, purchaseIndex);
+			
+			if (purchaseOption <= store.getItemsForSale().size()) //If the player did not choose None
+			{
+				farm.increaseCrops(store.getCropsForSale().get(purchaseOption - 1));
+				System.out.println(store.getCropsForSale().get(purchaseOption - 1).getName() + " bought!");
+			}
+			else //If the player chose None
+			{
+				visitStore();
+			}
+		}
+		
+		else if (purchaseCategory == "animal") {
+			for(Animal animal: store.getAnimalsForSale()) 
+			{
+				purchaseString += purchaseIndex + ". " + animal.getName() + "\n";
+				purchaseIndex++;
+			}
+			
+			purchaseString += purchaseIndex + ". None";
+			int purchaseOption = printOptions(purchaseString, purchaseIndex);
+			
+			if (purchaseOption <= store.getAnimalsForSale().size()) //If the player did not choose None
+			{
+				farm.increaseAnimals(store.getAnimalsForSale().get(purchaseOption - 1));
+				System.out.println(store.getAnimalsForSale().get(purchaseOption - 1).getName() + " bought!");
+			}
+			else //If the player chose None
+			{
+				visitStore();
+			}
+		}
+		
+		else if (purchaseCategory == "item") {
+			for(Item item: store.getItemsForSale()) 
+			{
+				purchaseString += purchaseIndex + ". " + item.getName() + "\n";
+				purchaseIndex++;
+			}
+			
+			purchaseString += purchaseIndex + ". None";
+			int purchaseOption = printOptions(purchaseString, purchaseIndex);
+			
+			if (purchaseOption <= store.getItemsForSale().size()) //If the player did not choose None
+			{
+				farm.increaseItems(store.getItemsForSale().get(purchaseOption - 1));
+				System.out.println(store.getItemsForSale().get(purchaseOption - 1).getName() + " bought!");
+			}
+			else //If the player chose None
+			{
+				visitStore();
+			}
+		}
+	}
+	
 	public boolean isAlpha(String name) {
 	    return name.matches("[a-zA-Z]+");
 	}
@@ -445,15 +456,15 @@ public class GameEnvironment {
 		System.out.println("You have slept.");
 		farmer.increaseAge();
 		actionsPerformed = 0;
-		if (farmer.getAge() == numDays)
-		{
-			finishGame();
-		}
-		else
+		if (farmer.getAge() != numDays)
 		{
 			//Grow crops
 			farm.growCrops();
 			farm.increaseMoney(farm.collectAnimalMoney());
+		}
+		else
+		{
+			finishGame();
 		}
 	}
 
