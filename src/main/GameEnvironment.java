@@ -343,20 +343,32 @@ public class GameEnvironment {
 			System.out.println("");
 			break;
 		case 4: //View currently owned items
-			System.out.println("You own " + farm.getItems().size() + " types of items. They are:");
-			for(Item item: farm.getItems()) 
+			System.out.println("You own " + farm.getItems().size() + " items. They are:");
+			for(Item item: store.getItemsForSale()) 
 			{
-				System.out.println(item.getName());
-				System.out.println("You own " + item.getNumOwned() + " of these");
-				if (item.getType() == "Crop")
+				//Getting the quantities of items brought
+				int numOwned = 0;
+				for(Item checkItem: farm.getItems()) 
 				{
-					System.out.println("Benefit: Speeds up crop growth speed by " 
-					+ (item.getBonus()*100) + "%");
+					if (item.getName() == checkItem.getName())
+					{
+						numOwned++;
+					}
 				}
-				if (item.getType() == "Animal")
+				if (numOwned != 0)//If you own this item
 				{
-					System.out.println("Benefit: Increases an animal's health by " 
-					+ (item.getBonus()*100) + "%");
+					System.out.println(item.getName());
+					System.out.println("You own " + numOwned + " of these");
+					if (item.getType() == "Crop")
+					{
+						System.out.println("Benefit: Speeds up crop growth speed by " 
+						+ (item.getBonus()*100) + "%");
+					}
+					if (item.getType() == "Animal")
+					{
+						System.out.println("Benefit: Increases an animal's health by " 
+						+ (item.getBonus()*100) + "%");
+					}
 				}
 			}
 			break;
