@@ -68,13 +68,4 @@ public class Animal implements StoreItem{
 		return health;
 	}
 	
-	// Deprecated, now using getter methods from the GameEnvironment class, keeping here for now just in case testing is required
-	/*
-	public void printAnimal()
-	{
-		System.out.println(animalName + " has a happiness level of " 
-	+ happiness + ". This equates to $" + returnDailyProfit() + " per day");
-				
-	}*/
-	
 }

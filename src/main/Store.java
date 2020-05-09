@@ -27,9 +27,13 @@ public class Store{
 		
 		//Name, Type(for crops or animals), price,  Bonus
 		//The bonus for crops is an increased growth speed.
-		itemsForSale.add(new Item("Fertilizer", "Crop", 10.0, 2.0));
+		itemsForSale.add(new Item("Organic Fertiliser", "Crop", 10.0, 2.0));
+		itemsForSale.add(new Item("Inorganic Fertiliser", "Crop", 5.0, 1.5));
+		itemsForSale.add(new Item("Compost", "Crop", 20.0, 2.5));
 		//The bonus for Animals is health given from food.
-		itemsForSale.add(new Item("Apples", "Animal", 1.0, 0.2));
+		itemsForSale.add(new Item("Apples", "Animal", 2.0, 0.2));
+		itemsForSale.add(new Item("Hay Bales", "Animal", 10.0, 0.4));
+		itemsForSale.add(new Item("Grass", "Animal", 20.0, 0.5));
 		//5 others
 	}
 	

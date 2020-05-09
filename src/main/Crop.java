@@ -70,15 +70,5 @@ public class Crop implements StoreItem{
 		daysGrown += daysToIncrease;
 	}
 	
-	// Deprecated, now using getter methods from the GameEnvironment class, keeping here for now just in case testing is required
-	/*
-	public void printCrop()
-	{
-		System.out.println(cropName + " Has been growing for " + daysGrown 
-				+ " days, it needs " + (daysToGrow - daysGrown) 
-				+ " more days to be harvested");
-				
-	}*/
-	
 	
 }

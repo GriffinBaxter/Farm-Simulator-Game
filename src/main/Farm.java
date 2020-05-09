@@ -12,8 +12,7 @@ public class Farm  extends GameEnvironment{
 	private ArrayList<Item> items = new ArrayList<Item>();
 	private double money;
 	private double initMoney;
-	private int freeSpace;
-	private double startCropGrowthSpeed;
+	private int cropSpace;
 	
 	
 	
@@ -27,24 +26,28 @@ public class Farm  extends GameEnvironment{
         //animals.add(store.animalsForSale.get(1));
     }
 	
-	public void setFarmType(String type) 
+	public void setFarmType(String type) // Need to add animal happiness changes, need to discuss how to implement this!
 	{
-		if (type == "1") 
+		if (type == "Normal") 
 		{
-			money = 2000;
-			startCropGrowthSpeed = 0.5;
+			initMoney = 1500;
+			cropSpace = 10;
 		}
-		else if (type == "2") 
+		else if (type == "Rich") 
 		{
-			money = 1000;
-			startCropGrowthSpeed = 1.5;
+			initMoney = 2000;
+			cropSpace = 10;
 		}
-		else if (type == "3") 
+		else if (type == "Happy") 
 		{
-			money = 1500;
-			startCropGrowthSpeed = 1.0;
+			initMoney = 1000;
+			cropSpace = 10;
 		}
-		initMoney = money;
+		else if (type == "Large") {
+			initMoney = 1000;
+			cropSpace = 20;
+		}
+		money = initMoney;
 		//System.out.println(money + "  " + startCropGrowthSpeed);
 		
 	}
@@ -52,13 +55,19 @@ public class Farm  extends GameEnvironment{
 	
 	
 	/**
-	 *	Tends to the Farm to make animals happier and increase space available
+	 *	Tends to the Farm to make animals happier and increase space available, returns true if there are animals to increase their health, otherwise returns false
 	 */
-	public void tendFarm()
+	public boolean tendFarm()
 	{
-		//Some cool stuff
-		startCropGrowthSpeed += 0.1;
-		freeSpace++;
+		cropSpace++;
+		return increaseHappinessAllAnimals(0.1);
+	}
+	
+	/**
+	 *	Calculates the available free space
+	 */
+	public int calculateFreeSpace() {
+		return cropSpace - crops.size();
 	}
 	
 	public void increaseMoney(double alpha)
@@ -158,10 +167,10 @@ public class Farm  extends GameEnvironment{
 	}
 	
 	/**
-	 * Feeds all animals and increases their health by healthToIncrease, returns true if there are animals to feed and returns false if there are no animals
+	 * Increases health of all animals by healthToIncrease, returns true if there are animals to feed and returns false if there are no animals
 	 * @param healthToIncrease
 	 */
-	public boolean feedAllAnimals(double healthToIncrease)
+	public boolean increaseHappinessAllAnimals(double healthToIncrease)
 	{
 		int index = 0;
 		for(Animal animal: animals)
@@ -269,28 +278,5 @@ public class Farm  extends GameEnvironment{
 		}
 		return differentCrops;
 	}
-	
-	
-	// Deprecated, now using getter methods from the GameEnvironment class, keeping here for now just in case testing is required
-	/*
-	public void printCropStatus()
-	{
-		System.out.println("You have " + crops.size() + " Crops");
-		for(Crop crop: crops) 
-		{
-			crop.printCrop();
-		}
-		System.out.println("");
-	}
-	
-	public void printAnimalStatus()
-	{
-		System.out.println("You have " + crops.size() + " Animals");
-		for(Animal animal: animals) 
-		{
-			animal.printAnimal();
-		}
-		System.out.println("");
-	}*/
 	
 }
