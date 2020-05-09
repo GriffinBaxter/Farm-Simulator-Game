@@ -228,36 +228,34 @@ public class GameEnvironment {
 			nextDay();
 			break;
 		case 5: //Tend to Crops
-			if(actionsPerformed++ >= 2)
+			if(actionsPerformed + 1 >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
 			}
 			else {
 				System.out.println("Please select what type of crops you would like to tend to:"); // Need to finish properly according to specifications
 				tendToCrops();
-				/*
-				for(Crop crop: farm.getCrops()) {
-					crop.grow();
-				}
 				
-				System.out.println("Crops have been tended to");*/
+				//actionsPerformed is incremented in the tendToCrops() function
 			}
 			break;
 		case 6: //Feed Animals
-			if(actionsPerformed++ >= 2)
+			if(actionsPerformed + 1 >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
 				break;
 			}
 			//Do something here
+			actionsPerformed++;
 			break;
 		case 7: //Play with Animals
-			if(actionsPerformed++ >= 2)
+			if(actionsPerformed + 1 >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
 				break;
 			}
 			//Do something here
+			actionsPerformed++;
 			break;
 		case 8: //Harvest Crops
 			if(actionsPerformed++ >= 2)
@@ -266,6 +264,7 @@ public class GameEnvironment {
 				break;
 			}
 			//Do something here
+			actionsPerformed++;
 			break;
 		case 9: //Tend to Farm land
 			if(actionsPerformed++ >= 2)
@@ -274,6 +273,7 @@ public class GameEnvironment {
 				break;
 			}
 			//Do something here
+			actionsPerformed++;
 			break;
 			
 		}
@@ -498,6 +498,7 @@ public class GameEnvironment {
 			
 			if (itemOption != 0)
 			{
+				actionsPerformed++;//Increase the actions performed by 1 after the player has chosen to tend to their crops
 				if (itemOption == 1)//Watered crops
 				{
 					farm.tendSpecificCrops(cropName, 1.0);
