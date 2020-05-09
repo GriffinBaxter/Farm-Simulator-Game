@@ -3,11 +3,14 @@
  * Make it so you can't go in negative money
  * lololol
  * make money show in cents with 2dp, make a new function for this
+ * Incorporate the score in the finishGame function. - I think this is done now
+ *  -maybe just a multiplier on the  amount of money earned and animal happiness and healthiness?
  */
 
 
 package main;
 import java.util.ArrayList;
+import java.lang.Math;
 //import java.util.ArrayList; // Re-add this if needed, otherwise will delete
 import java.util.Scanner;
 
@@ -132,11 +135,10 @@ public class GameEnvironment {
 	}
 	
 	/**
-	 * Starts a new game
+	 * Starts a new game by getting number of days, farmer name, farm type, and farm name
 	 */
-	public void startGame() {
-		
-		// Might use a single function for some of these with varying inputs, as their functions are quite similar to each other
+	public void startGame() 
+	{
 		inputNumDays();
 		inputFarmerName();
 		inputFarmType();
@@ -185,6 +187,10 @@ public class GameEnvironment {
 		return option;
 	}
 	
+	/**
+	 * The main command line application, here the player can control the game and manage their farm.
+	 * Gets an input from the user
+	 */
 	public void mainGame()
 	{
 
@@ -292,6 +298,11 @@ public class GameEnvironment {
 		}
 	}
 	
+	/**
+	 * The general store in the game.
+	 * The player goes here to buy crops, animals and items.
+	 * Gets an input from the user.
+	 */
 	public void visitStore()
 	{
 		boolean stayInStore = true;
@@ -402,6 +413,13 @@ public class GameEnvironment {
 		
 	}
 	
+	/**
+	 * Called when the user wants to purchase an item from the store.
+	 * Asks what item the user wants to purchase (can still say they don't want to purchase anything).
+	 * The program then increases the farms ArrayList for crops, animals or items depending on what was brought.
+	 * If the user has no space available then the program outputs a message.
+	 * @param purchaseCategory
+	 */
 	public void purchase(String purchaseCategory) {
 		System.out.println("Please select what " + purchaseCategory + " you would like to buy:");
 		int purchaseIndex = 0;
@@ -457,10 +475,21 @@ public class GameEnvironment {
 		}
 	}
 	
+	/**
+	 * A simple function to check whether a string has only alphabetical letters.
+	 * Returns false if it does not.
+	 * @param name
+	 * @return
+	 */
 	public boolean isAlpha(String name) {
 	    return name.matches("[a-zA-Z]+");
 	}
 	
+	/**
+	 * A function for moving on to the next day, Called when the player sleeps.
+	 * This function increases the farmers age, reduces the actions performed to 0 and grows the crops owned.
+	 * If the farmers age is equal to the number of days set during startup, the finishing sequence begins.
+	 */
 	public void nextDay() {
 		//if the game is finished
 		System.out.println("You have slept.");
@@ -477,16 +506,11 @@ public class GameEnvironment {
 			finishGame();
 		}
 	}
-
-	public void finishGame()
-	{
-		System.out.println("The game has finished!\n"
-				+ farmerName + "\n"
-				+ farmer.getAge() + " days have passed.\n"
-				+ "You made $" + farm.getProfit() + "\n"
-				+ "Score: ");
-	}
 	
+	/**
+	 * Asks the user what type of crops they would like to tend to and what item they would want to use on it.
+	 * the program then tends to all of the crops owned with the specified name
+	 */
 	public void tendToCrops()
 	{
 		System.out.println("Please select the type of crop you would like to tend to:");
@@ -521,13 +545,13 @@ public class GameEnvironment {
 							+ " by using " + itemUsed.getName() + " on them");
 				}
 			}
-			//Get what item the user would like to use on the type of crop, 
-			//then call farm.tendSpecificCrops(String cropName, double daysToIncrease)
-			//The days to increase would be the bonus for the item and if the crop is just watered then make daysToIncrease 1?
-			
 		}
 	}
 	
+	/**
+	 * This program feed all animals owned by first asking the user what item they would like to feed the animals 
+	 * and then calling the increaseHappinessAllAnimals function in the Farm class.
+	 */
 	public void feedAnimals() {
 		System.out.println("Please select the item you would like to feed all of your animals with:");
 		int itemOption = printOptions(farm.returnItemsString("0. Don't feed animals\n", "Animal", 0), farm.getItems().size());
@@ -548,6 +572,9 @@ public class GameEnvironment {
 		}
 	}
 	
+	/**
+	 * a function that allows the user to play with the animals owned, doing this will increase their happiness.
+	 */
 	public void playWithAnimals() {
 		if (farm.playWithAllAnimals()) {
 			actionsPerformed++;
@@ -558,6 +585,10 @@ public class GameEnvironment {
 		}
 	}
 	
+	/**
+	 * A function that will harvest the crops that can be harvested, 
+	 * it does this by calling the harvestAvailableCrops function in the Farm class.
+	 */
 	public void harvestCrops() {
 		if (farm.canHarvestCrops()) {
 			actionsPerformed++;
@@ -570,6 +601,9 @@ public class GameEnvironment {
 		}
 	}
 	
+	/**
+	 * A function to tend to the farm land. tending to the farm land will increase the number of available slots for planting crops.
+	 */
 	public void tendFarmLand() {
 		actionsPerformed++;
 		System.out.print("Farm land has been tended to, 1 more crop is able to be grown");
@@ -579,7 +613,34 @@ public class GameEnvironment {
 		System.out.println();
 	}
 	
+	/**
+	 * The finishGame function, called when the farmers age has reached the numDays set during startup.
+	 * Prints out the farmers name, the number of days passed, the money made and the score.
+	 */
+	public void finishGame()
+	{
+		double score;
+		if (farm.getAnimals().size() > 0)
+		{
+			//Just gets the first animals happiness and health because they are all the same
+			score = farm.getProfit() * farm.getAnimals().get(0).getHealth() * farm.getAnimals().get(0).getHappiness();
+		}
+		else
+		{
+			score = farm.getProfit();
+		}
+
+		System.out.println("The game has finished!\n"
+				+ farmerName + "\n"
+				+ farmer.getAge() + " days have passed.\n"
+				+ "You made $" + farm.getProfit() + "\n"
+				+ "Score: " + Math.round(score));//rounds score to 0dp
+	}
 	
+	/**
+	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");
 		GameEnvironment game = new GameEnvironment();
