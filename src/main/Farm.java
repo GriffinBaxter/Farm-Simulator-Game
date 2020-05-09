@@ -98,18 +98,36 @@ public class Farm  extends GameEnvironment{
 	}
 	
 	
-	public double harvestCrops()
+	public boolean canHarvestCrops() {
+		for(Crop crop: crops)
+		{
+			if (crop.canHarvest())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	public double harvestAvailableCrops()
 	{
 		double moneyMade = 0;
 		
-		for(Crop crop: crops) 
+		ArrayList<Crop> cropsToRemove = new ArrayList<Crop>();
+		
+		for(Crop crop: crops)
 		{
 			if (crop.canHarvest())
 			{
 				//Harvest here
-				crops.remove(crops.indexOf(crop));
+				cropsToRemove.add(crop);
 				moneyMade += crop.getSellPrice();
 			}
+		}
+		
+		for (Crop crop: cropsToRemove) {
+			crops.remove(crops.indexOf(crop));
 		}
 		
 		return moneyMade;
@@ -137,6 +155,42 @@ public class Farm  extends GameEnvironment{
 				crop.tend(daysToIncrease);
 			}
 		} 
+	}
+	
+	/**
+	 * Feeds all animals and increases their health by healthToIncrease, returns true if there are animals to feed and returns false if there are no animals
+	 * @param healthToIncrease
+	 */
+	public boolean feedAllAnimals(double healthToIncrease)
+	{
+		int index = 0;
+		for(Animal animal: animals)
+		{
+			index++;
+			animal.increaseHealth(healthToIncrease);
+		}
+		if (index > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean playWithAllAnimals()
+	{
+		int index = 0;
+		for(Animal animal: animals)
+		{
+			index++;
+			animal.increaseHappiness();
+		}
+		if (index > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public double collectAnimalMoney()

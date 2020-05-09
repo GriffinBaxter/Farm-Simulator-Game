@@ -6,7 +6,7 @@ public class Animal implements StoreItem{
 	private Double purchasePrice;
 	private Double happiness;//Multiplier for money made
 	private Double dailyMoneyMade;
-	private int health;
+	private Double health;
 	
 	public Animal(String name, Double initPurchasePrice,Double initHappiness, Double initdailyMoneyMade)
 	{
@@ -14,7 +14,7 @@ public class Animal implements StoreItem{
 		purchasePrice = initPurchasePrice;
 		happiness = initHappiness;
 		dailyMoneyMade = initdailyMoneyMade;
-		health = 1;
+		health = 1.0;
 	}
 	
 	/**
@@ -27,12 +27,17 @@ public class Animal implements StoreItem{
 		purchasePrice = animal.getPurchasePrice();
 		happiness = animal.getHappiness();
 		dailyMoneyMade = animal.getDailyMoneyMade();
-		health = 1;
+		health = 1.0;
 	}
 	
 	public void increaseHappiness()
 	{
-		happiness++;
+		happiness += 0.1;
+	}
+	
+	public void increaseHealth(double healthToIncrease)
+	{
+		health += healthToIncrease;
 	}
 	
 	public Double dailyProfit() //Called at the end of each day

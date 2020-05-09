@@ -29,7 +29,7 @@ public class Store{
 		//The bonus for crops is an increased growth speed.
 		itemsForSale.add(new Item("Fertilizer", "Crop", 10.0, 2.0));
 		//The bonus for Animals is health given from food.
-		itemsForSale.add(new Item("Apple", "Animal", 1.0, 0.2));
+		itemsForSale.add(new Item("Apples", "Animal", 1.0, 0.2));
 		//5 others
 	}
 	

@@ -31,7 +31,7 @@ public class Crop implements StoreItem{
 	
 	public Boolean canHarvest() 
 	{
-		if (daysGrown == daysToGrow)
+		if (daysGrown >= daysToGrow)
 		{
 			return true;
 		}
