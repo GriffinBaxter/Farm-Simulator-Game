@@ -1,3 +1,11 @@
+/*
+ * To-Do
+ * Make it so you can't go in negative money
+ * lololol
+ * make money show in cents with 2dp, make a new function for this
+ */
+
+
 package main;
 import java.util.ArrayList;
 //import java.util.ArrayList; // Re-add this if needed, otherwise will delete
@@ -136,7 +144,7 @@ public class GameEnvironment {
 		
 		farmer = new Farmer(farmerName, 1); //Age is 1, first day
 		farm = new Farm(farmName, farmType, farmer);
-		store = new Store();
+		store = farm.getStore();
 		
 	}
 	
@@ -208,7 +216,7 @@ public class GameEnvironment {
 			for(Crop crop: farm.getCrops()) 
 			{
 				System.out.println(crop.getName() + " Has been growing for " + crop.getDaysGrown() 
-						+ " days, it needs " + (crop.getDaysToGrow() - crop.getDaysGrown()) // Need to modify this so that it says ready to harvest when ready, rather than saying it needs 0 or a negative number of days to harvest
+						+ " days, it needs " + (crop.getDaysLeftToGrow()) // Need to modify this so that it says ready to harvest when ready, rather than saying it needs 0 or a negative number of days to harvest
 						+ " more days to be harvested");
 			}
 			
@@ -275,7 +283,6 @@ public class GameEnvironment {
 			else {
 				tendFarmLand();
 			}
-			//actionsPerformed++;
 			break;
 		}
 		System.out.println("");
@@ -309,9 +316,9 @@ public class GameEnvironment {
 			System.out.println("Crops for sale:");
 			for(Crop crop: store.getCropsForSale()) 
 			{
-				System.out.println(crop.getName());
-				System.out.println("Purchase price: " + crop.getPurchasePrice());
-				System.out.println("Sell price: " + crop.getSellPrice());
+				System.out.println("\n" + crop.getName());
+				System.out.println("Purchase price: $" + crop.getPurchasePrice());
+				System.out.println("Sell price: $" + crop.getSellPrice());
 				System.out.println("Days to grow: " + crop.getDaysToGrow());
 			}
 			System.out.println("");
@@ -320,9 +327,9 @@ public class GameEnvironment {
 			System.out.println("Animals for sale:");
 			for(Animal animal: store.getAnimalsForSale()) 
 			{
-				System.out.println(animal.getName());
-				System.out.println("Purchase price: " + animal.getPurchasePrice());
-				System.out.println("Daily profit at base Happiness: " + animal.getDailyMoneyMade());
+				System.out.println("\n" + animal.getName());
+				System.out.println("Purchase price: $" + animal.getPurchasePrice());
+				System.out.println("Daily profit at base Happiness: $" + animal.dailyProfit());
 			}
 			System.out.println("");
 			break;
@@ -330,8 +337,8 @@ public class GameEnvironment {
 			System.out.println("Items for sale:");
 			for(Item item: store.getItemsForSale()) 
 			{
-				System.out.println(item.getName());
-				System.out.println("Purchase price: " + item.getPurchasePrice());
+				System.out.println("\n" + item.getName());
+				System.out.println("Purchase price: $" + item.getPurchasePrice());
 				if (item.getType() == "Crop")
 				{
 					System.out.println("Benefit: Increases growth speed of a chosen type of crop by " 

@@ -26,7 +26,7 @@ public class Animal implements StoreItem{
 		animalName = animal.getName();
 		purchasePrice = animal.getPurchasePrice();
 		happiness = animal.getHappiness();
-		dailyMoneyMade = animal.getDailyMoneyMade();
+		dailyMoneyMade = animal.dailyProfit();
 		health = 1.0;
 	}
 	
@@ -57,11 +57,6 @@ public class Animal implements StoreItem{
 	{
 		return purchasePrice;
 	}	
-	
-	public double getDailyMoneyMade()
-	{
-		return dailyMoneyMade;
-	}
 	
 	public double getHealth()
 	{

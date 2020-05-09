@@ -6,7 +6,7 @@ public class Farm  extends GameEnvironment{
 	private String farmName;
 	private String farmType;
 	private Farmer farmer;
-	private Store store = new Store();
+	private Store store;
 	private ArrayList<Crop> crops = new ArrayList<Crop>();
 	private ArrayList<Animal> animals = new ArrayList<Animal>();
 	private ArrayList<Item> items = new ArrayList<Item>();
@@ -26,26 +26,35 @@ public class Farm  extends GameEnvironment{
         //animals.add(store.animalsForSale.get(1));
     }
 	
+	public Store getStore()
+	{
+		return store;
+	}
+	
 	public void setFarmType(String type) // Need to add animal happiness changes, need to discuss how to implement this!
 	{
 		if (type == "Normal") 
 		{
 			initMoney = 1500;
 			cropSpace = 10;
+			store = new Store(1.1);
 		}
 		else if (type == "Rich") 
 		{
 			initMoney = 2000;
 			cropSpace = 10;
+			store = new Store(1.0);
 		}
 		else if (type == "Happy") 
 		{
 			initMoney = 1000;
 			cropSpace = 10;
+			store = new Store(1.2);
 		}
 		else if (type == "Large") {
 			initMoney = 1000;
 			cropSpace = 20;
+			store = new Store(1.0);
 		}
 		money = initMoney;
 		//System.out.println(money + "  " + startCropGrowthSpeed);

@@ -60,14 +60,27 @@ public class Crop implements StoreItem{
 		return daysToGrow;
 	}
 	
+	public int getDaysLeftToGrow() 
+	{
+		return daysToGrow - daysGrown;
+	}
+	
 	public void grow()
 	{
-		daysGrown++;
+		if (getDaysLeftToGrow() > 0)
+		{
+			daysGrown++;
+		}
+		
 	}
 	
 	public void tend(double daysToIncrease)
 	{
 		daysGrown += daysToIncrease;
+		if (getDaysLeftToGrow() < 0)
+		{
+			daysGrown = daysToGrow;
+		}
 	}
 	
 	
