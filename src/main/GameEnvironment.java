@@ -22,126 +22,32 @@ public class GameEnvironment {
 	private String farmType;
 	private String farmName = null;
 	private int actionsPerformed = 0;
-	
-	/**
-	 * Sets the number of days via input from the user
-	 */
-	public void inputNumDays() {
-		do
-		{
-			scanner = new Scanner(System.in);
-			System.out.println("How many days would you like the game to last? (Enter a number between 5 and 10)");
-			
-			if (scanner.hasNextInt()) {
-				numDays = scanner.nextInt();
-				
-				if (numDays < 5 || numDays > 10) {
-					System.out.println("That number is not between 5 and 10, please try again");
-				}
-			}
-			else {
-				System.out.println("That is not an integer number, please try again");
-			}
-		}
-		while (numDays < 5 || numDays > 10);
-	}
-	
-	/**
-	 * Sets the farmer's name via input from the user
-	 */
-	public void inputFarmerName() {
-		do
-		{
-			scanner = new Scanner(System.in);
-			System.out.println("What is your name? (must be between 3 and 15 characters and must not include numbers or special characters)");
-			
-			if (scanner.hasNextLine())
-			{
-				farmerName = scanner.nextLine();
-				if ((farmerName.length() < 3 || farmerName.length() > 15) && !isAlpha(farmerName)) {
-					System.out.println("That name is not between 3 and 15 characters and includes numbers or special characters, please try again");
-				}
-				else if (farmerName.length() < 3 || farmerName.length() > 15) {
-					System.out.println("That name is not between 3 and 15 characters, please try again");
-				}
-				else if (!isAlpha(farmerName)) {
-					System.out.println("That name includes numbers or special characters, please try again");
-				}
-			}
-		}
-		while (farmerName.length() < 3 || farmerName.length() > 15 || !isAlpha(farmerName));
-	}
-	
-	/**
-	 * Sets the farm type via input from the user
-	 */
-	public void inputFarmType() {
-		do
-		{
-			scanner = new Scanner(System.in);
-			System.out.println("Please select a farm type from below by typing the corresponding number\n" + 
-					"1: Normal farm: $150 starting money, average animal happiness, 10 crop spaces, the default farm.\n" +
-					"2: Rich farm: $200 starting money, low animal happiness, 10 crop spaces.\n" + 
-					"3: Happy farm: $100 starting money, high animal happiness, 10 crop spaces.\n" + 
-					"4: Large farm: $100 starting money, low animal happiness, but hey, at least it has 20 crop spaces!");
-
-			if (scanner.hasNextInt())
-			{
-				typeInt = scanner.nextInt();
-				if (typeInt != 1 && typeInt != 2 && typeInt != 3 && typeInt != 4) {
-					System.out.println("That number is not between 1 and 4, please try again");
-				}
-			}
-			else {
-				System.out.println("That is not an integer number, please try again");
-			}
-		}
-		while(typeInt != 1 && typeInt != 2 && typeInt != 3 && typeInt != 4);
-		
-		if (typeInt == 1) { 
-			farmType = "Normal";
-		}
-		else if (typeInt == 2) {
-			farmType = "Rich";
-		}
-		else if (typeInt == 3) {
-			farmType = "Happy";
-		}
-		else {
-			farmType = "Large";
-		}
-	}
-	
-	/**
-	 * Sets the farm's name via input from the user
-	 */
-	public void inputFarmName() {
-		do
-		{
-			scanner = new Scanner(System.in);
-			System.out.println("What is your farm's name?");
-			
-			if (scanner.hasNextLine())
-			{
-				farmName = scanner.nextLine();
-			}
-		}
-		while (farmName == null);
-	}
+	private SetupScreen setupWindow;
+	private MainScreen mainWindow;
 	
 	/**
 	 * Starts a new game by getting number of days, farmer name, farm type, and farm name
 	 */
-	public void setupGame() 
+	public void setupGame(int initNumDays, String farmerName, String farmType, String farmName) 
 	{
-		inputNumDays();
-		inputFarmerName();
-		inputFarmType();
-		inputFarmName();
+		numDays = initNumDays;
 		
-		farmer = new Farmer(farmerName, 1); //Age is 1, first day
-		farm = new Farm(farmName, farmType, farmer);
-		store = farm.getStore();
+		if ((farmerName.length() < 3 || farmerName.length() > 15 || !isAlpha(farmerName)) && (farmName.length() < 3 || farmName.length() > 15 || !isAlpha(farmName))) {
+			setupWindow.setWarningText("farmer name and farm name are");
+		}
+		else if (farmerName.length() < 3 || farmerName.length() > 15 || !isAlpha(farmerName)) {
+			setupWindow.setWarningText("farmer name is");
+		}
+		else if (farmName.length() < 3 || farmName.length() > 15 || !isAlpha(farmName)) {
+			setupWindow.setWarningText("farm name is");
+		}
+		else {
+			setupWindow.setWarningText("");
+			farmer = new Farmer(farmerName, 1); //Age is 1, first day
+			farm = new Farm(farmName, farmType, farmer);
+			store = farm.getStore();
+			closeSetupScreen(setupWindow);
+		}
 		
 	}
 	
@@ -493,7 +399,7 @@ public class GameEnvironment {
 	 * @return
 	 */
 	public boolean isAlpha(String name) {
-	    return name.matches("[a-zA-Z]+");
+	    return name.matches("[a-zA-Z ]+");
 	}
 	
 	/**
@@ -667,8 +573,21 @@ public class GameEnvironment {
 				+ "Score is able to be increased by the profit, the healthiness and happiness of animals, the percentage of crop slots utilised, and by choosing a lower number of days!"); //rounds score to 0dp
 	}
 	
+	public void launchMainScreen() {
+		mainWindow = new MainScreen(this);
+	}
+	
+	public void closeMainScreen(MainScreen mainWindow) {
+		mainWindow.closeWindow();
+	}
+	
 	public void launchSetupScreen() {
-		SetupScreen setupWindow = new SetupScreen(this);
+		setupWindow = new SetupScreen(this);
+	}
+	
+	public void closeSetupScreen(SetupScreen setupWindow) {
+		setupWindow.closeWindow();
+		launchMainScreen();
 	}
 	
 	/**
@@ -676,12 +595,9 @@ public class GameEnvironment {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");
+		//System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");
 		GameEnvironment game = new GameEnvironment();
 		game.launchSetupScreen();
-		game.setupGame();
-		game.mainGame();
-
 	}
 	
 

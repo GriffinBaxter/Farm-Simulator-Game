@@ -14,6 +14,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class SetupScreen {
 
@@ -22,11 +23,20 @@ public class SetupScreen {
 	private JTextField textFieldName;
 	private final ButtonGroup buttonGroupFarmType = new ButtonGroup();
 	private JTextField textFieldFarmName;
+	private JLabel lblWarning;
 
 	public SetupScreen(GameEnvironment incomingManager) {
 		manager = incomingManager;
 		initialize();
 		frmSengFarm.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		frmSengFarm.dispose();
+	}
+	
+	public void finishWindow() {
+		manager.closeSetupScreen(this);
 	}
 	
 	/**
@@ -150,17 +160,36 @@ public class SetupScreen {
 		textFieldFarmName.setBounds(617, 476, 423, 39);
 		frmSengFarm.getContentPane().add(textFieldFarmName);
 		
+		lblWarning = new JLabel("");
+		lblWarning.setForeground(Color.RED);
+		lblWarning.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWarning.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblWarning.setBounds(10, 530, 1164, 27);
+		frmSengFarm.getContentPane().add(lblWarning);
+		
 		JButton btnStartGame = new JButton("Start Game");
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				manager.setupGame(sliderDays.getValue(), textFieldName.getText(), buttonGroupFarmType.getSelection().getActionCommand(), textFieldFarmName.getText());
+				
+				/*
 				System.out.println(sliderDays.getValue());
 				System.out.println(textFieldName.getText());
 				System.out.println(buttonGroupFarmType.getSelection().getActionCommand());
-				System.out.println(textFieldFarmName.getText());
+				System.out.println(textFieldFarmName.getText());*/
 			}
 		});
 		btnStartGame.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnStartGame.setBounds(540, 555, 128, 45);
+		btnStartGame.setBounds(528, 555, 128, 45);
 		frmSengFarm.getContentPane().add(btnStartGame);
+	}
+	
+	public void setWarningText(String warningType) {
+		if (warningType == "") {
+			lblWarning.setText("");
+		}
+		else {
+			lblWarning.setText("Warning: Your " + warningType + " incorrect (must be between 3 and 15 characters and must not include numbers or special characters)");
+		}
 	}
 }
