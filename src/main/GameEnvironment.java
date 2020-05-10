@@ -132,7 +132,7 @@ public class GameEnvironment {
 	/**
 	 * Starts a new game by getting number of days, farmer name, farm type, and farm name
 	 */
-	public void startGame() 
+	public void setupGame() 
 	{
 		inputNumDays();
 		inputFarmerName();
@@ -667,6 +667,10 @@ public class GameEnvironment {
 				+ "Score is able to be increased by the profit, the healthiness and happiness of animals, the percentage of crop slots utilised, and by choosing a lower number of days!"); //rounds score to 0dp
 	}
 	
+	public void launchSetupScreen() {
+		SetupScreen setupWindow = new SetupScreen(this);
+	}
+	
 	/**
 	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.
 	 * @param args
@@ -674,7 +678,8 @@ public class GameEnvironment {
 	public static void main(String[] args) {
 		System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");
 		GameEnvironment game = new GameEnvironment();
-		game.startGame();
+		game.launchSetupScreen();
+		game.setupGame();
 		game.mainGame();
 
 	}
