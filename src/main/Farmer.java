@@ -19,4 +19,8 @@ public class Farmer {
 	{
 		return farmerAge;
 	}
+	
+	public String getFarmerName() {
+		return farmerName;
+	}
 }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 public class Farm  extends GameEnvironment{
 	
 	private String farmName;
-	private String farmType;
-	private Farmer farmer;
+	//private String farmType; // Re-add this if needed, otherwise will delete
+	private Farmer farmer; // might not need farmer object in farm class
 	private Store store;
 	private ArrayList<Crop> crops = new ArrayList<Crop>();
 	private ArrayList<Animal> animals = new ArrayList<Animal>();
@@ -31,30 +31,30 @@ public class Farm  extends GameEnvironment{
 		return store;
 	}
 	
-	public void setFarmType(String type) // Need to add animal happiness changes, need to discuss how to implement this!
+	public void setFarmType(String type)
 	{
 		if (type == "Normal") 
 		{
-			initMoney = 1500;
+			initMoney = 150;
 			cropSpace = 10;
-			store = new Store(1.1);
+			store = new Store(1.1); // Average animal happiness
 		}
 		else if (type == "Rich") 
 		{
-			initMoney = 2000;
+			initMoney = 200;
 			cropSpace = 10;
-			store = new Store(1.0);
+			store = new Store(1.0); // Low animal happiness
 		}
 		else if (type == "Happy") 
 		{
-			initMoney = 1000;
+			initMoney = 100;
 			cropSpace = 10;
-			store = new Store(1.2);
+			store = new Store(1.2); // High animal happiness
 		}
 		else if (type == "Large") {
-			initMoney = 1000;
+			initMoney = 100;
 			cropSpace = 20;
-			store = new Store(1.0);
+			store = new Store(1.0); // Low animal happiness
 		}
 		money = initMoney;
 		//System.out.println(money + "  " + startCropGrowthSpeed);
@@ -115,6 +115,9 @@ public class Farm  extends GameEnvironment{
 		return items;
 	}
 	
+	public int getCropSpace() {
+		return cropSpace;
+	}
 	
 	public boolean canHarvestCrops() {
 		for(Crop crop: crops)

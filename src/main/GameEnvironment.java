@@ -1,10 +1,5 @@
 /*
- * To-Do
- * Make it so you can't go in negative money
- * lololol
- * make money show in cents with 2dp, make a new function for this
- * Incorporate the score in the finishGame function. - I think this is done now
- *  -maybe just a multiplier on the  amount of money earned and animal happiness and healthiness?
+ * To-Do (Empty)
  */
 
 
@@ -85,10 +80,10 @@ public class GameEnvironment {
 		{
 			scanner = new Scanner(System.in);
 			System.out.println("Please select a farm type from below by typing the corresponding number\n" + 
-					"1: Normal farm: $1500 starting money, average animal happiness, 10 crop spaces, the default farm.\n" +
-					"2: Rich farm: $2000 starting money, low animal happiness, 10 crop spaces.\n" + 
-					"3: Happy farm: $1000 starting money, high animal happiness, 10 crop spaces.\n" + 
-					"4: Large farm: $1000 starting money, low animal happiness, but hey, at least it has 20 crop spaces!");
+					"1: Normal farm: $150 starting money, average animal happiness, 10 crop spaces, the default farm.\n" +
+					"2: Rich farm: $200 starting money, low animal happiness, 10 crop spaces.\n" + 
+					"3: Happy farm: $100 starting money, high animal happiness, 10 crop spaces.\n" + 
+					"4: Large farm: $100 starting money, low animal happiness, but hey, at least it has 20 crop spaces!");
 
 			if (scanner.hasNextInt())
 			{
@@ -218,26 +213,33 @@ public class GameEnvironment {
 			System.exit(0);
 		case 1: //View status of Crops and Animals
 			
-			System.out.println(farm.getFarmName() + " has " + farm.getCrops().size() + " crops");
+			System.out.println("\n" + farm.getFarmName() + " has " + farm.getCrops().size() + " crops");
 			for(Crop crop: farm.getCrops()) 
 			{
-				System.out.println(crop.getName() + " Has been growing for " + crop.getDaysGrown() 
-						+ " days, it needs " + (crop.getDaysLeftToGrow()) // Need to modify this so that it says ready to harvest when ready, rather than saying it needs 0 or a negative number of days to harvest
-						+ " more days to be harvested");
+				if (crop.getDaysLeftToGrow() > 0) {
+					System.out.println(crop.getName() + " Has been growing for " + crop.getDaysGrown() 
+					+ " days, it needs " + (crop.getDaysLeftToGrow())
+					+ " more days to be harvested");
+				}
+				else {
+					System.out.println(crop.getName() + " Has been growing for " + crop.getDaysGrown() 
+					+ " days, it is ready to harvest!");
+				}
 			}
 			
-			System.out.println(farm.getFarmName() + " has " + farm.getAnimals().size() + " animals");
+			System.out.println("\n" + farm.getFarmName() + " has " + farm.getAnimals().size() + " animals");
 			for(Animal animal: farm.getAnimals()) 
 			{
-				System.out.println(animal.getName() + " has a happiness level of " 
-						+ animal.getHappiness() + ". This equates to $" + animal.dailyProfit() + " per day"); // Also need to add animal health to this
+				System.out.println(animal.getName() + " has a happiness level of " + String.format("%.1f", animal.getHappiness())
+					+ " and a healthiness level of " + String.format("%.1f", animal.getHealth())
+					+ ", which equates to $" + returnDollarsCents(animal.dailyProfit()) + " per day");
 			}
 			System.out.println("");
 			
 			break;
 			
 		case 2: //View status of Farm
-			System.out.println(farm.getFarmName() + " currently has $" + farm.getMoney() + " available and " + farm.calculateFreeSpace() + " free spaces for new crops"); // Probably will fix this to format dollars and cents properly
+			System.out.println(farm.getFarmName() + " currently has $" + returnDollarsCents(farm.getMoney()) + " available and " + farm.calculateFreeSpace() + " free spaces for new crops");
 			break;
 		case 3: //Visit Store
 			visitStore();
@@ -328,8 +330,8 @@ public class GameEnvironment {
 			for(Crop crop: store.getCropsForSale()) 
 			{
 				System.out.println("\n" + crop.getName());
-				System.out.println("Purchase price: $" + crop.getPurchasePrice());
-				System.out.println("Sell price: $" + crop.getSellPrice());
+				System.out.println("Purchase price: $" + returnDollarsCents(crop.getPurchasePrice()));
+				System.out.println("Sell price: $" + returnDollarsCents(crop.getSellPrice()));
 				System.out.println("Days to grow: " + crop.getDaysToGrow());
 			}
 			System.out.println("");
@@ -339,8 +341,8 @@ public class GameEnvironment {
 			for(Animal animal: store.getAnimalsForSale()) 
 			{
 				System.out.println("\n" + animal.getName());
-				System.out.println("Purchase price: $" + animal.getPurchasePrice());
-				System.out.println("Daily profit at base Happiness: $" + animal.dailyProfit());
+				System.out.println("Purchase price: $" + returnDollarsCents(animal.getPurchasePrice()));
+				System.out.println("Daily profit at base Happiness: $" + returnDollarsCents(animal.dailyProfit()));
 			}
 			System.out.println("");
 			break;
@@ -349,7 +351,7 @@ public class GameEnvironment {
 			for(Item item: store.getItemsForSale()) 
 			{
 				System.out.println("\n" + item.getName());
-				System.out.println("Purchase price: $" + item.getPurchasePrice());
+				System.out.println("Purchase price: $" + returnDollarsCents(item.getPurchasePrice()));
 				if (item.getType() == "Crop")
 				{
 					System.out.println("Benefit: Increases growth speed of a chosen type of crop by " 
@@ -431,7 +433,10 @@ public class GameEnvironment {
 			if (farm.calculateFreeSpace() > 0) {
 				int purchaseOption = printOptions(farm.returnCropsString("0. Don't buy anything\n", store.getCropsForSale()), store.getCropsForSale().size());
 				
-				if (purchaseOption != 0) //If the player did not choose None
+				if (farm.getMoney() < store.getCropsForSale().get(purchaseOption - 1).getPurchasePrice()) {
+					System.out.println("You don't have enough money to buy " + store.getCropsForSale().get(purchaseOption - 1).getName() + "!");
+				}
+				else if (purchaseOption != 0) //If the player did not choose None
 				{
 					farm.increaseCrops(store.getCropsForSale().get(purchaseOption - 1));
 					System.out.println(store.getCropsForSale().get(purchaseOption - 1).getName() + " bought!");
@@ -452,7 +457,10 @@ public class GameEnvironment {
 			}
 			int purchaseOption = printOptions(purchaseString, purchaseIndex);
 			
-			if (purchaseOption != 0) //If the player did not choose None
+			if (farm.getMoney() < store.getAnimalsForSale().get(purchaseOption - 1).getPurchasePrice()) {
+				System.out.println("You don't have enough money to buy " + store.getAnimalsForSale().get(purchaseOption - 1).getName() + "!");
+			}
+			else if (purchaseOption != 0) //If the player did not choose None
 			{
 				farm.increaseAnimals(store.getAnimalsForSale().get(purchaseOption - 1));
 				System.out.println(store.getAnimalsForSale().get(purchaseOption - 1).getName() + " bought!");
@@ -467,7 +475,10 @@ public class GameEnvironment {
 			}
 			int purchaseOption = printOptions(purchaseString, purchaseIndex);
 			
-			if (purchaseOption != 0) //If the player did not choose None
+			if (farm.getMoney() < store.getItemsForSale().get(purchaseOption - 1).getPurchasePrice()) {
+				System.out.println("You don't have enough money to buy " + store.getItemsForSale().get(purchaseOption - 1).getName() + "!");
+			}
+			else if (purchaseOption != 0) //If the player did not choose None
 			{
 				farm.increaseItems(store.getItemsForSale().get(purchaseOption - 1));
 				System.out.println(store.getItemsForSale().get(purchaseOption - 1).getName() + " bought!");
@@ -486,13 +497,20 @@ public class GameEnvironment {
 	}
 	
 	/**
+	 * Returns a double as a string with two decimal places, for use with dollars and cents.
+	 */
+	public String returnDollarsCents(double amount) {
+		return String.format("%.2f", amount);
+	}
+	
+	/**
 	 * A function for moving on to the next day, Called when the player sleeps.
 	 * This function increases the farmers age, reduces the actions performed to 0 and grows the crops owned.
 	 * If the farmers age is equal to the number of days set during startup, the finishing sequence begins.
 	 */
 	public void nextDay() {
 		//if the game is finished
-		System.out.println("You have slept.");
+		System.out.println(farmer.getFarmerName() + " has slept.\n");
 		farmer.increaseAge();
 		actionsPerformed = 0;
 		if (farmer.getAge() != numDays)
@@ -594,7 +612,7 @@ public class GameEnvironment {
 			actionsPerformed++;
 			double moneyMade = farm.harvestAvailableCrops();
 			farm.increaseMoney(moneyMade);
-			System.out.println("You made $" + moneyMade + " from harvesting all your crops");
+			System.out.println("You made $" + returnDollarsCents(moneyMade) + " from harvesting all your crops");
 		}
 		else {
 			System.out.println("You have no harvestable crops!");
@@ -619,22 +637,34 @@ public class GameEnvironment {
 	 */
 	public void finishGame()
 	{
-		double score;
-		if (farm.getAnimals().size() > 0)
-		{
-			//Just gets the first animals happiness and health because they are all the same
-			score = farm.getProfit() * farm.getAnimals().get(0).getHealth() * farm.getAnimals().get(0).getHappiness();
+		String profitString;
+		double scoreProfit = farm.getProfit();
+		double scoreAge = (15 - farmer.getAge());
+		double scoreCropSize = farm.getCrops().size() + 1;
+		double scoreCropSpace = farm.getCropSpace();
+		
+		if (scoreProfit <= 0.0) {
+			scoreProfit = 0;
+			profitString = " made no profit!\n";
 		}
-		else
-		{
-			score = farm.getProfit();
+		else {
+			profitString = " made $" + returnDollarsCents(farm.getProfit()) + " in profit.\n";
 		}
+		
+		double score = scoreProfit * scoreAge * (scoreCropSize / scoreCropSpace);
+		
+		for (Animal animal: farm.getAnimals()) {
+			score += animal.getHappiness() * animal.getHealth();
+		}
+		
+		
 
 		System.out.println("The game has finished!\n"
-				+ farmerName + "\n"
+				+ "Stats for " + farmer.getFarmerName() + " on the farm " + farm.getFarmName() + ":\n"
 				+ farmer.getAge() + " days have passed.\n"
-				+ "You made $" + farm.getProfit() + "\n"
-				+ "Score: " + Math.round(score));//rounds score to 0dp
+				+ farmer.getFarmerName() + profitString
+				+ "Total Score: " + Math.round(score) + "\n"
+				+ "Score is able to be increased by the profit, the healthiness and happiness of animals, the percentage of crop slots utilised, and by choosing a lower number of days!"); //rounds score to 0dp
 	}
 	
 	/**
