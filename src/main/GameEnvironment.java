@@ -590,6 +590,54 @@ public class GameEnvironment {
 		launchMainScreen();
 	}
 	
+	public String returnStatusCropsAnimals()
+	{
+		String returnString = "";
+		returnString += farm.getFarmName() + " has " + farm.getCrops().size() + " crops\r\n";
+		for(Crop crop: farm.getCrops()) 
+		{
+			if (crop.getDaysLeftToGrow() > 0) {
+				returnString += crop.getName() + " Has been growing for " + crop.getDaysGrown() 
+				+ " days, it needs " + (crop.getDaysLeftToGrow())
+				+ " more days to be harvested\r\n";
+			}
+			else {
+				returnString += crop.getName() + " Has been growing for " + crop.getDaysGrown() 
+				+ " days, it is ready to harvest!\r\n";
+			}
+		}
+		
+		returnString += "\r\n" + farm.getFarmName() + " has " + farm.getAnimals().size() + " animals\r\n";
+		for(Animal animal: farm.getAnimals()) 
+		{
+			returnString += animal.getName() + " has a happiness level of " + String.format("%.1f", animal.getHappiness())
+				+ " and a healthiness level of " + String.format("%.1f", animal.getHealth())
+				+ ", which equates to $" + returnDollarsCents(animal.dailyProfit()) + " per day\r\n";
+		}
+		//String test = "l\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\n" + "l\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\n";
+		return returnString;
+	}
+	
+	public String returnMoneyString()
+	{
+		return returnDollarsCents(farm.getMoney());
+	}
+	
+	public int returnCropSpace()
+	{
+		return farm.getCropSpace();
+	}
+	
+	public int returnDays()
+	{
+		return farmer.getAge();
+	}
+	
+	public int getNumDays()
+	{
+		return numDays;
+	}
+	
 	/**
 	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.
 	 * @param args
