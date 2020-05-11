@@ -6,7 +6,7 @@
 package main;
 import java.util.ArrayList;
 import java.lang.Math;
-//import java.util.ArrayList; // Re-add this if needed, otherwise will delete
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameEnvironment {
@@ -24,6 +24,7 @@ public class GameEnvironment {
 	private int actionsPerformed = 0;
 	private SetupScreen setupWindow;
 	private MainScreen mainWindow;
+	private StoreScreen storeWindow;
 	
 	/**
 	 * Starts a new game by getting number of days, farmer name, farm type, and farm name
@@ -587,7 +588,15 @@ public class GameEnvironment {
 	
 	public void closeSetupScreen(SetupScreen setupWindow) {
 		setupWindow.closeWindow();
-		launchMainScreen();
+		launchMainScreen(); // Only here for closing setup screen, as this is used once
+	}
+	
+	public void launchStoreScreen() {
+		storeWindow = new StoreScreen(this);
+	}
+	
+	public void closeStoreScreen(StoreScreen storeWindow) {
+		storeWindow.closeWindow();
 	}
 	
 	public String returnStatusCropsAnimals()
@@ -623,9 +632,9 @@ public class GameEnvironment {
 		return returnDollarsCents(farm.getMoney());
 	}
 	
-	public int returnCropSpace()
+	public int returnFreeCropSpace()
 	{
-		return farm.getCropSpace();
+		return farm.calculateFreeSpace();
 	}
 	
 	public int returnDays()
@@ -637,6 +646,43 @@ public class GameEnvironment {
 	{
 		return numDays;
 	}
+	
+	public int getActionsPerformed() {
+		return actionsPerformed;
+	}
+	
+	public String[] returnCropArray() {
+		ArrayList<String> cropArrayList = new ArrayList<String>();
+		for(Crop crop: store.getCropsForSale()) 
+		{
+			cropArrayList.add(crop.getName()
+			+ ", Purchase price: $" + returnDollarsCents(crop.getPurchasePrice())
+			+ ", Harvest sell price: $" + returnDollarsCents(crop.getSellPrice())
+			+ ", Days to grow: " + crop.getDaysToGrow()); 
+		}
+		String[] cropArray = cropArrayList.toArray(new String[0]);
+		return cropArray;
+	}
+	
+	public String purchaseCrop(int purchaseOption) {
+		String purchaseCropString = "";
+			if (farm.calculateFreeSpace() > 0) {
+				if (farm.getMoney() < store.getCropsForSale().get(purchaseOption).getPurchasePrice()) {
+					purchaseCropString = "You don't have enough money to buy " + store.getCropsForSale().get(purchaseOption).getName() + "!" ;
+				}
+				else
+				{
+					farm.increaseCrops(store.getCropsForSale().get(purchaseOption));
+					purchaseCropString = store.getCropsForSale().get(purchaseOption).getName() + " bought!";
+				}
+			}
+			else {
+				purchaseCropString = "You have no space available for new crops!\n"
+						+ "To purchase crops again, you need to either tend to the farm land to increase crop space or harvest crops to remove current crops";
+			}
+		return purchaseCropString;
+	}
+	
 	
 	/**
 	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.

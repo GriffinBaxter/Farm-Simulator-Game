@@ -85,8 +85,8 @@ public class MainScreen {
 		
 		JLabel lblFarmStatus = new JLabel("Farm Status");
 		lblFarmStatus.setHorizontalAlignment(SwingConstants.LEFT);
-		lblFarmStatus.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFarmStatus.setBounds(10, 11, 100, 24);
+		lblFarmStatus.setFont(new Font("Tahoma", Font.BOLD, 22));
+		lblFarmStatus.setBounds(10, 11, 151, 24);
 		panelFarmStatus.add(lblFarmStatus);
 		
 		JLabel lblCurrentMoney = new JLabel("Current Money: $" + manager.returnMoneyString());
@@ -95,7 +95,7 @@ public class MainScreen {
 		lblCurrentMoney.setBounds(10, 43, 347, 24);
 		panelFarmStatus.add(lblCurrentMoney);
 		
-		JLabel lblFreeCropSpace = new JLabel("Free crop space: " + manager.returnCropSpace());
+		JLabel lblFreeCropSpace = new JLabel("Free crop space: " + manager.returnFreeCropSpace());
 		lblFreeCropSpace.setHorizontalAlignment(SwingConstants.LEFT);
 		lblFreeCropSpace.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblFreeCropSpace.setBounds(441, 43, 237, 24);
@@ -118,6 +118,12 @@ public class MainScreen {
 		panelNoActionsReq.setLayout(null);
 		
 		JButton btnVisitStore = new JButton("Visit Store");
+		btnVisitStore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishWindow();
+				manager.launchStoreScreen();
+			}
+		});
 		btnVisitStore.setBounds(10, 11, 268, 50);
 		panelNoActionsReq.add(btnVisitStore);
 		btnVisitStore.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -133,7 +139,7 @@ public class MainScreen {
 		panelButtons.add(panelActionsReq);
 		panelActionsReq.setLayout(null);
 		
-		JLabel lblRequireActions = new JLabel("Require Actions:");
+		JLabel lblRequireActions = new JLabel("Require Actions: (" + (2 - manager.getActionsPerformed()) + " remaining)");
 		lblRequireActions.setHorizontalAlignment(SwingConstants.LEFT);
 		lblRequireActions.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblRequireActions.setBounds(10, 12, 268, 24);
@@ -168,19 +174,25 @@ public class MainScreen {
 		btnTendToFarm.setBounds(10, 293, 268, 50);
 		panelActionsReq.add(btnTendToFarm);
 		
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBounds(308, 100, 866, 500);
+		frmSengFarm.getContentPane().add(panel);
+		panel.setLayout(null);
+		
 		JLabel lblStatusOfCrops = new JLabel("Status of Crops and Animals");
-		lblStatusOfCrops.setBounds(308, 119, 866, 49);
+		lblStatusOfCrops.setBounds(10, 11, 846, 49);
+		panel.add(lblStatusOfCrops);
 		lblStatusOfCrops.setHorizontalAlignment(SwingConstants.CENTER);
-		lblStatusOfCrops.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		frmSengFarm.getContentPane().add(lblStatusOfCrops);
+		lblStatusOfCrops.setFont(new Font("Tahoma", Font.BOLD, 25));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(308, 179, 866, 421);
-		frmSengFarm.getContentPane().add(scrollPane);
+		scrollPane.setBounds(10, 71, 846, 418);
+		panel.add(scrollPane);
 		
 		JTextArea txtCropsAnimalsStatus = new JTextArea();
-		txtCropsAnimalsStatus.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		scrollPane.setViewportView(txtCropsAnimalsStatus);
+		txtCropsAnimalsStatus.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtCropsAnimalsStatus.setText(manager.returnStatusCropsAnimals());
 		txtCropsAnimalsStatus.setEditable(false);
 	}

@@ -172,12 +172,6 @@ public class SetupScreen {
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				manager.setupGame(sliderDays.getValue(), textFieldName.getText(), buttonGroupFarmType.getSelection().getActionCommand(), textFieldFarmName.getText());
-				
-				/*
-				System.out.println(sliderDays.getValue());
-				System.out.println(textFieldName.getText());
-				System.out.println(buttonGroupFarmType.getSelection().getActionCommand());
-				System.out.println(textFieldFarmName.getText());*/
 			}
 		});
 		btnStartGame.setFont(new Font("Tahoma", Font.BOLD, 16));
