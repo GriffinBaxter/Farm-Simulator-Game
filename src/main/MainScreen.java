@@ -136,13 +136,15 @@ public class MainScreen {
 			public void actionPerformed(ActionEvent e) 
 			{
 				manager.nextDay();
-				finishWindow();
-				manager.launchMainScreen();
 				JOptionPane.showMessageDialog(frmSengFarm, "You have slept!");
 				if (manager.gameFinishing())
 				{
 					JOptionPane.showMessageDialog(frmSengFarm, manager.finishGame());
 					finishWindow();
+				}
+				else {
+					finishWindow();
+					manager.launchMainScreen();
 				}
 			}
 		});
@@ -165,6 +167,13 @@ public class MainScreen {
 		JButton btnTendToCrops = new JButton("Tend to crops");
 		btnTendToCrops.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (manager.getCrops().size() > 0) {
+					finishWindow();
+					manager.launchTendCropsScreen();
+				}
+				else {
+					JOptionPane.showMessageDialog(frmSengFarm, "You have no crops to tend to, so no actions were used");
+				}
 			}
 		});
 		btnTendToCrops.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -172,21 +181,59 @@ public class MainScreen {
 		panelActionsReq.add(btnTendToCrops);
 		
 		JButton btnFeedAnimals = new JButton("Feed animals");
+		btnFeedAnimals.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (manager.getAnimals().size() > 0 && manager.returnAnimalItemSize() > 0) {
+					finishWindow();
+					manager.launchFeedAnimalsScreen();
+				}
+				else if (manager.getAnimals().size() > 0) {
+					JOptionPane.showMessageDialog(frmSengFarm, "You have no items to feed your animals with, so no actions were used");
+				}
+				else if (manager.returnAnimalItemSize() > 0) {
+					JOptionPane.showMessageDialog(frmSengFarm, "You have no animals to feed, so no actions were used");
+				}
+				else {
+					JOptionPane.showMessageDialog(frmSengFarm, "You have no animals to feed nor any items to feed them with, so no actions were used");
+				}
+			}
+		});
 		btnFeedAnimals.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnFeedAnimals.setBounds(10, 108, 268, 50);
 		panelActionsReq.add(btnFeedAnimals);
 		
 		JButton btnPlayWithAnimals = new JButton("Play With Animals");
+		btnPlayWithAnimals.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frmSengFarm, manager.playWithAnimals());
+				finishWindow();
+				manager.launchMainScreen();
+			}
+		});
 		btnPlayWithAnimals.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnPlayWithAnimals.setBounds(10, 169, 268, 50);
 		panelActionsReq.add(btnPlayWithAnimals);
 		
 		JButton btnHarvestCrops = new JButton("Harvest Crops");
+		btnHarvestCrops.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frmSengFarm, manager.harvestCrops());
+				finishWindow();
+				manager.launchMainScreen();
+			}
+		});
 		btnHarvestCrops.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnHarvestCrops.setBounds(10, 230, 268, 50);
 		panelActionsReq.add(btnHarvestCrops);
 		
 		JButton btnTendToFarm = new JButton("Tend to farm land");
+		btnTendToFarm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frmSengFarm, manager.tendFarmLand());
+				finishWindow();
+				manager.launchMainScreen();
+			}
+		});
 		btnTendToFarm.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnTendToFarm.setBounds(10, 293, 268, 50);
 		panelActionsReq.add(btnTendToFarm);

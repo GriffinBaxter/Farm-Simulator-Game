@@ -1,5 +1,6 @@
 /*
- * To-Do (Empty)
+ * To-Do
+ * Edit tendToCrops and feedAnimals doc-strings to make sense for GUI implementation
  */
 
 
@@ -25,6 +26,8 @@ public class GameEnvironment {
 	private SetupScreen setupWindow;
 	private MainScreen mainWindow;
 	private StoreScreen storeWindow;
+	private TendCropsScreen tendCropsWindow;
+	private FeedAnimalsScreen feedAnimalsWindow;
 	
 	/**
 	 * Starts a new game by getting number of days, farmer name, farm type, and farm name
@@ -160,7 +163,7 @@ public class GameEnvironment {
 				System.out.println("You can not do this as you have no actions left");
 			}
 			else {
-				tendToCrops(); //actionsPerformed is incremented in the tendToCrops() function
+				//tendToCrops(); //actionsPerformed is incremented in the tendToCrops() function
 			}
 			break;
 		case 6: //Feed Animals
@@ -169,7 +172,7 @@ public class GameEnvironment {
 				System.out.println("You can not do this as you have no actions left");
 			}
 			else {
-				feedAnimals(); //actionsPerformed is incremented in the feedAnimals() function
+				//feedAnimals(); //actionsPerformed is incremented in the feedAnimals() function
 			}
 			break;
 		case 7: //Play with Animals
@@ -428,43 +431,57 @@ public class GameEnvironment {
 		}
 	}
 	
+	public String[] returnCropTypeArray() {
+		ArrayList<Crop> differentCrops = farm.returnDifferentCropsOwned();
+		ArrayList<String> differentCropNames = new ArrayList<String>();
+		for(Crop crop: differentCrops) {
+			differentCropNames.add(crop.getName());
+		}
+		String[] cropArray = differentCropNames.toArray(new String[0]);
+		return cropArray;
+	}
+	
+	public String[] returnCurrentItemsArray(String itemType) {
+		ArrayList<String> currentItems = new ArrayList<String>();
+		
+		if (itemType == "Crop") {
+				currentItems.add("Water (free)");
+		}
+		
+		for(Item item: farm.getItems()) 
+		{
+			if (item.getType() == itemType)
+			{
+				currentItems.add(item.getName());
+			}
+		}
+		
+		String[] currentItemsArray = currentItems.toArray(new String[0]);
+		return currentItemsArray;
+	}
+	
 	/**
 	 * Asks the user what type of crops they would like to tend to and what item they would want to use on it.
 	 * the program then tends to all of the crops owned with the specified name
 	 */
-	public void tendToCrops()
-	{
-		System.out.println("Please select the type of crop you would like to tend to:");
-		ArrayList<Crop> differentCrops = farm.returnDifferentCropsOwned();
-		int tendOption = printOptions(farm.returnCropsString("0. Don't tend to anything\n", differentCrops), farm.getCrops().size());
-		if (tendOption != 0)
-		{
-			String cropName = differentCrops.get(tendOption-1).getName();
-			System.out.println("Please select the item you would like to tend all of your " + cropName + " with:");
-			String itemString = "0. Don't use anything\n"
-					+ "1. Water (free)\n";
-			
-			int itemOption = printOptions(farm.returnItemsString(itemString, "Crop", 1), farm.getItems().size() + 1);
-			
-			if (itemOption != 0)
+	public String tendToCrops(int cropIndex, int itemIndex) { // Need to edit the above doc-string for this method!
+		if (actionsPerformed >= 2) {
+			return "You cannot do this as you have no actions left";
+		}
+		else {
+			String cropName = returnCropTypeArray()[cropIndex];
+			actionsPerformed++; //Increase the actions performed by 1 after the player has chosen to tend to their crops
+			if (itemIndex == 0) //Watered crops
 			{
-				actionsPerformed++;//Increase the actions performed by 1 after the player has chosen to tend to their crops
-				if (itemOption == 1)//Watered crops
-				{
-					farm.tendSpecificCrops(cropName, 1.0);
-					System.out.println("Tended to every " + differentCrops.get(tendOption-1).getName() 
-							+ " by watering them");
-				}
-				else//If used an item on the crop
-				{
-					Item itemUsed = farm.getItems().get(itemOption-2);
-					farm.tendSpecificCrops(cropName, itemUsed.getBonus());
-					//Remove the item from the users inventory
-					farm.decreaseItems(itemUsed);
-
-					System.out.println("Tended to every " + differentCrops.get(tendOption-1).getName() 
-							+ " by using " + itemUsed.getName() + " on them");
-				}
+				farm.tendSpecificCrops(cropName, 1.0);
+				return "Tended to every " + cropName + " by watering them";
+			}
+			else //If used an item on the crop
+			{
+				Item itemUsed = farm.getItems().get(itemIndex - 1);
+				farm.tendSpecificCrops(cropName, itemUsed.getBonus());
+				farm.decreaseItems(itemUsed); //Remove the item from the users inventory
+				return "Tended to every " + cropName + " by using " + itemUsed.getName() + " on them";
 			}
 		}
 	}
@@ -473,36 +490,33 @@ public class GameEnvironment {
 	 * This program feed all animals owned by first asking the user what item they would like to feed the animals 
 	 * and then calling the increaseHappinessAllAnimals function in the Farm class.
 	 */
-	public void feedAnimals() {
-		System.out.println("Please select the item you would like to feed all of your animals with:");
-		int itemOption = printOptions(farm.returnItemsString("0. Don't feed animals\n", "Animal", 0), farm.getItems().size());
-		
-		if (itemOption != 0)
-		{
-			
-			Item itemUsed = farm.getItems().get(itemOption-1);
-			
-			if (farm.increaseHappinessAllAnimals(itemUsed.getBonus())) {
-				actionsPerformed++;
-				farm.decreaseItems(itemUsed); //Remove the item from the users inventory
-				System.out.println("Fed every animal with " + itemUsed.getName());
-			}
-			else {
-				System.out.println("You have no animals to feed!");
-			}
+	public String feedAnimals(int itemIndex) { // Need to edit the above doc-string for this method!
+		if (actionsPerformed >= 2) {
+			return "You cannot do this as you have no actions left";
+		}
+		else {
+			Item itemUsed = farm.getItems().get(itemIndex + returnCropItemSize());
+				
+			farm.increaseHappinessAllAnimals(itemUsed.getBonus());
+			actionsPerformed++;
+			farm.decreaseItems(itemUsed); //Remove the item from the users inventory
+			return "Fed every animal with " + itemUsed.getName();
 		}
 	}
 	
 	/**
 	 * a function that allows the user to play with the animals owned, doing this will increase their happiness.
 	 */
-	public void playWithAnimals() {
-		if (farm.playWithAllAnimals()) {
+	public String playWithAnimals() {
+		if (actionsPerformed >= 2) {
+			return "You cannot do this as you have no actions left";
+		}
+		else if (farm.playWithAllAnimals()) {
 			actionsPerformed++;
-			System.out.println("Played with every animal (and increased their happiness by doing so)");
+			return "Played with every animal (and increased their happiness by doing so)";
 		}
 		else {
-			System.out.println("You have no animals to play with!");
+			return "You have no animals to play with, so no actions were used";
 		}
 	}
 	
@@ -510,28 +524,36 @@ public class GameEnvironment {
 	 * A function that will harvest the crops that can be harvested, 
 	 * it does this by calling the harvestAvailableCrops function in the Farm class.
 	 */
-	public void harvestCrops() {
-		if (farm.canHarvestCrops()) {
+	public String harvestCrops() {
+		if (actionsPerformed >= 2) {
+			return "You cannot do this as you have no actions left";
+		}
+		else if (farm.canHarvestCrops()) {
 			actionsPerformed++;
 			double moneyMade = farm.harvestAvailableCrops();
 			farm.increaseMoney(moneyMade);
-			System.out.println("You made $" + returnDollarsCents(moneyMade) + " from harvesting all your crops");
+			return "You made $" + returnDollarsCents(moneyMade) + " from harvesting all your crops";
 		}
 		else {
-			System.out.println("You have no harvestable crops!");
+			return "You have no harvestable crops, so no actions were used";
 		}
 	}
 	
 	/**
 	 * A function to tend to the farm land. tending to the farm land will increase the number of available slots for planting crops.
 	 */
-	public void tendFarmLand() {
-		actionsPerformed++;
-		System.out.print("Farm land has been tended to, 1 more crop is able to be grown");
-		if (farm.tendFarm()) {
-			System.out.print(", plus all of your animals now have increased health!");
+	public String tendFarmLand() {
+		if (actionsPerformed >= 2) {
+			return "You cannot do this as you have no actions left";
 		}
-		System.out.println();
+		else {
+			actionsPerformed++;
+			String returnString = "Farm land has been tended to, 1 more crop is able to be grown";
+			if (farm.tendFarm()) {
+				returnString += ", plus all of your animals now have increased health!";
+			}
+			return returnString;
+		}
 	}
 	
 	/**
@@ -592,6 +614,22 @@ public class GameEnvironment {
 	
 	public void closeStoreScreen(StoreScreen storeWindow) {
 		storeWindow.closeWindow();
+	}
+	
+	public void launchTendCropsScreen() {
+		tendCropsWindow = new TendCropsScreen(this);
+	}
+	
+	public void closeTendCropsScreen(TendCropsScreen tendCropsWindow) {
+		tendCropsWindow.closeWindow();
+	}
+	
+	public void launchFeedAnimalsScreen() {
+		feedAnimalsWindow = new FeedAnimalsScreen(this);
+	}
+	
+	public void closeFeedAnimalsScreen(FeedAnimalsScreen feedAnimalsWindow) {
+		feedAnimalsWindow.closeWindow();
 	}
 	
 	public String returnStatusCropsAnimals()
@@ -730,18 +768,18 @@ public class GameEnvironment {
 			String tempString = item.getName() + ", Purchase price: $" + returnDollarsCents(item.getPurchasePrice());
 			if (item.getType() == "Crop")
 			{
-				tempString += ", Benefit when used: +" + item.getBonus() + " day growth increase for chosen crop type";
+				tempString += ", Benefit when used: +" + Math.round(item.getBonus()) + " day growth increase for chosen crop type";
 			}
 			if (item.getType() == "Animal")
 			{
-				tempString += ", Benefit when used: +" + (item.getBonus()*100) + "% health for all animals";
+				tempString += ", Benefit when used: +" + Math.round(item.getBonus() * 100) + "% health for all animals";
 			}
 			
 			itemArrayList.add(tempString);
 			
 		}
-		String[] cropArray = itemArrayList.toArray(new String[0]);
-		return cropArray;
+		String[] itemArray = itemArrayList.toArray(new String[0]);
+		return itemArray;
 	}
 	
 	public String purchaseItem(int purchaseOption) {
@@ -762,6 +800,33 @@ public class GameEnvironment {
 		return farmer.getAge() == numDays + 1;
 	}
 	
+	public ArrayList<Crop> getCrops() {
+		return farm.getCrops();
+	}
+	
+	public ArrayList<Animal> getAnimals() {
+		return farm.getAnimals();
+	}
+	
+	public int returnCropItemSize() {
+		int size = 0;
+		for (Item item: farm.getItems()) {
+			if (item.getType() == "Crop") {
+				size++;
+			}
+		}
+		return size;
+	}
+	
+	public int returnAnimalItemSize() {
+		int size = 0;
+		for (Item item: farm.getItems()) {
+			if (item.getType() == "Animal") {
+				size++;
+			}
+		}
+		return size;
+	}
 	
 	/**
 	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.

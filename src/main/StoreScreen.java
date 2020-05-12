@@ -126,24 +126,26 @@ public class StoreScreen {
 		lblCropMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCropMessage.setForeground(Color.RED);
 		lblCropMessage.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblCropMessage.setBounds(10, 116, 155, 36);
+		lblCropMessage.setBounds(10, 116, 190, 36);
 		panelCropsForSale.add(lblCropMessage);
 		
 		JButton btnBuyCrops = new JButton("Buy");
 		btnBuyCrops.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String test = manager.purchaseCrop(listCrops.getSelectedIndex());
-				if (test.endsWith("bought!")) { // Might change it so even this case shows a message dialogue
-					lblCropMessage.setText(test);
+				String message = manager.purchaseCrop(listCrops.getSelectedIndex());
+				if (message.endsWith("bought!")) { // Might change it so even this case shows a message dialogue
+					lblCropMessage.setText(message);
+					lblAnimalMessage.setText("");
+					lblItemMessage.setText("");
 				}
 				else {
 					lblCropMessage.setText("");
-					JOptionPane.showMessageDialog(frame, test);
+					JOptionPane.showMessageDialog(frame, message);
 				}
 			}
 		});
 		btnBuyCrops.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuyCrops.setBounds(175, 116, 135, 36);
+		btnBuyCrops.setBounds(210, 116, 100, 36);
 		panelCropsForSale.add(btnBuyCrops);
 		
 		JLabel lblselectWhichCrop = new JLabel("Select which crop you would like to purchase");
@@ -194,24 +196,26 @@ public class StoreScreen {
 		lblAnimalMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnimalMessage.setForeground(Color.RED);
 		lblAnimalMessage.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblAnimalMessage.setBounds(10, 101, 155, 36);
+		lblAnimalMessage.setBounds(10, 101, 190, 36);
 		panelAnimalsForSale.add(lblAnimalMessage);
 		
 		JButton btnBuyAnimals = new JButton("Buy");
 		btnBuyAnimals.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String test = manager.purchaseAnimal(listAnimals.getSelectedIndex());
-				if (test.endsWith("bought!")) { // Might change it so even this case shows a message dialogue
-					lblAnimalMessage.setText(test);
+				String message = manager.purchaseAnimal(listAnimals.getSelectedIndex());
+				if (message.endsWith("bought!")) { // Might change it so even this case shows a message dialogue
+					lblCropMessage.setText("");
+					lblAnimalMessage.setText(message);
+					lblItemMessage.setText("");
 				}
 				else {
 					lblAnimalMessage.setText("");
-					JOptionPane.showMessageDialog(frame, test);
+					JOptionPane.showMessageDialog(frame, message);
 				}
 			}
 		});
 		btnBuyAnimals.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuyAnimals.setBounds(175, 101, 135, 36);
+		btnBuyAnimals.setBounds(210, 101, 100, 36);
 		panelAnimalsForSale.add(btnBuyAnimals);
 		
 		JLabel lblSelectWhichAnimal = new JLabel("Select which animal you would like to purchase");
@@ -227,7 +231,7 @@ public class StoreScreen {
 		panelAnimalsForSale.add(lblThenPressThe_1);
 		
 		JScrollPane scrollPaneAnimals = new JScrollPane();
-		scrollPaneAnimals.setBounds(320, 11, 834, 72);
+		scrollPaneAnimals.setBounds(320, 11, 834, 126);
 		panelAnimalsForSale.add(scrollPaneAnimals);
 		
 		listAnimals = new JList();
@@ -258,28 +262,30 @@ public class StoreScreen {
 		lblItemsForSale.setBounds(10, 11, 300, 36);
 		panelItemsForSale.add(lblItemsForSale);
 		
-		JLabel lblItemMessage = new JLabel("");
+		lblItemMessage = new JLabel("");
 		lblItemMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblItemMessage.setForeground(Color.RED);
 		lblItemMessage.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblItemMessage.setBounds(10, 116, 155, 36);
+		lblItemMessage.setBounds(10, 116, 190, 36);
 		panelItemsForSale.add(lblItemMessage);
 		
 		JButton button = new JButton("Buy");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String test = manager.purchaseItem(listItems.getSelectedIndex());
-				if (test.endsWith("bought!")) { // Might change it so even this case shows a message dialogue
-					lblItemMessage.setText(test);
+				String message = manager.purchaseItem(listItems.getSelectedIndex());
+				if (message.endsWith("bought!")) { // Might change it so even this case shows a message dialogue
+					lblCropMessage.setText("");
+					lblAnimalMessage.setText("");
+					lblItemMessage.setText(message);
 				}
 				else {
 					lblItemMessage.setText("");
-					JOptionPane.showMessageDialog(frame, test);
+					JOptionPane.showMessageDialog(frame, message);
 				}
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		button.setBounds(175, 116, 135, 36);
+		button.setBounds(210, 116, 100, 36);
 		panelItemsForSale.add(button);
 		
 		JLabel lblSelectWhichItem = new JLabel("Select which item you would like to purchase");

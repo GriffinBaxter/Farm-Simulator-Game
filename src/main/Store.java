@@ -24,6 +24,7 @@ public class Store{
 		animalsForSale.add(new Animal("Cow", 50.0, initAnimalHappiness, 70.0));
 		animalsForSale.add(new Animal("Goat", 25.0, initAnimalHappiness, 30.0));
 		
+		//Crop items need to be added before Animal items
 		//Name, Type(for crops or animals), price,  Bonus
 		//The bonus for crops is an increase in the days grown.
 		itemsForSale.add(new Item("Organic Fertiliser", "Crop", 10.0, 2.0));
