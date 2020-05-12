@@ -683,6 +683,65 @@ public class GameEnvironment {
 		return purchaseCropString;
 	}
 	
+	public String[] returnAnimalArray() {
+		ArrayList<String> animalArrayList = new ArrayList<String>();
+		for(Animal animal: store.getAnimalsForSale()) 
+		{
+			animalArrayList.add(animal.getName()
+			+ ", Purchase price: $" + returnDollarsCents(animal.getPurchasePrice())
+			+ ", Daily profit at base Happiness: $" + returnDollarsCents(animal.dailyProfit()));
+		}
+		String[] animalArray = animalArrayList.toArray(new String[0]);
+		return animalArray;
+	}
+	
+	public String purchaseAnimal(int purchaseOption) {
+		String purchaseAnimalString = "";
+			if (farm.getMoney() < store.getAnimalsForSale().get(purchaseOption).getPurchasePrice()) {
+				purchaseAnimalString = "You don't have enough money to buy " + store.getAnimalsForSale().get(purchaseOption).getName() + "!" ;
+			}
+			else
+			{
+				farm.increaseAnimals(store.getAnimalsForSale().get(purchaseOption));
+				purchaseAnimalString = store.getAnimalsForSale().get(purchaseOption).getName() + " bought!";
+			}
+		return purchaseAnimalString;
+	}
+	
+	public String[] returnItemArray() {
+		ArrayList<String> itemArrayList = new ArrayList<String>();
+		for(Item item: store.getItemsForSale()) 
+		{
+			String tempString = item.getName() + ", Purchase price: $" + returnDollarsCents(item.getPurchasePrice());
+			if (item.getType() == "Crop")
+			{
+				tempString += ", Benefit when used: +" + (item.getBonus()*100) + "% growth speed for chosen crop type";
+			}
+			if (item.getType() == "Animal")
+			{
+				tempString += ", Benefit when used: +" + (item.getBonus()*100) + "% health for all animals";
+			}
+			
+			itemArrayList.add(tempString);
+			
+		}
+		String[] cropArray = itemArrayList.toArray(new String[0]);
+		return cropArray;
+	}
+	
+	public String purchaseItem(int purchaseOption) {
+		String purchaseItemString = "";
+		if (farm.getMoney() < store.getItemsForSale().get(purchaseOption).getPurchasePrice()) {
+			purchaseItemString = "You don't have enough money to buy " + store.getItemsForSale().get(purchaseOption).getName() + "!" ;
+		}
+		else
+		{
+			farm.increaseItems(store.getItemsForSale().get(purchaseOption));
+			purchaseItemString = store.getItemsForSale().get(purchaseOption).getName() + " bought!";
+		}
+	return purchaseItemString;
+	}
+	
 	
 	/**
 	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.
