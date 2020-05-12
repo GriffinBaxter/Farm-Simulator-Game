@@ -100,6 +100,12 @@ public class StoreScreen {
 		panelStoreHeader.add(btnGoBack);
 		
 		JButton btnViewCurrentlyOwned = new JButton("View currently owned items");
+		btnViewCurrentlyOwned.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				JOptionPane.showMessageDialog(frame, manager.returnItemsString(), "Items owned", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 		btnViewCurrentlyOwned.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnViewCurrentlyOwned.setBounds(854, 11, 300, 56);
 		panelStoreHeader.add(btnViewCurrentlyOwned);

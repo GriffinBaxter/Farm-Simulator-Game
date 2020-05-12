@@ -25,7 +25,7 @@ public class Store{
 		animalsForSale.add(new Animal("Goat", 25.0, initAnimalHappiness, 30.0));
 		
 		//Name, Type(for crops or animals), price,  Bonus
-		//The bonus for crops is an increased growth speed.
+		//The bonus for crops is an increase in the days grown.
 		itemsForSale.add(new Item("Organic Fertiliser", "Crop", 10.0, 2.0));
 		itemsForSale.add(new Item("Inorganic Fertiliser", "Crop", 5.0, 1.0));
 		itemsForSale.add(new Item("Compost", "Crop", 100.0, 3.0));

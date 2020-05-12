@@ -2,6 +2,7 @@ package main;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -19,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
@@ -129,6 +132,20 @@ public class MainScreen {
 		btnVisitStore.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		JButton BtnSleep = new JButton("Sleep (Move to next day)");
+		BtnSleep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				manager.nextDay();
+				finishWindow();
+				manager.launchMainScreen();
+				JOptionPane.showMessageDialog(frmSengFarm, "You have slept!");
+				if (manager.gameFinishing())
+				{
+					JOptionPane.showMessageDialog(frmSengFarm, manager.finishGame());
+					finishWindow();
+				}
+			}
+		});
 		BtnSleep.setBounds(10, 73, 268, 50);
 		panelNoActionsReq.add(BtnSleep);
 		BtnSleep.setFont(new Font("Tahoma", Font.PLAIN, 18));

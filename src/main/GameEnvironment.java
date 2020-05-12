@@ -417,18 +417,14 @@ public class GameEnvironment {
 	 */
 	public void nextDay() {
 		//if the game is finished
-		System.out.println(farmer.getFarmerName() + " has slept.\n");
+		//System.out.println(farmer.getFarmerName() + " has slept.\n");
 		farmer.increaseAge();
 		actionsPerformed = 0;
-		if (farmer.getAge() != numDays)
+		if (farmer.getAge() != numDays + 1)
 		{
 			//Grow crops
 			farm.growCrops();
 			farm.increaseMoney(farm.collectAnimalMoney());
-		}
-		else
-		{
-			finishGame();
 		}
 	}
 	
@@ -542,7 +538,7 @@ public class GameEnvironment {
 	 * The finishGame function, called when the farmers age has reached the numDays set during startup.
 	 * Prints out the farmers name, the number of days passed, the money made and the score.
 	 */
-	public void finishGame()
+	public String finishGame()
 	{
 		String profitString;
 		double scoreProfit = farm.getProfit();
@@ -552,10 +548,10 @@ public class GameEnvironment {
 		
 		if (scoreProfit <= 0.0) {
 			scoreProfit = 0;
-			profitString = " made no profit!\n";
+			profitString = " made no profit!\r\n";
 		}
 		else {
-			profitString = " made $" + returnDollarsCents(farm.getProfit()) + " in profit.\n";
+			profitString = " made $" + returnDollarsCents(farm.getProfit()) + " in profit.\r\n";
 		}
 		
 		double score = scoreProfit * scoreAge * (scoreCropSize / scoreCropSpace);
@@ -564,14 +560,13 @@ public class GameEnvironment {
 			score += animal.getHappiness() * animal.getHealth();
 		}
 		
-		
-
-		System.out.println("The game has finished!\n"
-				+ "Stats for " + farmer.getFarmerName() + " on the farm " + farm.getFarmName() + ":\n"
-				+ farmer.getAge() + " days have passed.\n"
+		 String returnString = "The game has finished!\n"
+				+ "Stats for " + farmer.getFarmerName() + " on the farm " + farm.getFarmName() + ":\r\n"
+				+ (farmer.getAge() - 1) + " days have passed.\r\n"
 				+ farmer.getFarmerName() + profitString
-				+ "Total Score: " + Math.round(score) + "\n"
-				+ "Score is able to be increased by the profit, the healthiness and happiness of animals, the percentage of crop slots utilised, and by choosing a lower number of days!"); //rounds score to 0dp
+				+ "Total Score: " + Math.round(score) + "\r\n"
+				+ "Score is able to be increased by the profit, the healthiness and happiness of animals, the percentage of crop slots utilised, and by choosing a lower number of days!"; //rounds score to 0dp
+		 return returnString;
 	}
 	
 	public void launchMainScreen() {
@@ -626,6 +621,26 @@ public class GameEnvironment {
 		//String test = "l\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\n" + "l\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\n";
 		return returnString;
 	}
+	
+	public String returnItemsString()
+	{
+		String returnString;
+		if (farm.getItems().size() == 0)
+		{
+			returnString = farm.getFarmName() + " owns " + farm.getItems().size() + " Items.";
+		}
+		else
+		{
+			returnString = farm.getFarmName() + " owns " + farm.getItems().size() + " Items, They are:\r\n";
+		}
+		
+		for(Item item: farm.getItems()) 
+		{
+			returnString += "- " + item.getName() + "\r\n";
+		}
+		return returnString;
+	}
+	
 	
 	public String returnMoneyString()
 	{
@@ -715,7 +730,7 @@ public class GameEnvironment {
 			String tempString = item.getName() + ", Purchase price: $" + returnDollarsCents(item.getPurchasePrice());
 			if (item.getType() == "Crop")
 			{
-				tempString += ", Benefit when used: +" + (item.getBonus()*100) + "% growth speed for chosen crop type";
+				tempString += ", Benefit when used: +" + item.getBonus() + " day growth increase for chosen crop type";
 			}
 			if (item.getType() == "Animal")
 			{
@@ -740,6 +755,11 @@ public class GameEnvironment {
 			purchaseItemString = store.getItemsForSale().get(purchaseOption).getName() + " bought!";
 		}
 	return purchaseItemString;
+	}
+	
+	public boolean gameFinishing()
+	{
+		return farmer.getAge() == numDays + 1;
 	}
 	
 	
