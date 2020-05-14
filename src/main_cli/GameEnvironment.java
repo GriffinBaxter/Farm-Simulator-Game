@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import java.lang.Math;
 //import java.util.ArrayList; // Re-add this if needed, otherwise will delete
 import java.util.Scanner;
+import main.Animal;
+import main.Crop;
+import main.Farm;
+import main.Farmer;
+import main.Item;
+import main.Store;
+import main.StoreItem;
 
 public class GameEnvironment {
 	
