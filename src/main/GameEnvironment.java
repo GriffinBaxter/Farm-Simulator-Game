@@ -66,10 +66,11 @@ public class GameEnvironment {
 	 * Starts a new game by getting number of days, farmer name, farm type, and farm name.
 	 * @param initNumDays the number of days the user wants to play for.
 	 * @param farmerName the name of the farmer.
+	 * @param farmerAge the age of the farmer.
 	 * @param farmType the type of the farm.
 	 * @param farmName the name of the farm.
 	 */
-	public void setupGame(int initNumDays, String farmerName, String farmType, String farmName) 
+	public void setupGame(int initNumDays, String farmerName, int farmerAge, String farmType, String farmName) 
 	{
 		numDays = initNumDays;
 		
@@ -88,7 +89,7 @@ public class GameEnvironment {
 		else 
 		{
 			setupWindow.setWarningText("");
-			farmer = new Farmer(farmerName, 1); //Age is 1, first day
+			farmer = new Farmer(farmerName, 1, farmerAge); // First day
 			farm = new Farm(farmName, farmType, farmer);
 			store = farm.getStore();
 			closeSetupScreen(setupWindow);
@@ -168,9 +169,9 @@ public class GameEnvironment {
 	{
 		//if the game is finished
 		//System.out.println(farmer.getFarmerName() + " has slept.\n");
-		farmer.increaseAge();
+		farmer.increaseDaysPassed();
 		actionsPerformed = 0;
-		if (farmer.getAge() != numDays + 1)
+		if (farmer.getDaysPassed() != numDays + 1)
 		{
 			//Grow crops
 			farm.growCrops();
@@ -349,7 +350,7 @@ public class GameEnvironment {
 	{
 		String profitString;
 		double scoreProfit = farm.getProfit();
-		double scoreAge = (15 - farmer.getAge());
+		double scoreAge = (15 - farmer.getDaysPassed());
 		double scoreCropSize = farm.getCrops().size() + 1;
 		double scoreCropSpace = farm.getCropSpace();
 		
@@ -371,11 +372,11 @@ public class GameEnvironment {
 		}
 		
 		 String returnString = "The game has finished!\n"
-				+ "Stats for " + farmer.getFarmerName() + " on the farm " + farm.getFarmName() + ":\r\n"
-				+ (farmer.getAge() - 1) + " days have passed.\r\n"
+				+ "Stats for " + farmer.getFarmerName() + ", age: " + farmer.getFarmerAge() + ", on the farm " + farm.getFarmName() + ":\r\n"
+				+ (farmer.getDaysPassed() - 1) + " days have passed.\r\n"
 				+ farmer.getFarmerName() + profitString
-				+ "Total Score: " + Math.round(score) + "\r\n"
-				+ "Score is able to be increased by the profit, the healthiness and happiness of animals, the percentage of crop slots utilised, and by choosing a lower number of days!"; //rounds score to 0dp
+				+ "Total Score: " + Math.round(score) + "\r\n" //rounds score to 0dp
+				+ "Score is able to be increased by the profit, the healthiness and happiness of animals, the percentage of crop slots utilised, and by choosing a lower number of days!";
 		 return returnString;
 	}
 	
@@ -539,7 +540,7 @@ public class GameEnvironment {
 	 */
 	public int returnDays()
 	{
-		return farmer.getAge();
+		return farmer.getDaysPassed();
 	}
 	
 	/**
@@ -695,7 +696,7 @@ public class GameEnvironment {
 	 */
 	public boolean gameFinishing()
 	{
-		return farmer.getAge() == numDays + 1;
+		return farmer.getDaysPassed() == numDays + 1;
 	}
 	
 	/**
