@@ -16,12 +16,7 @@ public class GameEnvironment {
 	private Farmer farmer;
 	private Store store;
 	
-	private Scanner scanner;
 	private int numDays = 0;
-	private String farmerName = "";
-	private int typeInt = 0;
-	private String farmType;
-	private String farmName = null;
 	private int actionsPerformed = 0;
 	private SetupScreen setupWindow;
 	private MainScreen mainWindow;
@@ -30,22 +25,30 @@ public class GameEnvironment {
 	private FeedAnimalsScreen feedAnimalsWindow;
 	
 	/**
-	 * Starts a new game by getting number of days, farmer name, farm type, and farm name
+	 * Starts a new game by getting number of days, farmer name, farm type, and farm name.
+	 * @param initNumDays the number of days the user wants to play for.
+	 * @param farmerName the name of the farmer.
+	 * @param farmType the type of the farm.
+	 * @param farmName the name of the farm.
 	 */
 	public void setupGame(int initNumDays, String farmerName, String farmType, String farmName) 
 	{
 		numDays = initNumDays;
 		
-		if ((farmerName.length() < 3 || farmerName.length() > 15 || !isAlpha(farmerName)) && (farmName.length() < 3 || farmName.length() > 15 || !isAlpha(farmName))) {
+		if ((farmerName.length() < 3 || farmerName.length() > 15 || !isAlpha(farmerName)) && (farmName.length() < 3 || farmName.length() > 15 || !isAlpha(farmName))) 
+		{
 			setupWindow.setWarningText("farmer name and farm name are");
 		}
-		else if (farmerName.length() < 3 || farmerName.length() > 15 || !isAlpha(farmerName)) {
+		else if (farmerName.length() < 3 || farmerName.length() > 15 || !isAlpha(farmerName)) 
+		{
 			setupWindow.setWarningText("farmer name is");
 		}
-		else if (farmName.length() < 3 || farmName.length() > 15 || !isAlpha(farmName)) {
+		else if (farmName.length() < 3 || farmName.length() > 15 || !isAlpha(farmName)) 
+		{
 			setupWindow.setWarningText("farm name is");
 		}
-		else {
+		else 
+		{
 			setupWindow.setWarningText("");
 			farmer = new Farmer(farmerName, 1); //Age is 1, first day
 			farm = new Farm(farmName, farmType, farmer);
@@ -66,7 +69,7 @@ public class GameEnvironment {
 	 * 1. option1
 	 * 2. option2
 	 * etc.
-	 * the int inputed by the user must be an option from the <code>optionString</code>,
+	 * the integer inputed by the user must be an option from the <code>optionString</code>,
 	 * if it is not the method will ask again
      */
 
@@ -93,24 +96,28 @@ public class GameEnvironment {
 	 * Asks what item the user wants to purchase (can still say they don't want to purchase anything).
 	 * The program then increases the farms ArrayList for crops, animals or items depending on what was brought.
 	 * If the user has no space available then the program outputs a message.
-	 * @param purchaseCategory
+	 * @param purchaseCategory The Purchase category.
 	 */
 	
 	
 	/**
 	 * A simple function to check whether a string has only alphabetical letters.
 	 * Returns false if it does not.
-	 * @param name
-	 * @return
+	 * @param name The name being tested for only Alpha characters.
+	 * @return True or false depending on the characters in <code>name</code>
 	 */
-	public boolean isAlpha(String name) {
+	public boolean isAlpha(String name) 
+	{
 	    return name.matches("[a-zA-Z ]+");
 	}
 	
 	/**
 	 * Returns a double as a string with two decimal places, for use with dollars and cents.
+	 * @param amount The amount of money owning.
+	 * @return String format of a double with 2dp
 	 */
-	public String returnDollarsCents(double amount) {
+	public String returnDollarsCents(double amount) 
+	{
 		return String.format("%.2f", amount);
 	}
 	
@@ -119,7 +126,8 @@ public class GameEnvironment {
 	 * This function increases the farmers age, reduces the actions performed to 0 and grows the crops owned.
 	 * If the farmers age is equal to the number of days set during startup, the finishing sequence begins.
 	 */
-	public void nextDay() {
+	public void nextDay() 
+	{
 		//if the game is finished
 		//System.out.println(farmer.getFarmerName() + " has slept.\n");
 		farmer.increaseAge();
@@ -133,12 +141,16 @@ public class GameEnvironment {
 	}
 	
 	/**
-	 * Returns a String array with the name of all of the crops currently owned
+	 * Returns a String array with the name of all of the crops currently owned.
+	 * @return String Array containing names of Animals
+	 * 
 	 */
-	public String[] returnCropTypeArray() {
+	public String[] returnCropTypeArray() 
+	{
 		ArrayList<Crop> differentCrops = farm.returnDifferentCropsOwned();
 		ArrayList<String> differentCropNames = new ArrayList<String>();
-		for(Crop crop: differentCrops) {
+		for(Crop crop: differentCrops) 
+		{
 			differentCropNames.add(crop.getName());
 		}
 		String[] cropArray = differentCropNames.toArray(new String[0]);
@@ -146,12 +158,15 @@ public class GameEnvironment {
 	}
 	
 	/**
-	 * Returns a String array with the name of all of the items currently owned given the correct String <code>itemType</code>
+	 * Returns a String array with the name of all of the items currently owned given the correct String <code>itemType</code>.
+	 * @return String Array containing names of items
 	 */
-	public String[] returnCurrentItemsArray(String itemType) {
+	public String[] returnCurrentItemsArray(String itemType) 
+	{
 		ArrayList<String> currentItems = new ArrayList<String>();
 		
-		if (itemType == "Crop") {
+		if (itemType == "Crop") 
+		{
 				currentItems.add("Water (free)");
 		}
 		
@@ -168,14 +183,19 @@ public class GameEnvironment {
 	}
 	
 	/**
-	 * Asks the user what type of crops they would like to tend to and what item they would want to use on it.
-	 * the program then tends to all of the crops owned with the specified name
+	 * Tends to all of the crops owned with the specified <code>cropIndex</code> and <code>itemIndex</code>.
+	 * @param cropIndex The crop index
+	 * @param itemIndex The item index
+	 * @return String identifying the action performed.
 	 */
-	public String tendToCrops(int cropIndex, int itemIndex) { // Need to edit the above doc-string for this method!
-		if (actionsPerformed >= 2) {
+	public String tendToCrops(int cropIndex, int itemIndex) 
+	{
+		if (actionsPerformed >= 2) 
+		{
 			return "You cannot do this as you have no actions left";
 		}
-		else {
+		else
+		{
 			String cropName = returnCropTypeArray()[cropIndex];
 			actionsPerformed++; //Increase the actions performed by 1 after the player has chosen to tend to their crops
 			if (itemIndex == 0) //Watered crops
@@ -194,14 +214,18 @@ public class GameEnvironment {
 	}
 	
 	/**
-	 * This program feed all animals owned by first asking the user what item they would like to feed the animals 
-	 * and then calling the increaseHappinessAllAnimals function in the Farm class.
+	 * Feed to all of the animals owned with the item at <code>itemIndex</code>.
+	 * @param itemIndex The item index
+	 * @return String identifying the action performed.
 	 */
-	public String feedAnimals(int itemIndex) { // Need to edit the above doc-string for this method!
-		if (actionsPerformed >= 2) {
+	public String feedAnimals(int itemIndex) 
+	{ // Need to edit the above doc-string for this method!
+		if (actionsPerformed >= 2) 
+		{
 			return "You cannot do this as you have no actions left";
 		}
-		else {
+		else 
+		{
 			Item itemUsed = farm.getItems().get(itemIndex + returnCropItemSize());
 				
 			farm.increaseHappinessAllAnimals(itemUsed.getBonus());
@@ -213,16 +237,21 @@ public class GameEnvironment {
 	
 	/**
 	 * a function that allows the user to play with the animals owned, doing this will increase their happiness.
+	 * @return String identifying the action performed.
 	 */
-	public String playWithAnimals() {
-		if (actionsPerformed >= 2) {
+	public String playWithAnimals() 
+	{
+		if (actionsPerformed >= 2) 
+		{
 			return "You cannot do this as you have no actions left";
 		}
-		else if (farm.playWithAllAnimals()) {
+		else if (farm.playWithAllAnimals()) 
+		{
 			actionsPerformed++;
 			return "Played with every animal (and increased their happiness by doing so)";
 		}
-		else {
+		else 
+		{
 			return "You have no animals to play with, so no actions were used";
 		}
 	}
@@ -230,33 +259,43 @@ public class GameEnvironment {
 	/**
 	 * A function that will harvest the crops that can be harvested, 
 	 * it does this by calling the harvestAvailableCrops function in the Farm class.
+	 * @return String identifying the action performed.
 	 */
-	public String harvestCrops() {
-		if (actionsPerformed >= 2) {
+	public String harvestCrops() 
+	{
+		if (actionsPerformed >= 2) 
+		{
 			return "You cannot do this as you have no actions left";
 		}
-		else if (farm.canHarvestCrops()) {
+		else if (farm.canHarvestCrops()) 
+		{
 			actionsPerformed++;
 			double moneyMade = farm.harvestAvailableCrops();
 			farm.increaseMoney(moneyMade);
 			return "You made $" + returnDollarsCents(moneyMade) + " from harvesting all your crops";
 		}
-		else {
+		else 
+		{
 			return "You have no harvestable crops, so no actions were used";
 		}
 	}
 	
 	/**
 	 * A function to tend to the farm land. tending to the farm land will increase the number of available slots for planting crops.
+	 * @return String identifying the action performed.
 	 */
-	public String tendFarmLand() {
-		if (actionsPerformed >= 2) {
+	public String tendFarmLand() 
+	{
+		if (actionsPerformed >= 2) 
+		{
 			return "You cannot do this as you have no actions left";
 		}
-		else {
+		else 
+		{
 			actionsPerformed++;
 			String returnString = "Farm land has been tended to, 1 more crop is able to be grown";
-			if (farm.tendFarm()) {
+			if (farm.tendFarm()) 
+			{
 				returnString += ", plus all of your animals now have increased health!";
 			}
 			return returnString;
@@ -266,6 +305,7 @@ public class GameEnvironment {
 	/**
 	 * The finishGame function, called when the farmers age has reached the numDays set during startup.
 	 * Prints out the farmers name, the number of days passed, the money made and the score.
+	 * @return finish game dialog String
 	 */
 	public String finishGame()
 	{
@@ -275,17 +315,20 @@ public class GameEnvironment {
 		double scoreCropSize = farm.getCrops().size() + 1;
 		double scoreCropSpace = farm.getCropSpace();
 		
-		if (scoreProfit <= 0.0) {
+		if (scoreProfit <= 0.0) 
+		{
 			scoreProfit = 0;
 			profitString = " made no profit!\r\n";
 		}
-		else {
+		else 
+		{
 			profitString = " made $" + returnDollarsCents(farm.getProfit()) + " in profit.\r\n";
 		}
 		
 		double score = scoreProfit * scoreAge * (scoreCropSize / scoreCropSpace);
 		
-		for (Animal animal: farm.getAnimals()) {
+		for (Animal animal: farm.getAnimals()) 
+		{
 			score += animal.getHappiness() * animal.getHealth();
 		}
 		
@@ -299,76 +342,103 @@ public class GameEnvironment {
 	}
 	
 	/**
-	 * A method to launch the main screen where the user controls the game
+	 * A method to launch the main screen where the user controls the game.
 	 */
-	public void launchMainScreen() {
+	public void launchMainScreen() 
+	{
 		mainWindow = new MainScreen(this);
 	}
 	
 	/**
 	 * A method to close the main screen
 	 */
-	public void closeMainScreen(MainScreen mainWindow) {
+	public void closeMainScreen(MainScreen mainWindow) 
+	{
 		mainWindow.closeWindow();
 	}
 	
 	/**
-	 * A method to launch the setup screen where the user sets up the game
+	 * A method to launch the setup screen where the user sets up the game.
 	 */
-	public void launchSetupScreen() {
+	public void launchSetupScreen() 
+	{
 		setupWindow = new SetupScreen(this);
 	}
 	
 	/**
-	 * A method to close the setup screen
+	 * A method to close the setup screen.
 	 */
-	public void closeSetupScreen(SetupScreen setupWindow) {
+	public void closeSetupScreen(SetupScreen setupWindow) 
+	{
 		setupWindow.closeWindow();
-		launchMainScreen(); // Only here for closing setup screen, as this is used once
+		launchMainScreen(); // Only here for closing setup screen, as this is used once.
 	}
 	
 	/**
-	 * A method to launch the store screen where the user buys crops, animals and items
+	 * A method to launch the store screen where the user buys crops, animals and items.
 	 */
-	public void launchStoreScreen() {
+	public void launchStoreScreen() 
+	{
 		storeWindow = new StoreScreen(this);
 	}
 	
 	/**
 	 * A method to close the store screen
 	 */
-	public void closeStoreScreen(StoreScreen storeWindow) {
+	public void closeStoreScreen(StoreScreen storeWindow) 
+	{
 		storeWindow.closeWindow();
 	}
-	
-	public void launchTendCropsScreen() {
+	/**
+	 * A method to launch the tend to crops screen where the user tends to crops by using items.
+	 */
+	public void launchTendCropsScreen() 
+	{
 		tendCropsWindow = new TendCropsScreen(this);
 	}
 	
-	public void closeTendCropsScreen(TendCropsScreen tendCropsWindow) {
+	/**
+	 * A method to close the tend to crops screen
+	 */
+	public void closeTendCropsScreen(TendCropsScreen tendCropsWindow) 
+	{
 		tendCropsWindow.closeWindow();
 	}
 	
-	public void launchFeedAnimalsScreen() {
+	/**
+	 * A method to launch the feed animals screen where the user feeds animals by feeding them items.
+	 */
+	public void launchFeedAnimalsScreen() 
+	{
 		feedAnimalsWindow = new FeedAnimalsScreen(this);
 	}
 	
-	public void closeFeedAnimalsScreen(FeedAnimalsScreen feedAnimalsWindow) {
+	/**
+	 * A method to close the feed animals screen
+	 */
+	public void closeFeedAnimalsScreen(FeedAnimalsScreen feedAnimalsWindow) 
+	{
 		feedAnimalsWindow.closeWindow();
 	}
 	
+	/**
+	 * Returns a String formated correctly for displaying each crop and animal and its status.
+	 * @return string containing status of crops and animals
+	 */
 	public String returnStatusCropsAnimals()
 	{
 		String returnString = "";
 		returnString += farm.getFarmName() + " has " + farm.getCrops().size() + " crops\r\n";
 		for(Crop crop: farm.getCrops()) 
 		{
-			if (crop.getDaysLeftToGrow() > 0) {
+			if (crop.getDaysLeftToGrow() > 0) 
+			{
 				returnString += crop.getName() + " Has been growing for " + crop.getDaysGrown() 
 				+ " days, it needs " + (crop.getDaysLeftToGrow())
 				+ " more days to be harvested\r\n";
 			}
-			else {
+			else 
+			{
 				returnString += crop.getName() + " Has been growing for " + crop.getDaysGrown() 
 				+ " days, it is ready to harvest!\r\n";
 			}
@@ -381,10 +451,13 @@ public class GameEnvironment {
 				+ " and a healthiness level of " + String.format("%.1f", animal.getHealth())
 				+ ", which equates to $" + returnDollarsCents(animal.dailyProfit()) + " per day\r\n";
 		}
-		//String test = "l\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\n" + "l\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\nl\r\n";
 		return returnString;
 	}
 	
+	/**
+	 * A function for returning the items the user currently owns in a string format with one item per line.
+	 * @return string of items
+	 */
 	public String returnItemsString()
 	{
 		String returnString;
@@ -404,32 +477,57 @@ public class GameEnvironment {
 		return returnString;
 	}
 	
-	
+	/**
+	 * Returns the money the farm currently has in string format to have it to 2dp.
+	 * @return farm money
+	 */
 	public String returnMoneyString()
 	{
 		return returnDollarsCents(farm.getMoney());
 	}
 	
+	/**
+	 * Returns the crop space available, used when the user wants to buy more crops.
+	 * @return free crop space
+	 */
 	public int returnFreeCropSpace()
 	{
 		return farm.calculateFreeSpace();
 	}
 	
+	/**
+	 * Returns the age of the farmer. Used to check the number of.
+	 * @return Age of farmer
+	 */
 	public int returnDays()
 	{
 		return farmer.getAge();
 	}
 	
+	/**
+	 * Returns the number of days user wants to play for.
+	 * @return Number of days
+	 */
 	public int getNumDays()
 	{
 		return numDays;
 	}
 	
-	public int getActionsPerformed() {
+	/**
+	 * Returns the actions performed.
+	 * @return current actions performed
+	 */
+	public int getActionsPerformed() 
+	{
 		return actionsPerformed;
 	}
 	
-	public String[] returnCropArray() {
+	/**
+	 * Returns String Array of crops with the crops formated so that each crop has its details and price on one line.
+	 * @return String Array of crops
+	 */
+	public String[] returnCropArray() 
+	{
 		ArrayList<String> cropArrayList = new ArrayList<String>();
 		for(Crop crop: store.getCropsForSale()) 
 		{
@@ -442,10 +540,18 @@ public class GameEnvironment {
 		return cropArray;
 	}
 	
-	public String purchaseCrop(int purchaseOption) {
+	/**
+	 * Takes a purchaseOption index and purchases the Crop at that index in the farm crops ArrayList.
+	 * @param purchaseOption Crop the user chose to buy.
+	 * @return String detailing what the user did.
+	 */
+	public String purchaseCrop(int purchaseOption) 
+	{
 		String purchaseCropString = "";
-			if (farm.calculateFreeSpace() > 0) {
-				if (farm.getMoney() < store.getCropsForSale().get(purchaseOption).getPurchasePrice()) {
+			if (farm.calculateFreeSpace() > 0) 
+			{
+				if (farm.getMoney() < store.getCropsForSale().get(purchaseOption).getPurchasePrice()) 
+				{
 					purchaseCropString = "You don't have enough money to buy " + store.getCropsForSale().get(purchaseOption).getName() + "!" ;
 				}
 				else
@@ -454,14 +560,20 @@ public class GameEnvironment {
 					purchaseCropString = store.getCropsForSale().get(purchaseOption).getName() + " bought!";
 				}
 			}
-			else {
+			else 
+			{
 				purchaseCropString = "You have no space available for new crops!\n"
 						+ "To purchase crops again, you need to either tend to the farm land to increase crop space or harvest crops to remove current crops";
 			}
 		return purchaseCropString;
 	}
 	
-	public String[] returnAnimalArray() {
+	/**
+	 * Returns String Array of animals with the animals formated so that each animal has its details and price on one line.
+	 * @return String Array of animals.
+	 */
+	public String[] returnAnimalArray() 
+	{
 		ArrayList<String> animalArrayList = new ArrayList<String>();
 		for(Animal animal: store.getAnimalsForSale()) 
 		{
@@ -473,9 +585,16 @@ public class GameEnvironment {
 		return animalArray;
 	}
 	
-	public String purchaseAnimal(int purchaseOption) {
+	/**
+	 * Takes a purchaseOption index and purchases the Animal at that index in the farm animals ArrayList.
+	 * @param purchaseOption Animal the user chose to buy.
+	 * @return String detailing what the user did.
+	 */
+	public String purchaseAnimal(int purchaseOption) 
+	{
 		String purchaseAnimalString = "";
-			if (farm.getMoney() < store.getAnimalsForSale().get(purchaseOption).getPurchasePrice()) {
+			if (farm.getMoney() < store.getAnimalsForSale().get(purchaseOption).getPurchasePrice()) 
+			{
 				purchaseAnimalString = "You don't have enough money to buy " + store.getAnimalsForSale().get(purchaseOption).getName() + "!" ;
 			}
 			else
@@ -486,7 +605,12 @@ public class GameEnvironment {
 		return purchaseAnimalString;
 	}
 	
-	public String[] returnItemArray() {
+	/**
+	 * Returns String Array of items with the items formated so that each item has its details and price on one line.
+	 * @return String Array of items
+	 */
+	public String[] returnItemArray() 
+	{
 		ArrayList<String> itemArrayList = new ArrayList<String>();
 		for(Item item: store.getItemsForSale()) 
 		{
@@ -507,9 +631,16 @@ public class GameEnvironment {
 		return itemArray;
 	}
 	
-	public String purchaseItem(int purchaseOption) {
+	/**
+	 * Takes a purchaseOption index and purchases the Item at that index in the farm items ArrayList.
+	 * @param purchaseOption Item the user chose to buy.
+	 * @return String detailing what the user did.
+	 */
+	public String purchaseItem(int purchaseOption) 
+	{
 		String purchaseItemString = "";
-		if (farm.getMoney() < store.getItemsForSale().get(purchaseOption).getPurchasePrice()) {
+		if (farm.getMoney() < store.getItemsForSale().get(purchaseOption).getPurchasePrice()) 
+		{
 			purchaseItemString = "You don't have enough money to buy " + store.getItemsForSale().get(purchaseOption).getName() + "!" ;
 		}
 		else
@@ -520,33 +651,61 @@ public class GameEnvironment {
 	return purchaseItemString;
 	}
 	
+	/**
+	 * A function for testing if the game can finish or not by returning true if the farmers age is equal to the number of days + 1, the +1 to have the game finish after the numberOfDays day.
+	 * @return true or false depending on the farmers age.
+	 */
 	public boolean gameFinishing()
 	{
 		return farmer.getAge() == numDays + 1;
 	}
 	
-	public ArrayList<Crop> getCrops() {
+	/**
+	 * Returns the ArrayList crops from the farm class.
+	 * @return ArrayList of crops owned.
+	 */
+	public ArrayList<Crop> getCrops() 
+	{
 		return farm.getCrops();
 	}
 	
-	public ArrayList<Animal> getAnimals() {
+	/**
+	 * Returns the ArrayList animals from the farm class.
+	 * @return ArrayList of animals owned.
+	 */
+	public ArrayList<Animal> getAnimals() 
+	{
 		return farm.getAnimals();
 	}
 	
-	public int returnCropItemSize() {
+	/**
+	 * Returns the number of items the user has that have the type "Crop".
+	 * @return integer of the number of items of type "Crop".
+	 */
+	public int returnCropItemSize() 
+	{
 		int size = 0;
-		for (Item item: farm.getItems()) {
-			if (item.getType() == "Crop") {
+		for (Item item: farm.getItems()) 
+		{
+			if (item.getType() == "Crop") 
+			{
 				size++;
 			}
 		}
 		return size;
 	}
 	
-	public int returnAnimalItemSize() {
+	/**
+	 * Returns the number of items the user has that have the type "Animal".
+	 * @return Integer of the number of items of type "Animal".
+	 */
+	public int returnAnimalItemSize() 
+	{
 		int size = 0;
-		for (Item item: farm.getItems()) {
-			if (item.getType() == "Animal") {
+		for (Item item: farm.getItems()) 
+		{
+			if (item.getType() == "Animal") 
+			{
 				size++;
 			}
 		}
@@ -557,7 +716,8 @@ public class GameEnvironment {
 	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		//System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");
 		GameEnvironment game = new GameEnvironment();
 		game.launchSetupScreen();
