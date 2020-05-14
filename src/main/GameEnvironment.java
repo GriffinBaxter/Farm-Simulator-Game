@@ -12,16 +12,54 @@ import java.util.Scanner;
 
 public class GameEnvironment {
 	
+	/**
+	 * The farm Class.
+	 */
 	private Farm farm;
+	
+	/**
+	 * The farmer Class.
+	 */
 	private Farmer farmer;
+	
+	/**
+	 * The store Class.
+	 */
 	private Store store;
 	
+	/**
+	 * The number of days the user wants to play for.
+	 */
 	private int numDays = 0;
+	
+	/**
+	 * The actions performed.
+	 */
 	private int actionsPerformed = 0;
+	
+	/**
+	 * The setup window.
+	 */
 	private SetupScreen setupWindow;
+	
+	/**
+	 * The main window.
+	 */
 	private MainScreen mainWindow;
+	
+	/**
+	 * The store window.
+	 */
 	private StoreScreen storeWindow;
+	
+	/**
+	 * The tend to crops window.
+	 */
 	private TendCropsScreen tendCropsWindow;
+	
+	/**
+	 * The feed animals window.
+	 */
 	private FeedAnimalsScreen feedAnimalsWindow;
 	
 	/**

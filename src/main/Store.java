@@ -3,11 +3,26 @@ import java.util.ArrayList;
 
 public class Store{
 
-	
+	/**
+	 * The crops the store has for sale.
+	 */
 	private ArrayList<Crop> cropsForSale = new ArrayList<Crop>();
+	
+	/**
+	 * The animals the store has for sale.
+	 */
 	private ArrayList<Animal> animalsForSale = new ArrayList<Animal>();
+	
+	/**
+	 * The items the store has for sale.
+	 */
 	private ArrayList<Item> itemsForSale = new ArrayList<Item>();
 	
+	/**
+	 * Constructor function for Store Class, this constructor takes a variable <code>initAnimalHappiness</code> and gives all animals that base happiness.
+	 * This Constructor also fills the crops, animals and items for sale Array Lists with values.
+	 * @param initAnimalHappiness The initial animal happiness.
+	 */
 	public Store(double initAnimalHappiness)
 	{
 		//Name, buy price, sell price, days to grow(harvestDays)
@@ -37,34 +52,58 @@ public class Store{
 		//5 others
 	}
 	
-
+	/**
+	 * Returns the cropsForSale ArrayList.
+	 * @return The cropsForSale.
+	 */
 	public ArrayList<Crop> getCropsForSale()
 	{
 		return cropsForSale;
-		
 	}
 	
+	/**
+	 * Returns the animalsForSale ArrayList.
+	 * @return The animalsForSale.
+	 */
 	public ArrayList<Animal> getAnimalsForSale()
 	{
 		return animalsForSale;
 	}
 	
+	/**
+	 * Returns the itemsForSale ArrayList.
+	 * @return The itemsForSale.
+	 */
 	public ArrayList<Item> getItemsForSale()
 	{
 		return itemsForSale;
 	}
 	
-	
+	/**
+	 * return Crop at <code>index</code> to be purchased.
+	 * @param index Index of crop to buy.
+	 * @return The Crop at specified <code>index</code>.
+	 */
 	public Crop buyCrops(int index)
 	{
 		return cropsForSale.get(index);
 	}
 	
+	/**
+	 * return Animal at <code>index</code> to be purchased.
+	 * @param index Index of animal to buy.
+	 * @return The Animal at specified <code>index</code>.
+	 */
 	public Animal buyAnimals(int index)
 	{
 		return animalsForSale.get(index);
 	}
 	
+	/**
+	 * return Item at <code>index</code> to be purchased.
+	 * @param index Index of item to buy.
+	 * @return The Item at specified <code>index</code>.
+	 */
 	public Item buyItems(int index)
 	{
 		return itemsForSale.get(index);

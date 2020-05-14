@@ -18,16 +18,54 @@ import main.StoreItem;
 
 public class GameEnvironment {
 	
+	/**
+	 * The farm Class.
+	 */
 	private Farm farm;
+	
+	/**
+	 * The farmer Class.
+	 */
 	private Farmer farmer;
+	
+	/**
+	 * The store Class.
+	 */
 	private Store store;
 	
+	/**
+	 * The scanner, used for getting keyboard input from the user.
+	 */
 	private Scanner scanner;
+	
+	/**
+	 * The number of days the user wants to play for.
+	 */
 	private int numDays = 0;
+	
+	/**
+	 * The farmer name
+	 */
 	private String farmerName = "";
+	
+	/**
+	 * The type of farm in Integer form.
+	 */
 	private int typeInt = 0;
+	
+	/**
+	 * The type of farm in String form.
+	 */
 	private String farmType;
+	
+	/**
+	 * The farm name.
+	 */
 	private String farmName = null;
+	
+	/**
+	 * The actions performed.
+	 */
 	private int actionsPerformed = 0;
 	
 	/**
