@@ -82,7 +82,7 @@ public class SetupScreen {
 		JLabel lblDays = new JLabel("How many days would you like the game to last?");
 		lblDays.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDays.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblDays.setBounds(10, 85, 586, 45);
+		lblDays.setBounds(10, 68, 586, 45);
 		setupScreenFrame.getContentPane().add(lblDays);
 		
 		JSlider sliderDays = new JSlider();
@@ -93,31 +93,31 @@ public class SetupScreen {
 		sliderDays.setPaintTicks(true);
 		sliderDays.setMaximum(10);
 		sliderDays.setMinimum(5);
-		sliderDays.setBounds(606, 85, 434, 45);
+		sliderDays.setBounds(617, 68, 515, 45);
 		setupScreenFrame.getContentPane().add(sliderDays);
 		
 		JLabel lblName = new JLabel("What is your name?");
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblName.setBounds(10, 157, 586, 45);
+		lblName.setBounds(10, 124, 586, 45);
 		setupScreenFrame.getContentPane().add(lblName);
 		
 		JLabel lblNameText = new JLabel("(must be between 3 and 15 characters and must not include numbers or special characters)");
 		lblNameText.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNameText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNameText.setBounds(10, 192, 586, 27);
+		lblNameText.setBounds(10, 153, 586, 27);
 		setupScreenFrame.getContentPane().add(lblNameText);
 		
 		textFieldName = new JTextField();
 		textFieldName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textFieldName.setBounds(617, 174, 423, 39);
+		textFieldName.setBounds(617, 137, 515, 39);
 		setupScreenFrame.getContentPane().add(textFieldName);
 		textFieldName.setColumns(10);
 		
 		JLabel lblPleaseSelectA = new JLabel("Please select a farm type:");
 		lblPleaseSelectA.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPleaseSelectA.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblPleaseSelectA.setBounds(10, 251, 1164, 45);
+		lblPleaseSelectA.setBounds(10, 275, 1164, 45);
 		setupScreenFrame.getContentPane().add(lblPleaseSelectA);
 		
 		JRadioButton rdbtnNormalFarm = new JRadioButton("Normal farm: $150 starting money, average animal happiness, 10 crop spaces, the default farm.");
@@ -125,40 +125,40 @@ public class SetupScreen {
 		rdbtnNormalFarm.setActionCommand("Normal");
 		buttonGroupFarmType.add(rdbtnNormalFarm);
 		rdbtnNormalFarm.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnNormalFarm.setBounds(10, 303, 744, 33);
+		rdbtnNormalFarm.setBounds(220, 316, 744, 33);
 		setupScreenFrame.getContentPane().add(rdbtnNormalFarm);
 		
 		JRadioButton rdbtnRichFarm = new JRadioButton("Rich farm: $200 starting money, low animal happiness, 10 crop spaces.");
 		rdbtnRichFarm.setActionCommand("Rich");
 		buttonGroupFarmType.add(rdbtnRichFarm);
 		rdbtnRichFarm.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnRichFarm.setBounds(10, 339, 744, 33);
+		rdbtnRichFarm.setBounds(220, 352, 744, 33);
 		setupScreenFrame.getContentPane().add(rdbtnRichFarm);
 		
 		JRadioButton rdbtnHappyFarm = new JRadioButton("Happy farm: $100 starting money, high animal happiness, 10 crop spaces.");
 		rdbtnHappyFarm.setActionCommand("Happy");
 		buttonGroupFarmType.add(rdbtnHappyFarm);
 		rdbtnHappyFarm.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnHappyFarm.setBounds(10, 375, 744, 33);
+		rdbtnHappyFarm.setBounds(220, 388, 744, 33);
 		setupScreenFrame.getContentPane().add(rdbtnHappyFarm);
 		
 		JRadioButton rdbtnLargeFarm = new JRadioButton("Large farm: $100 starting money, low animal happiness, but hey, at least it has 20 crop spaces!");
 		rdbtnLargeFarm.setActionCommand("Large");
 		buttonGroupFarmType.add(rdbtnLargeFarm);
 		rdbtnLargeFarm.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnLargeFarm.setBounds(10, 411, 744, 33);
+		rdbtnLargeFarm.setBounds(220, 424, 744, 33);
 		setupScreenFrame.getContentPane().add(rdbtnLargeFarm);
 		
 		JLabel lblFarmName = new JLabel("What is your farm's name?");
 		lblFarmName.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblFarmName.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblFarmName.setBounds(10, 473, 586, 45);
+		lblFarmName.setBounds(10, 487, 586, 45);
 		setupScreenFrame.getContentPane().add(lblFarmName);
 		
 		textFieldFarmName = new JTextField();
 		textFieldFarmName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textFieldFarmName.setColumns(10);
-		textFieldFarmName.setBounds(617, 476, 423, 39);
+		textFieldFarmName.setBounds(617, 490, 515, 39);
 		setupScreenFrame.getContentPane().add(textFieldFarmName);
 		
 		lblWarning = new JLabel("");
@@ -168,10 +168,32 @@ public class SetupScreen {
 		lblWarning.setBounds(10, 530, 1164, 27);
 		setupScreenFrame.getContentPane().add(lblWarning);
 		
+		JLabel lblWhatIsYour = new JLabel("What is your farmer's age?");
+		lblWhatIsYour.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblWhatIsYour.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblWhatIsYour.setBounds(10, 197, 586, 45);
+		setupScreenFrame.getContentPane().add(lblWhatIsYour);
+		
+		JSlider slider = new JSlider();
+		slider.setMajorTickSpacing(5);
+		slider.setSnapToTicks(true);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		slider.setValue(1);
+		slider.setMinimum(15);
+		slider.setBounds(617, 205, 515, 45);
+		setupScreenFrame.getContentPane().add(slider);
+		
+		JLabel lblthereAre = new JLabel("(there are 18 available presets for farmer age)");
+		lblthereAre.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblthereAre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblthereAre.setBounds(10, 226, 586, 27);
+		setupScreenFrame.getContentPane().add(lblthereAre);
+		
 		JButton btnStartGame = new JButton("Start Game");
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manager.setupGame(sliderDays.getValue(), textFieldName.getText(), buttonGroupFarmType.getSelection().getActionCommand(), textFieldFarmName.getText());
+				manager.setupGame(sliderDays.getValue(), textFieldName.getText(), slider.getValue(), buttonGroupFarmType.getSelection().getActionCommand(), textFieldFarmName.getText());
 			}
 		});
 		btnStartGame.setFont(new Font("Tahoma", Font.BOLD, 16));
