@@ -201,7 +201,7 @@ public class GameEnvironment {
 		inputFarmName();
 		
 		farmer = new Farmer(farmerName, 1); //Age is 1, first day
-		farm = new Farm(farmName, farmType, farmer);
+		farm = new Farm(farmName, farmType);
 		store = farm.getStore();
 		
 	}
