@@ -21,21 +21,32 @@ public class SetupScreen {
 
 	private JFrame setupScreenFrame;
 	private GameEnvironment manager;
-	private JTextField textFieldName;
-	private final ButtonGroup buttonGroupFarmType = new ButtonGroup();
-	private JTextField textFieldFarmName;
-	private JLabel lblWarning;
+	private JTextField nameTextField;
+	private final ButtonGroup farmTypeButtonGroup = new ButtonGroup();
+	private JTextField farmNameTextField;
+	private JLabel warningLabel;
 
+	/**
+	 * Constructor for the setup screen. This constructor takes an incoming manager and makes it the manager of the screen.
+	 * Then, the constructor calls initialise to initialise the screen and then makes the frame visible.
+	 * @param incomingManager The manager for the screen.
+	 */
 	public SetupScreen(GameEnvironment incomingManager) {
 		manager = incomingManager;
 		initialize();
 		setupScreenFrame.setVisible(true);
 	}
 	
+	/**
+	 * A function to close the setup screen.
+	 */
 	public void closeWindow() {
 		setupScreenFrame.dispose();
 	}
 	
+	/**
+	 * A function that calls closeWindow to close the setup screen. call this method if you want to close the screen.
+	 */
 	public void finishWindow() {
 		manager.closeSetupScreen(this);
 	}
@@ -64,7 +75,7 @@ public class SetupScreen {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise the contents of the frame.
 	 */
 	private void initialize() {
 		setupScreenFrame = new JFrame();
@@ -73,140 +84,144 @@ public class SetupScreen {
 		setupScreenFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setupScreenFrame.getContentPane().setLayout(null);
 		
-		JLabel lblWelcome = new JLabel("Welcome to Farm Simulator!");
-		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcome.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblWelcome.setBounds(10, 11, 1164, 33);
-		setupScreenFrame.getContentPane().add(lblWelcome);
+		JLabel welcomeLabel = new JLabel("Welcome to Farm Simulator!");
+		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		welcomeLabel.setBounds(10, 11, 1164, 33);
+		setupScreenFrame.getContentPane().add(welcomeLabel);
 		
-		JLabel lblDays = new JLabel("How many days would you like the game to last?");
-		lblDays.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDays.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblDays.setBounds(10, 68, 586, 45);
-		setupScreenFrame.getContentPane().add(lblDays);
+		JLabel daysLabel = new JLabel("How many days would you like the game to last?");
+		daysLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		daysLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		daysLabel.setBounds(10, 68, 586, 45);
+		setupScreenFrame.getContentPane().add(daysLabel);
 		
-		JSlider sliderDays = new JSlider();
-		sliderDays.setValue(5);
-		sliderDays.setPaintLabels(true);
-		sliderDays.setMajorTickSpacing(1);
-		sliderDays.setSnapToTicks(true);
-		sliderDays.setPaintTicks(true);
-		sliderDays.setMaximum(10);
-		sliderDays.setMinimum(5);
-		sliderDays.setBounds(617, 68, 515, 45);
-		setupScreenFrame.getContentPane().add(sliderDays);
+		JSlider daysSlider = new JSlider();
+		daysSlider.setValue(5);
+		daysSlider.setPaintLabels(true);
+		daysSlider.setMajorTickSpacing(1);
+		daysSlider.setSnapToTicks(true);
+		daysSlider.setPaintTicks(true);
+		daysSlider.setMaximum(10);
+		daysSlider.setMinimum(5);
+		daysSlider.setBounds(617, 68, 515, 45);
+		setupScreenFrame.getContentPane().add(daysSlider);
 		
-		JLabel lblName = new JLabel("What is your name?");
-		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblName.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblName.setBounds(10, 124, 586, 45);
-		setupScreenFrame.getContentPane().add(lblName);
+		JLabel nameLabel = new JLabel("What is your name?");
+		nameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		nameLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		nameLabel.setBounds(10, 124, 586, 45);
+		setupScreenFrame.getContentPane().add(nameLabel);
 		
-		JLabel lblNameText = new JLabel("(must be between 3 and 15 characters and must not include numbers or special characters)");
-		lblNameText.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNameText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNameText.setBounds(10, 153, 586, 27);
-		setupScreenFrame.getContentPane().add(lblNameText);
+		JLabel nameWarningLabel = new JLabel("(must be between 3 and 15 characters and must not include numbers or special characters)");
+		nameWarningLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		nameWarningLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		nameWarningLabel.setBounds(10, 153, 586, 27);
+		setupScreenFrame.getContentPane().add(nameWarningLabel);
 		
-		textFieldName = new JTextField();
-		textFieldName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textFieldName.setBounds(617, 137, 515, 39);
-		setupScreenFrame.getContentPane().add(textFieldName);
-		textFieldName.setColumns(10);
+		nameTextField = new JTextField();
+		nameTextField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		nameTextField.setBounds(617, 137, 515, 39);
+		setupScreenFrame.getContentPane().add(nameTextField);
+		nameTextField.setColumns(10);
 		
-		JLabel lblPleaseSelectA = new JLabel("Please select a farm type:");
-		lblPleaseSelectA.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPleaseSelectA.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblPleaseSelectA.setBounds(10, 275, 1164, 45);
-		setupScreenFrame.getContentPane().add(lblPleaseSelectA);
+		JLabel selectFarmTypeLabel = new JLabel("Please select a farm type:");
+		selectFarmTypeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		selectFarmTypeLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		selectFarmTypeLabel.setBounds(10, 275, 1164, 45);
+		setupScreenFrame.getContentPane().add(selectFarmTypeLabel);
 		
-		JRadioButton rdbtnNormalFarm = new JRadioButton("Normal farm: $150 starting money, average animal happiness, 10 crop spaces, the default farm.");
-		rdbtnNormalFarm.setSelected(true);
-		rdbtnNormalFarm.setActionCommand("Normal");
-		buttonGroupFarmType.add(rdbtnNormalFarm);
-		rdbtnNormalFarm.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnNormalFarm.setBounds(220, 316, 744, 33);
-		setupScreenFrame.getContentPane().add(rdbtnNormalFarm);
+		JRadioButton normalFarmRadioButton = new JRadioButton("Normal farm: $150 starting money, average animal happiness, 10 crop spaces, the default farm.");
+		normalFarmRadioButton.setSelected(true);
+		normalFarmRadioButton.setActionCommand("Normal");
+		farmTypeButtonGroup.add(normalFarmRadioButton);
+		normalFarmRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		normalFarmRadioButton.setBounds(220, 316, 744, 33);
+		setupScreenFrame.getContentPane().add(normalFarmRadioButton);
 		
-		JRadioButton rdbtnRichFarm = new JRadioButton("Rich farm: $200 starting money, low animal happiness, 10 crop spaces.");
-		rdbtnRichFarm.setActionCommand("Rich");
-		buttonGroupFarmType.add(rdbtnRichFarm);
-		rdbtnRichFarm.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnRichFarm.setBounds(220, 352, 744, 33);
-		setupScreenFrame.getContentPane().add(rdbtnRichFarm);
+		JRadioButton richFarmRadioButton = new JRadioButton("Rich farm: $200 starting money, low animal happiness, 10 crop spaces.");
+		richFarmRadioButton.setActionCommand("Rich");
+		farmTypeButtonGroup.add(richFarmRadioButton);
+		richFarmRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		richFarmRadioButton.setBounds(220, 352, 744, 33);
+		setupScreenFrame.getContentPane().add(richFarmRadioButton);
 		
-		JRadioButton rdbtnHappyFarm = new JRadioButton("Happy farm: $100 starting money, high animal happiness, 10 crop spaces.");
-		rdbtnHappyFarm.setActionCommand("Happy");
-		buttonGroupFarmType.add(rdbtnHappyFarm);
-		rdbtnHappyFarm.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnHappyFarm.setBounds(220, 388, 744, 33);
-		setupScreenFrame.getContentPane().add(rdbtnHappyFarm);
+		JRadioButton happyFarmRadioButton = new JRadioButton("Happy farm: $100 starting money, high animal happiness, 10 crop spaces.");
+		happyFarmRadioButton.setActionCommand("Happy");
+		farmTypeButtonGroup.add(happyFarmRadioButton);
+		happyFarmRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		happyFarmRadioButton.setBounds(220, 388, 744, 33);
+		setupScreenFrame.getContentPane().add(happyFarmRadioButton);
 		
-		JRadioButton rdbtnLargeFarm = new JRadioButton("Large farm: $100 starting money, low animal happiness, but hey, at least it has 20 crop spaces!");
-		rdbtnLargeFarm.setActionCommand("Large");
-		buttonGroupFarmType.add(rdbtnLargeFarm);
-		rdbtnLargeFarm.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnLargeFarm.setBounds(220, 424, 744, 33);
-		setupScreenFrame.getContentPane().add(rdbtnLargeFarm);
+		JRadioButton largeFarmRadioButton = new JRadioButton("Large farm: $100 starting money, low animal happiness, but hey, at least it has 20 crop spaces!");
+		largeFarmRadioButton.setActionCommand("Large");
+		farmTypeButtonGroup.add(largeFarmRadioButton);
+		largeFarmRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		largeFarmRadioButton.setBounds(220, 424, 744, 33);
+		setupScreenFrame.getContentPane().add(largeFarmRadioButton);
 		
-		JLabel lblFarmName = new JLabel("What is your farm's name?");
-		lblFarmName.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblFarmName.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblFarmName.setBounds(10, 487, 586, 45);
-		setupScreenFrame.getContentPane().add(lblFarmName);
+		JLabel farmNameLabel = new JLabel("What is your farm's name?");
+		farmNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		farmNameLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		farmNameLabel.setBounds(10, 487, 586, 45);
+		setupScreenFrame.getContentPane().add(farmNameLabel);
 		
-		textFieldFarmName = new JTextField();
-		textFieldFarmName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textFieldFarmName.setColumns(10);
-		textFieldFarmName.setBounds(617, 490, 515, 39);
-		setupScreenFrame.getContentPane().add(textFieldFarmName);
+		farmNameTextField = new JTextField();
+		farmNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		farmNameTextField.setColumns(10);
+		farmNameTextField.setBounds(617, 490, 515, 39);
+		setupScreenFrame.getContentPane().add(farmNameTextField);
 		
-		lblWarning = new JLabel("");
-		lblWarning.setForeground(Color.RED);
-		lblWarning.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWarning.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblWarning.setBounds(10, 530, 1164, 27);
-		setupScreenFrame.getContentPane().add(lblWarning);
+		warningLabel = new JLabel("");
+		warningLabel.setForeground(Color.RED);
+		warningLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		warningLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		warningLabel.setBounds(10, 530, 1164, 27);
+		setupScreenFrame.getContentPane().add(warningLabel);
 		
-		JLabel lblWhatIsYour = new JLabel("What is your farmer's age?");
-		lblWhatIsYour.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblWhatIsYour.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblWhatIsYour.setBounds(10, 197, 586, 45);
-		setupScreenFrame.getContentPane().add(lblWhatIsYour);
+		JLabel farmerAgeLabel = new JLabel("What is your farmer's age?");
+		farmerAgeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		farmerAgeLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		farmerAgeLabel.setBounds(10, 197, 586, 45);
+		setupScreenFrame.getContentPane().add(farmerAgeLabel);
 		
-		JSlider slider = new JSlider();
-		slider.setMajorTickSpacing(5);
-		slider.setSnapToTicks(true);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
-		slider.setValue(1);
-		slider.setMinimum(15);
-		slider.setBounds(617, 205, 515, 45);
-		setupScreenFrame.getContentPane().add(slider);
+		JSlider farmerAgeSlider = new JSlider();
+		farmerAgeSlider.setMajorTickSpacing(5);
+		farmerAgeSlider.setSnapToTicks(true);
+		farmerAgeSlider.setPaintTicks(true);
+		farmerAgeSlider.setPaintLabels(true);
+		farmerAgeSlider.setValue(1);
+		farmerAgeSlider.setMinimum(15);
+		farmerAgeSlider.setBounds(617, 205, 515, 45);
+		setupScreenFrame.getContentPane().add(farmerAgeSlider);
 		
-		JLabel lblthereAre = new JLabel("(there are 18 available presets for farmer age)");
-		lblthereAre.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblthereAre.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblthereAre.setBounds(10, 226, 586, 27);
-		setupScreenFrame.getContentPane().add(lblthereAre);
+		JLabel farmerAgeInfoLabel = new JLabel("(there are 18 available presets for farmer age)");
+		farmerAgeInfoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		farmerAgeInfoLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		farmerAgeInfoLabel.setBounds(10, 226, 586, 27);
+		setupScreenFrame.getContentPane().add(farmerAgeInfoLabel);
 		
-		JButton btnStartGame = new JButton("Start Game");
-		btnStartGame.addActionListener(new ActionListener() {
+		JButton startGameButton = new JButton("Start Game");
+		startGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manager.setupGame(sliderDays.getValue(), textFieldName.getText(), slider.getValue(), buttonGroupFarmType.getSelection().getActionCommand(), textFieldFarmName.getText());
+				manager.setupGame(daysSlider.getValue(), nameTextField.getText(), farmerAgeSlider.getValue(), farmTypeButtonGroup.getSelection().getActionCommand(), farmNameTextField.getText());
 			}
 		});
-		btnStartGame.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnStartGame.setBounds(528, 555, 128, 45);
-		setupScreenFrame.getContentPane().add(btnStartGame);
+		startGameButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+		startGameButton.setBounds(528, 555, 128, 45);
+		setupScreenFrame.getContentPane().add(startGameButton);
 	}
 	
+	/**
+	 * Sets the text of the warningLabel. This is used when the user needs to be notified of an error in their name or farm name.
+	 * @param warningType The type of warning the user needs to know about.
+	 */
 	public void setWarningText(String warningType) {
 		if (warningType == "") {
-			lblWarning.setText("");
+			warningLabel.setText("");
 		}
 		else {
-			lblWarning.setText("Warning: Your " + warningType + " incorrect (must be between 3 and 15 characters and must not include numbers or special characters)");
+			warningLabel.setText("Warning: Your " + warningType + " incorrect (must be between 3 and 15 characters and must not include numbers or special characters)");
 		}
 	}
 }
