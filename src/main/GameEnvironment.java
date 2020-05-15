@@ -167,8 +167,6 @@ public class GameEnvironment {
 	 */
 	public void nextDay() 
 	{
-		//if the game is finished
-		//System.out.println(farmer.getFarmerName() + " has slept.\n");
 		farmer.increaseDaysPassed();
 		actionsPerformed = 0;
 		if (farmer.getDaysPassed() != numDays + 1)

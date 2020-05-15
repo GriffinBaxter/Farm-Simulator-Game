@@ -53,9 +53,6 @@ public class Farm  extends GameEnvironment{
 	{
         farmName = name;
         setFarmType(type);
-        //For testing
-        //crops.add(store.cropsForSale.get(1));
-        //animals.add(store.animalsForSale.get(1));
     }
 	
 	/**
@@ -98,9 +95,7 @@ public class Farm  extends GameEnvironment{
 			cropSpace = 20;
 			store = new Store(1.0); // Low animal happiness
 		}
-		money = initMoney;
-		//System.out.println(money + "  " + startCropGrowthSpeed);
-		
+		money = initMoney;	
 	}
 	
 	

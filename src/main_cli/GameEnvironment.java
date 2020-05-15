@@ -270,8 +270,6 @@ public class GameEnvironment {
 		int numOptions = 9;
 		
 		int option = printOptions(optionsString, numOptions);
-		//System.out.println("you have selected option " + option);//for testing
-		//use a switch to carry out selected option
 		switch(option)
 		{
 		case 0: // Exit game
@@ -442,8 +440,6 @@ public class GameEnvironment {
 			for(Item item: store.getItemsForSale()) 
 			{
 				//Getting the quantities of items brought
-				
-				//Make new function in farm class that checks quantities and returns a list with items, maybe use sets or something
 				int numOwned = 0;
 				for(Item checkItem: farm.getItems()) 
 				{
