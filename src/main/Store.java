@@ -1,7 +1,8 @@
 package main;
 import java.util.ArrayList;
 
-public class Store{
+public class Store
+{
 
 	/**
 	 * The crops the store has for sale.

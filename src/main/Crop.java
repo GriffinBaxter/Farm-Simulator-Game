@@ -1,6 +1,7 @@
 package main;
 
-public class Crop implements StoreItem{
+public class Crop implements StoreItem
+{
 
 	/**
 	 * The name of the crop.

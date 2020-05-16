@@ -19,41 +19,93 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
-public class StoreScreen {
+public class StoreScreen 
+{
 
-	private JFrame frame;
+	/**
+	 * The store Frame, all elements of the frame are in here.
+	 */
+	private JFrame storeFrame;
+	
+	/**
+	 * The manager which is the GameEnviroment Class.
+	 */
 	private GameEnvironment manager;
-	private JList listCrops;
-	private JList listAnimals;
-	private JList listItems;
-	private JLabel lblCropMessage;
-	private JLabel lblAnimalMessage;
-	private JLabel lblItemMessage;
+	
+	/**
+	 * List of crops in a Jlist.
+	 */
+	private JList cropsList;
+	
+	/**
+	 * List of animals in a Jlist.
+	 */
+	private JList animalsList;
+	
+	/**
+	 * List of items in a Jlist.
+	 */
+	private JList itemsList;
+	
+	/**
+	 * Label that displays if a crop has been purchased.
+	 */
+	private JLabel cropMessageLabel;
+	
+	/**
+	 * Label that displays if a animal has been purchased.
+	 */
+	private JLabel animalMessageLabel;
+	
+	/**
+	 * Label that displays if a item has been purchased.
+	 */
+	private JLabel itemMessageLabel;
 
-	public StoreScreen(GameEnvironment incomingManager) {
+	/**
+	 * Constructor for the store screen. This constructor takes an incoming manager and makes it the manager of the screen.
+	 * Then, the constructor calls initialise to initialise the screen and then makes the frame visible.
+	 * @param incomingManager The manager for the screen.
+	 */
+	public StoreScreen(GameEnvironment incomingManager) 
+	{
 		manager = incomingManager;
 		initialize();
-		frame.setVisible(true);
+		storeFrame.setVisible(true);
 	}
 	
-	public void closeWindow() {
-		frame.dispose();
+	/**
+	 * A function to close the store screen.
+	 */
+	public void closeWindow() 
+	{
+		storeFrame.dispose();
 	}
 	
-	public void finishWindow() {
+	/**
+	 * A function that calls closeWindow to close the store screen. call this method if you want to close the screen.
+	 */
+	public void finishWindow() 
+	{
 		manager.closeStoreScreen(this);
 	}
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					StoreScreen window = new StoreScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
+					window.storeFrame.setVisible(true);
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -63,262 +115,288 @@ public class StoreScreen {
 	/**
 	 * Create the application.
 	 */
-	public StoreScreen() {
+	public StoreScreen() 
+	{
 		initialize();
 	}
 
 	/**
 	 * Initialise the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 1200, 650);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+	private void initialize() 
+	{
+		storeFrame = new JFrame();
+		storeFrame.setBounds(100, 100, 1200, 650);
+		storeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		storeFrame.getContentPane().setLayout(null);
 		
-		JPanel panelStoreHeader = new JPanel();
-		panelStoreHeader.setLayout(null);
-		panelStoreHeader.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelStoreHeader.setBounds(10, 11, 1164, 78);
-		frame.getContentPane().add(panelStoreHeader);
+		JPanel storeHeaderPanel = new JPanel();
+		storeHeaderPanel.setLayout(null);
+		storeHeaderPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		storeHeaderPanel.setBounds(10, 11, 1164, 78);
+		storeFrame.getContentPane().add(storeHeaderPanel);
 		
-		JLabel lblStore = new JLabel("Store");
-		lblStore.setHorizontalAlignment(SwingConstants.CENTER);
-		lblStore.setFont(new Font("Tahoma", Font.BOLD, 32));
-		lblStore.setBounds(469, 11, 226, 56);
-		panelStoreHeader.add(lblStore);
+		JLabel storeLabel = new JLabel("Store");
+		storeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		storeLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
+		storeLabel.setBounds(469, 11, 226, 56);
+		storeHeaderPanel.add(storeLabel);
 		
-		JButton btnGoBack = new JButton("Go back");
-		btnGoBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JButton goBackButton = new JButton("Go back");
+		goBackButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				finishWindow();
 				manager.launchMainScreen();
 			}
 		});
-		btnGoBack.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnGoBack.setBounds(10, 11, 300, 56);
-		panelStoreHeader.add(btnGoBack);
+		goBackButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		goBackButton.setBounds(10, 11, 300, 56);
+		storeHeaderPanel.add(goBackButton);
 		
-		JButton btnViewCurrentlyOwned = new JButton("View currently owned items");
-		btnViewCurrentlyOwned.addActionListener(new ActionListener() {
+		JButton viewCurrentlyOwnedButton = new JButton("View currently owned items");
+		viewCurrentlyOwnedButton.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				JOptionPane.showMessageDialog(frame, manager.returnItemsString(), "Items owned", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(storeFrame, manager.returnItemsString(), "Items owned", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		btnViewCurrentlyOwned.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnViewCurrentlyOwned.setBounds(854, 11, 300, 56);
-		panelStoreHeader.add(btnViewCurrentlyOwned);
+		viewCurrentlyOwnedButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		viewCurrentlyOwnedButton.setBounds(854, 11, 300, 56);
+		storeHeaderPanel.add(viewCurrentlyOwnedButton);
 		
-		JPanel panelCropsForSale = new JPanel();
-		panelCropsForSale.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelCropsForSale.setBounds(10, 100, 1164, 163);
-		frame.getContentPane().add(panelCropsForSale);
-		panelCropsForSale.setLayout(null);
+		JPanel cropsForSalePanel = new JPanel();
+		cropsForSalePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		cropsForSalePanel.setBounds(10, 100, 1164, 163);
+		storeFrame.getContentPane().add(cropsForSalePanel);
+		cropsForSalePanel.setLayout(null);
 		
-		JLabel lblCropsForSale = new JLabel("Crops for sale");
-		lblCropsForSale.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCropsForSale.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblCropsForSale.setBounds(10, 11, 300, 36);
-		panelCropsForSale.add(lblCropsForSale);
+		JLabel cropsForSaleLabel = new JLabel("Crops for sale");
+		cropsForSaleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cropsForSaleLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+		cropsForSaleLabel.setBounds(10, 11, 300, 36);
+		cropsForSalePanel.add(cropsForSaleLabel);
 		
-		lblCropMessage = new JLabel("");
-		lblCropMessage.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCropMessage.setForeground(Color.RED);
-		lblCropMessage.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblCropMessage.setBounds(10, 116, 190, 36);
-		panelCropsForSale.add(lblCropMessage);
+		cropMessageLabel = new JLabel("");
+		cropMessageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cropMessageLabel.setForeground(Color.RED);
+		cropMessageLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		cropMessageLabel.setBounds(10, 116, 190, 36);
+		cropsForSalePanel.add(cropMessageLabel);
 		
-		JButton btnBuyCrops = new JButton("Buy");
-		btnBuyCrops.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String message = manager.purchaseCrop(listCrops.getSelectedIndex());
-				if (message.endsWith("bought!")) { // Might change it so even this case shows a message dialogue
-					lblCropMessage.setText(message);
-					lblAnimalMessage.setText("");
-					lblItemMessage.setText("");
+		JButton buyCropButton = new JButton("Buy");
+		buyCropButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				String printMessage = manager.purchaseCrop(cropsList.getSelectedIndex());
+				if (printMessage.endsWith("bought!")) 
+				{
+					cropMessageLabel.setText(printMessage);
+					animalMessageLabel.setText("");
+					itemMessageLabel.setText("");
 				}
-				else {
-					lblCropMessage.setText("");
-					JOptionPane.showMessageDialog(frame, message);
+				else 
+				{
+					cropMessageLabel.setText("");
+					JOptionPane.showMessageDialog(storeFrame, printMessage);
 				}
 			}
 		});
-		btnBuyCrops.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuyCrops.setBounds(210, 116, 100, 36);
-		panelCropsForSale.add(btnBuyCrops);
+		buyCropButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		buyCropButton.setBounds(210, 116, 100, 36);
+		cropsForSalePanel.add(buyCropButton);
 		
-		JLabel lblselectWhichCrop = new JLabel("Select which crop you would like to purchase");
-		lblselectWhichCrop.setBounds(10, 47, 300, 22);
-		panelCropsForSale.add(lblselectWhichCrop);
-		lblselectWhichCrop.setHorizontalAlignment(SwingConstants.CENTER);
-		lblselectWhichCrop.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel selectCropLabel = new JLabel("Select which crop you would like to purchase");
+		selectCropLabel.setBounds(10, 47, 300, 22);
+		cropsForSalePanel.add(selectCropLabel);
+		selectCropLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		selectCropLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		JLabel lblThenPressThe = new JLabel("on the right, then press the buy button below");
-		lblThenPressThe.setBounds(10, 68, 300, 22);
-		panelCropsForSale.add(lblThenPressThe);
-		lblThenPressThe.setHorizontalAlignment(SwingConstants.CENTER);
-		lblThenPressThe.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel selectCropLabel2 = new JLabel("on the right, then press the buy button below");
+		selectCropLabel2.setBounds(10, 68, 300, 22);
+		cropsForSalePanel.add(selectCropLabel2);
+		selectCropLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		selectCropLabel2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(320, 11, 834, 141);
-		panelCropsForSale.add(scrollPane);
+		JScrollPane cropsScrollPane = new JScrollPane();
+		cropsScrollPane.setBounds(320, 11, 834, 141);
+		cropsForSalePanel.add(cropsScrollPane);
 		
-		listCrops = new JList();
-		scrollPane.setViewportView(listCrops);
-		listCrops.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listCrops.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		listCrops.setModel(new AbstractListModel() {
+		cropsList = new JList();
+		cropsScrollPane.setViewportView(cropsList);
+		cropsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		cropsList.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		cropsList.setModel(new AbstractListModel() 
+		{
 			String[] values = manager.returnCropArray();
-			public int getSize() {
+			public int getSize() 
+			{
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public Object getElementAt(int index) 
+			{
 				return values[index];
 			}
 		});
-		listCrops.setSelectedIndex(0);
-		listCrops.setToolTipText("");
+		cropsList.setSelectedIndex(0);
+		cropsList.setToolTipText("");
 		
-		JPanel panelAnimalsForSale = new JPanel();
-		panelAnimalsForSale.setLayout(null);
-		panelAnimalsForSale.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelAnimalsForSale.setBounds(10, 274, 1164, 152);
-		frame.getContentPane().add(panelAnimalsForSale);
+		JPanel animalsForSalePanel = new JPanel();
+		animalsForSalePanel.setLayout(null);
+		animalsForSalePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		animalsForSalePanel.setBounds(10, 274, 1164, 152);
+		storeFrame.getContentPane().add(animalsForSalePanel);
 		
-		JLabel lblAnimalsForSale = new JLabel("Animals for sale");
-		lblAnimalsForSale.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAnimalsForSale.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblAnimalsForSale.setBounds(10, 11, 300, 36);
-		panelAnimalsForSale.add(lblAnimalsForSale);
+		JLabel animalsForSaleLabel = new JLabel("Animals for sale");
+		animalsForSaleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		animalsForSaleLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+		animalsForSaleLabel.setBounds(10, 11, 300, 36);
+		animalsForSalePanel.add(animalsForSaleLabel);
 		
-		lblAnimalMessage = new JLabel("");
-		lblAnimalMessage.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAnimalMessage.setForeground(Color.RED);
-		lblAnimalMessage.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblAnimalMessage.setBounds(10, 101, 190, 36);
-		panelAnimalsForSale.add(lblAnimalMessage);
+		animalMessageLabel = new JLabel("");
+		animalMessageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		animalMessageLabel.setForeground(Color.RED);
+		animalMessageLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		animalMessageLabel.setBounds(10, 101, 190, 36);
+		animalsForSalePanel.add(animalMessageLabel);
 		
-		JButton btnBuyAnimals = new JButton("Buy");
-		btnBuyAnimals.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String message = manager.purchaseAnimal(listAnimals.getSelectedIndex());
-				if (message.endsWith("bought!")) { // Might change it so even this case shows a message dialogue
-					lblCropMessage.setText("");
-					lblAnimalMessage.setText(message);
-					lblItemMessage.setText("");
+		JButton buyAnimalButton = new JButton("Buy");
+		buyAnimalButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				String message = manager.purchaseAnimal(animalsList.getSelectedIndex());
+				if (message.endsWith("bought!")) 
+				{
+					cropMessageLabel.setText("");
+					animalMessageLabel.setText(message);
+					itemMessageLabel.setText("");
 				}
-				else {
-					lblAnimalMessage.setText("");
-					JOptionPane.showMessageDialog(frame, message);
+				else 
+				{
+					animalMessageLabel.setText("");
+					JOptionPane.showMessageDialog(storeFrame, message);
 				}
 			}
 		});
-		btnBuyAnimals.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuyAnimals.setBounds(210, 101, 100, 36);
-		panelAnimalsForSale.add(btnBuyAnimals);
+		buyAnimalButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		buyAnimalButton.setBounds(210, 101, 100, 36);
+		animalsForSalePanel.add(buyAnimalButton);
 		
-		JLabel lblSelectWhichAnimal = new JLabel("Select which animal you would like to purchase");
-		lblSelectWhichAnimal.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSelectWhichAnimal.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSelectWhichAnimal.setBounds(10, 47, 300, 22);
-		panelAnimalsForSale.add(lblSelectWhichAnimal);
+		JLabel selectAnimalLabel = new JLabel("Select which animal you would like to purchase");
+		selectAnimalLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		selectAnimalLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectAnimalLabel.setBounds(10, 47, 300, 22);
+		animalsForSalePanel.add(selectAnimalLabel);
 		
-		JLabel lblThenPressThe_1 = new JLabel("on the right, then press the buy button below");
-		lblThenPressThe_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblThenPressThe_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblThenPressThe_1.setBounds(10, 68, 300, 22);
-		panelAnimalsForSale.add(lblThenPressThe_1);
+		JLabel selectAnimalLabel2 = new JLabel("on the right, then press the buy button below");
+		selectAnimalLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		selectAnimalLabel2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectAnimalLabel2.setBounds(10, 68, 300, 22);
+		animalsForSalePanel.add(selectAnimalLabel2);
 		
-		JScrollPane scrollPaneAnimals = new JScrollPane();
-		scrollPaneAnimals.setBounds(320, 11, 834, 126);
-		panelAnimalsForSale.add(scrollPaneAnimals);
+		JScrollPane animalsScrollPane = new JScrollPane();
+		animalsScrollPane.setBounds(320, 11, 834, 126);
+		animalsForSalePanel.add(animalsScrollPane);
 		
-		listAnimals = new JList();
-		scrollPaneAnimals.setViewportView(listAnimals);
-		listAnimals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listAnimals.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		listAnimals.setModel(new AbstractListModel() {
+		animalsList = new JList();
+		animalsScrollPane.setViewportView(animalsList);
+		animalsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		animalsList.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		animalsList.setModel(new AbstractListModel() 
+		{
 			String[] values = manager.returnAnimalArray();
-			public int getSize() {
+			public int getSize() 
+			{
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public Object getElementAt(int index) 
+			{
 				return values[index];
 			}
 		});
-		listAnimals.setSelectedIndex(0);
-		listAnimals.setToolTipText("");
+		animalsList.setSelectedIndex(0);
+		animalsList.setToolTipText("");
 		
-		JPanel panelItemsForSale = new JPanel();
-		panelItemsForSale.setLayout(null);
-		panelItemsForSale.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelItemsForSale.setBounds(10, 437, 1164, 163);
-		frame.getContentPane().add(panelItemsForSale);
+		JPanel itemsForSalePanel = new JPanel();
+		itemsForSalePanel.setLayout(null);
+		itemsForSalePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		itemsForSalePanel.setBounds(10, 437, 1164, 163);
+		storeFrame.getContentPane().add(itemsForSalePanel);
 		
-		JLabel lblItemsForSale = new JLabel("Items for sale");
-		lblItemsForSale.setHorizontalAlignment(SwingConstants.CENTER);
-		lblItemsForSale.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblItemsForSale.setBounds(10, 11, 300, 36);
-		panelItemsForSale.add(lblItemsForSale);
+		JLabel itemsForSaleLabel = new JLabel("Items for sale");
+		itemsForSaleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		itemsForSaleLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+		itemsForSaleLabel.setBounds(10, 11, 300, 36);
+		itemsForSalePanel.add(itemsForSaleLabel);
 		
-		lblItemMessage = new JLabel("");
-		lblItemMessage.setHorizontalAlignment(SwingConstants.CENTER);
-		lblItemMessage.setForeground(Color.RED);
-		lblItemMessage.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblItemMessage.setBounds(10, 116, 190, 36);
-		panelItemsForSale.add(lblItemMessage);
+		itemMessageLabel = new JLabel("");
+		itemMessageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		itemMessageLabel.setForeground(Color.RED);
+		itemMessageLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		itemMessageLabel.setBounds(10, 116, 190, 36);
+		itemsForSalePanel.add(itemMessageLabel);
 		
-		JButton button = new JButton("Buy");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String message = manager.purchaseItem(listItems.getSelectedIndex());
-				if (message.endsWith("bought!")) { // Might change it so even this case shows a message dialogue
-					lblCropMessage.setText("");
-					lblAnimalMessage.setText("");
-					lblItemMessage.setText(message);
+		JButton buyItemButton = new JButton("Buy");
+		buyItemButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				String message = manager.purchaseItem(itemsList.getSelectedIndex());
+				if (message.endsWith("bought!")) 
+				{
+					cropMessageLabel.setText("");
+					animalMessageLabel.setText("");
+					itemMessageLabel.setText(message);
 				}
-				else {
-					lblItemMessage.setText("");
-					JOptionPane.showMessageDialog(frame, message);
+				else 
+				{
+					itemMessageLabel.setText("");
+					JOptionPane.showMessageDialog(storeFrame, message);
 				}
 			}
 		});
-		button.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		button.setBounds(210, 116, 100, 36);
-		panelItemsForSale.add(button);
+		buyItemButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		buyItemButton.setBounds(210, 116, 100, 36);
+		itemsForSalePanel.add(buyItemButton);
 		
-		JLabel lblSelectWhichItem = new JLabel("Select which item you would like to purchase");
-		lblSelectWhichItem.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSelectWhichItem.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSelectWhichItem.setBounds(10, 47, 300, 22);
-		panelItemsForSale.add(lblSelectWhichItem);
+		JLabel selectItemLabel = new JLabel("Select which item you would like to purchase");
+		selectItemLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		selectItemLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectItemLabel.setBounds(10, 47, 300, 22);
+		itemsForSalePanel.add(selectItemLabel);
 		
-		JLabel lblThenPressThe_2 = new JLabel("on the right, then press the buy button below");
-		lblThenPressThe_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblThenPressThe_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblThenPressThe_2.setBounds(10, 68, 300, 22);
-		panelItemsForSale.add(lblThenPressThe_2);
+		JLabel selectItemLabel2 = new JLabel("on the right, then press the buy button below");
+		selectItemLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		selectItemLabel2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectItemLabel2.setBounds(10, 68, 300, 22);
+		itemsForSalePanel.add(selectItemLabel2);
 		
-		JScrollPane scrollPaneItems = new JScrollPane();
-		scrollPaneItems.setBounds(320, 11, 834, 141);
-		panelItemsForSale.add(scrollPaneItems);
+		JScrollPane itemsScrollPane = new JScrollPane();
+		itemsScrollPane.setBounds(320, 11, 834, 141);
+		itemsForSalePanel.add(itemsScrollPane);
 		
-		listItems = new JList();
-		scrollPaneItems.setViewportView(listItems);
-		listItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listItems.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		listItems.setModel(new AbstractListModel() {
+		itemsList = new JList();
+		itemsScrollPane.setViewportView(itemsList);
+		itemsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		itemsList.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		itemsList.setModel(new AbstractListModel() 
+		{
 			String[] values = manager.returnItemArray();
-			public int getSize() {
+			public int getSize() 
+			{
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public Object getElementAt(int index) 
+			{
 				return values[index];
 			}
 		});
-		listItems.setSelectedIndex(0);
-		listItems.setToolTipText("");
+		itemsList.setSelectedIndex(0);
+		itemsList.setToolTipText("");
 		
 	}
 }

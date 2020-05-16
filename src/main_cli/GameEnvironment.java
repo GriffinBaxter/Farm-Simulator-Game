@@ -16,7 +16,8 @@ import main.Item;
 import main.Store;
 import main.StoreItem;
 
-public class GameEnvironment {
+public class GameEnvironment 
+{
 	
 	/**
 	 * The farm Class.

@@ -1,6 +1,7 @@
 package main;
 
-public class Item implements StoreItem{
+public class Item implements StoreItem
+{
 
 	/**
 	 * The name of the item.

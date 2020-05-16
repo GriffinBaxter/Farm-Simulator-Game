@@ -10,7 +10,8 @@ import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GameEnvironment {
+public class GameEnvironment 
+{
 	
 	/**
 	 * The farm Class.

@@ -1,7 +1,8 @@
 package main;
 import java.util.ArrayList;
 
-public class Farm  extends GameEnvironment{
+public class Farm  extends GameEnvironment
+{
 	
 	/**
 	 * Farm name String.

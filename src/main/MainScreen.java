@@ -28,35 +28,63 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 
-public class MainScreen {
-
-	private JFrame frmSengFarm;
+public class MainScreen 
+{
+	
+	/**
+	 * The main screen Frame, all elements of the frame are in here.
+	 */
+	private JFrame MainScreenFrame;
+	
+	/**
+	 * The manager which is the GameEnviroment Class.
+	 */
 	private GameEnvironment manager;
 	
-	public MainScreen(GameEnvironment incomingManager) {
+	/**
+	 * Constructor for the main screen. This constructor takes an incoming manager and makes it the manager of the screen.
+	 * Then, the constructor calls initialise to initialise the screen and then makes the frame visible.
+	 * @param incomingManager The manager for the screen.
+	 */
+	public MainScreen(GameEnvironment incomingManager) 
+	{
 		manager = incomingManager;
 		initialize();
-		frmSengFarm.setVisible(true);
+		MainScreenFrame.setVisible(true);
 	}
 	
-	public void closeWindow() {
-		frmSengFarm.dispose();
+	/**
+	 * A function to close the main screen.
+	 */
+	public void closeWindow() 
+	{
+		MainScreenFrame.dispose();
 	}
 	
-	public void finishWindow() {
+	/**
+	 * A function that calls closeWindow to close the main screen. call this method if you want to close the screen.
+	 */
+	public void finishWindow() 
+	{
 		manager.closeMainScreen(this);
 	}
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					MainScreen window = new MainScreen();
-					window.frmSengFarm.setVisible(true);
-				} catch (Exception e) {
+					window.MainScreenFrame.setVisible(true);
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -66,198 +94,220 @@ public class MainScreen {
 	/**
 	 * Create the application.
 	 */
-	public MainScreen() {
+	public MainScreen() 
+	{
 		initialize();
 	}
 
 	/**
 	 * Initialise the contents of the frame.
 	 */
-	private void initialize() {
-		frmSengFarm = new JFrame();
-		frmSengFarm.setTitle("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen");
-		frmSengFarm.setBounds(100, 100, 1200, 650);
-		frmSengFarm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmSengFarm.getContentPane().setLayout(null);
+	private void initialize() 
+	{
+		MainScreenFrame = new JFrame();
+		MainScreenFrame.setTitle("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen");
+		MainScreenFrame.setBounds(100, 100, 1200, 650);
+		MainScreenFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		MainScreenFrame.getContentPane().setLayout(null);
 		
-		JPanel panelFarmStatus = new JPanel();
-		panelFarmStatus.setBounds(10, 11, 1164, 78);
-		panelFarmStatus.setBorder(new LineBorder(new Color(0, 0, 0)));
-		frmSengFarm.getContentPane().add(panelFarmStatus);
-		panelFarmStatus.setLayout(null);
+		JPanel headerPanel = new JPanel();
+		headerPanel.setBounds(10, 11, 1164, 78);
+		headerPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		MainScreenFrame.getContentPane().add(headerPanel);
+		headerPanel.setLayout(null);
 		
-		JLabel lblFarmStatus = new JLabel("Farm Status");
-		lblFarmStatus.setHorizontalAlignment(SwingConstants.LEFT);
-		lblFarmStatus.setFont(new Font("Tahoma", Font.BOLD, 22));
-		lblFarmStatus.setBounds(10, 11, 151, 24);
-		panelFarmStatus.add(lblFarmStatus);
+		JLabel farmStatusLabel = new JLabel("Farm Status");
+		farmStatusLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		farmStatusLabel.setFont(new Font("Tahoma", Font.BOLD, 22));
+		farmStatusLabel.setBounds(10, 11, 151, 24);
+		headerPanel.add(farmStatusLabel);
 		
-		JLabel lblCurrentMoney = new JLabel("Current Money: $" + manager.returnMoneyString());
-		lblCurrentMoney.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCurrentMoney.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCurrentMoney.setBounds(10, 43, 347, 24);
-		panelFarmStatus.add(lblCurrentMoney);
+		JLabel currentMoneyLabel = new JLabel("Current Money: $" + manager.returnMoneyString());
+		currentMoneyLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		currentMoneyLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		currentMoneyLabel.setBounds(10, 43, 347, 24);
+		headerPanel.add(currentMoneyLabel);
 		
-		JLabel lblFreeCropSpace = new JLabel("Free crop space: " + manager.returnFreeCropSpace());
-		lblFreeCropSpace.setHorizontalAlignment(SwingConstants.LEFT);
-		lblFreeCropSpace.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblFreeCropSpace.setBounds(441, 43, 237, 24);
-		panelFarmStatus.add(lblFreeCropSpace);
+		JLabel freeCropSpaceLabel = new JLabel("Free crop space: " + manager.returnFreeCropSpace());
+		freeCropSpaceLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		freeCropSpaceLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		freeCropSpaceLabel.setBounds(441, 43, 237, 24);
+		headerPanel.add(freeCropSpaceLabel);
 		
-		JLabel lblDayOutOf = new JLabel("Day: " + manager.returnDays() + " out of " + manager.getNumDays());
-		lblDayOutOf.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDayOutOf.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDayOutOf.setBounds(898, 43, 185, 24);
-		panelFarmStatus.add(lblDayOutOf);
+		JLabel dayLabel = new JLabel("Day: " + manager.returnDays() + " out of " + manager.getNumDays());
+		dayLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		dayLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		dayLabel.setBounds(898, 43, 185, 24);
+		headerPanel.add(dayLabel);
 		
-		JPanel panelButtons = new JPanel();
-		panelButtons.setBounds(10, 100, 288, 500);
-		frmSengFarm.getContentPane().add(panelButtons);
-		panelButtons.setLayout(null);
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setBounds(10, 100, 288, 500);
+		MainScreenFrame.getContentPane().add(buttonsPanel);
+		buttonsPanel.setLayout(null);
 		
-		JPanel panelNoActionsReq = new JPanel();
-		panelNoActionsReq.setBounds(0, 0, 288, 135);
-		panelButtons.add(panelNoActionsReq);
-		panelNoActionsReq.setLayout(null);
+		JPanel noActionsRequiredPanel = new JPanel();
+		noActionsRequiredPanel.setBounds(0, 0, 288, 135);
+		buttonsPanel.add(noActionsRequiredPanel);
+		noActionsRequiredPanel.setLayout(null);
 		
-		JButton btnVisitStore = new JButton("Visit Store");
-		btnVisitStore.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JButton visitStoreButton = new JButton("Visit Store");
+		visitStoreButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				finishWindow();
 				manager.launchStoreScreen();
 			}
 		});
-		btnVisitStore.setBounds(10, 11, 268, 50);
-		panelNoActionsReq.add(btnVisitStore);
-		btnVisitStore.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		visitStoreButton.setBounds(10, 11, 268, 50);
+		noActionsRequiredPanel.add(visitStoreButton);
+		visitStoreButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
-		JButton BtnSleep = new JButton("Sleep (Move to next day)");
-		BtnSleep.addActionListener(new ActionListener() {
+		JButton sleepButton = new JButton("Sleep (Move to next day)");
+		sleepButton.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				manager.nextDay();
-				JOptionPane.showMessageDialog(frmSengFarm, "You have slept!");
+				JOptionPane.showMessageDialog(MainScreenFrame, "You have slept!");
 				if (manager.gameFinishing())
 				{
-					JOptionPane.showMessageDialog(frmSengFarm, manager.finishGame());
+					JOptionPane.showMessageDialog(MainScreenFrame, manager.finishGame());
 					finishWindow();
 				}
-				else {
+				else 
+				{
 					finishWindow();
 					manager.launchMainScreen();
 				}
 			}
 		});
-		BtnSleep.setBounds(10, 73, 268, 50);
-		panelNoActionsReq.add(BtnSleep);
-		BtnSleep.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		sleepButton.setBounds(10, 73, 268, 50);
+		noActionsRequiredPanel.add(sleepButton);
+		sleepButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
-		JPanel panelActionsReq = new JPanel();
-		panelActionsReq.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelActionsReq.setBounds(0, 146, 288, 354);
-		panelButtons.add(panelActionsReq);
-		panelActionsReq.setLayout(null);
+		JPanel actionsRequiredPanel = new JPanel();
+		actionsRequiredPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		actionsRequiredPanel.setBounds(0, 146, 288, 354);
+		buttonsPanel.add(actionsRequiredPanel);
+		actionsRequiredPanel.setLayout(null);
 		
-		JLabel lblRequireActions = new JLabel("Require Actions: (" + (2 - manager.getActionsPerformed()) + " remaining)");
-		lblRequireActions.setHorizontalAlignment(SwingConstants.LEFT);
-		lblRequireActions.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblRequireActions.setBounds(10, 12, 268, 24);
-		panelActionsReq.add(lblRequireActions);
+		JLabel requireActionsLabel = new JLabel("Require Actions: (" + (2 - manager.getActionsPerformed()) + " remaining)");
+		requireActionsLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		requireActionsLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		requireActionsLabel.setBounds(10, 12, 268, 24);
+		actionsRequiredPanel.add(requireActionsLabel);
 		
-		JButton btnTendToCrops = new JButton("Tend to crops");
-		btnTendToCrops.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (manager.getCrops().size() > 0) {
+		JButton tendToCropsButton = new JButton("Tend to crops");
+		tendToCropsButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				if (manager.getCrops().size() > 0) 
+				{
 					finishWindow();
 					manager.launchTendCropsScreen();
 				}
-				else {
-					JOptionPane.showMessageDialog(frmSengFarm, "You have no crops to tend to, so no actions were used");
+				else 
+				{
+					JOptionPane.showMessageDialog(MainScreenFrame, "You have no crops to tend to, so no actions were used");
 				}
 			}
 		});
-		btnTendToCrops.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnTendToCrops.setBounds(10, 47, 268, 50);
-		panelActionsReq.add(btnTendToCrops);
+		tendToCropsButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tendToCropsButton.setBounds(10, 47, 268, 50);
+		actionsRequiredPanel.add(tendToCropsButton);
 		
-		JButton btnFeedAnimals = new JButton("Feed animals");
-		btnFeedAnimals.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (manager.getAnimals().size() > 0 && manager.returnAnimalItemSize() > 0) {
+		JButton feedAnimalsButton = new JButton("Feed animals");
+		feedAnimalsButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				if (manager.getAnimals().size() > 0 && manager.returnAnimalItemSize() > 0) 
+				{
 					finishWindow();
 					manager.launchFeedAnimalsScreen();
 				}
-				else if (manager.getAnimals().size() > 0) {
-					JOptionPane.showMessageDialog(frmSengFarm, "You have no items to feed your animals with, so no actions were used");
+				else if (manager.getAnimals().size() > 0) 
+				{
+					JOptionPane.showMessageDialog(MainScreenFrame, "You have no items to feed your animals with, so no actions were used");
 				}
-				else if (manager.returnAnimalItemSize() > 0) {
-					JOptionPane.showMessageDialog(frmSengFarm, "You have no animals to feed, so no actions were used");
+				else if (manager.returnAnimalItemSize() > 0) 
+				{
+					JOptionPane.showMessageDialog(MainScreenFrame, "You have no animals to feed, so no actions were used");
 				}
-				else {
-					JOptionPane.showMessageDialog(frmSengFarm, "You have no animals to feed nor any items to feed them with, so no actions were used");
+				else 
+				{
+					JOptionPane.showMessageDialog(MainScreenFrame, "You have no animals to feed nor any items to feed them with, so no actions were used");
 				}
 			}
 		});
-		btnFeedAnimals.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnFeedAnimals.setBounds(10, 108, 268, 50);
-		panelActionsReq.add(btnFeedAnimals);
+		feedAnimalsButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		feedAnimalsButton.setBounds(10, 108, 268, 50);
+		actionsRequiredPanel.add(feedAnimalsButton);
 		
-		JButton btnPlayWithAnimals = new JButton("Play With Animals");
-		btnPlayWithAnimals.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frmSengFarm, manager.playWithAnimals());
+		JButton playWithAnimalsButton = new JButton("Play With Animals");
+		playWithAnimalsButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				JOptionPane.showMessageDialog(MainScreenFrame, manager.playWithAnimals());
 				finishWindow();
 				manager.launchMainScreen();
 			}
 		});
-		btnPlayWithAnimals.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnPlayWithAnimals.setBounds(10, 169, 268, 50);
-		panelActionsReq.add(btnPlayWithAnimals);
+		playWithAnimalsButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		playWithAnimalsButton.setBounds(10, 169, 268, 50);
+		actionsRequiredPanel.add(playWithAnimalsButton);
 		
-		JButton btnHarvestCrops = new JButton("Harvest Crops");
-		btnHarvestCrops.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frmSengFarm, manager.harvestCrops());
+		JButton harvestCropsButton = new JButton("Harvest Crops");
+		harvestCropsButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				JOptionPane.showMessageDialog(MainScreenFrame, manager.harvestCrops());
 				finishWindow();
 				manager.launchMainScreen();
 			}
 		});
-		btnHarvestCrops.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnHarvestCrops.setBounds(10, 230, 268, 50);
-		panelActionsReq.add(btnHarvestCrops);
+		harvestCropsButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		harvestCropsButton.setBounds(10, 230, 268, 50);
+		actionsRequiredPanel.add(harvestCropsButton);
 		
-		JButton btnTendToFarm = new JButton("Tend to farm land");
-		btnTendToFarm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frmSengFarm, manager.tendFarmLand());
+		JButton tendToFarmButton = new JButton("Tend to farm land");
+		tendToFarmButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				JOptionPane.showMessageDialog(MainScreenFrame, manager.tendFarmLand());
 				finishWindow();
 				manager.launchMainScreen();
 			}
 		});
-		btnTendToFarm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnTendToFarm.setBounds(10, 293, 268, 50);
-		panelActionsReq.add(btnTendToFarm);
+		tendToFarmButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tendToFarmButton.setBounds(10, 293, 268, 50);
+		actionsRequiredPanel.add(tendToFarmButton);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(308, 100, 866, 500);
-		frmSengFarm.getContentPane().add(panel);
-		panel.setLayout(null);
+		JPanel statusPanel = new JPanel();
+		statusPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		statusPanel.setBounds(308, 100, 866, 500);
+		MainScreenFrame.getContentPane().add(statusPanel);
+		statusPanel.setLayout(null);
 		
-		JLabel lblStatusOfCrops = new JLabel("Status of Crops and Animals");
-		lblStatusOfCrops.setBounds(10, 11, 846, 49);
-		panel.add(lblStatusOfCrops);
-		lblStatusOfCrops.setHorizontalAlignment(SwingConstants.CENTER);
-		lblStatusOfCrops.setFont(new Font("Tahoma", Font.BOLD, 25));
+		JLabel statusCropsAnimalsLabel = new JLabel("Status of Crops and Animals");
+		statusCropsAnimalsLabel.setBounds(10, 11, 846, 49);
+		statusPanel.add(statusCropsAnimalsLabel);
+		statusCropsAnimalsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		statusCropsAnimalsLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 71, 846, 418);
-		panel.add(scrollPane);
+		statusPanel.add(scrollPane);
 		
-		JTextArea txtCropsAnimalsStatus = new JTextArea();
-		scrollPane.setViewportView(txtCropsAnimalsStatus);
-		txtCropsAnimalsStatus.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtCropsAnimalsStatus.setText(manager.returnStatusCropsAnimals());
-		txtCropsAnimalsStatus.setEditable(false);
+		JTextArea cropsAnimalsStatusTextArea = new JTextArea();
+		scrollPane.setViewportView(cropsAnimalsStatusTextArea);
+		cropsAnimalsStatusTextArea.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		cropsAnimalsStatusTextArea.setText(manager.returnStatusCropsAnimals());
+		cropsAnimalsStatusTextArea.setEditable(false);
 	}
 }

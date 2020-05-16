@@ -1,6 +1,7 @@
 package main;
 
-public class Animal implements StoreItem {
+public class Animal implements StoreItem 
+{
 
 	/**
 	 * The name of an animal.

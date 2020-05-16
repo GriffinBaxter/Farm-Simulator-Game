@@ -18,35 +18,62 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class FeedAnimalsScreen {
-
-	private JFrame frame;
+public class FeedAnimalsScreen 
+{
+	/**
+	 * The feed animals screen Frame, all elements of the frame are in here.
+	 */
+	private JFrame feedAnimalsScreenFrame;
+	
+	/**
+	 * The manager which is the GameEnviroment Class.
+	 */
 	private GameEnvironment manager;
 	
-	public FeedAnimalsScreen(GameEnvironment incomingManager) {
+	/**
+	 * Constructor for the feed animals screen. This constructor takes an incoming manager and makes it the manager of the screen.
+	 * Then, the constructor calls initialise to initialise the screen and then makes the frame visible.
+	 * @param incomingManager The manager for the screen.
+	 */
+	public FeedAnimalsScreen(GameEnvironment incomingManager) 
+	{
 		manager = incomingManager;
 		initialize();
-		frame.setVisible(true);
+		feedAnimalsScreenFrame.setVisible(true);
 	}
 	
-	public void closeWindow() {
-		frame.dispose();
+	/**
+	 * A function to close the feed animals screen.
+	 */
+	public void closeWindow() 
+	{
+		feedAnimalsScreenFrame.dispose();
 	}
 	
-	public void finishWindow() {
+	/**
+	 * A function that calls closeWindow to close the feed animals screen. call this method if you want to close the screen.
+	 */
+	public void finishWindow() 
+	{
 		manager.closeFeedAnimalsScreen(this);
 	}
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run()
+			{
+				try 
+				{
 					FeedAnimalsScreen window = new FeedAnimalsScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
+					window.feedAnimalsScreenFrame.setVisible(true);
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -56,111 +83,114 @@ public class FeedAnimalsScreen {
 	/**
 	 * Create the application.
 	 */
-	public FeedAnimalsScreen() {
+	public FeedAnimalsScreen() 
+	{
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 1200, 650);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+	private void initialize() 
+	{
+		feedAnimalsScreenFrame = new JFrame();
+		feedAnimalsScreenFrame.setTitle("Farm Simulator");
+		feedAnimalsScreenFrame.setBounds(100, 100, 1200, 650);
+		feedAnimalsScreenFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		feedAnimalsScreenFrame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(10, 11, 1164, 78);
-		frame.getContentPane().add(panel);
+		JPanel headerPanel = new JPanel();
+		headerPanel.setLayout(null);
+		headerPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		headerPanel.setBounds(10, 11, 1164, 78);
+		feedAnimalsScreenFrame.getContentPane().add(headerPanel);
 		
-		JLabel lblFeedAnimals = new JLabel("Feed Animals");
-		lblFeedAnimals.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFeedAnimals.setFont(new Font("Tahoma", Font.BOLD, 32));
-		lblFeedAnimals.setBounds(448, 11, 269, 56);
-		panel.add(lblFeedAnimals);
+		JLabel feedAnimalsLabel = new JLabel("Feed Animals");
+		feedAnimalsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		feedAnimalsLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
+		feedAnimalsLabel.setBounds(448, 11, 269, 56);
+		headerPanel.add(feedAnimalsLabel);
 		
-		JButton button = new JButton("Go back");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JButton goBackButton = new JButton("Go back");
+		goBackButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				finishWindow();
 				manager.launchMainScreen();
 			}
 		});
-		button.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		button.setBounds(10, 11, 300, 56);
-		panel.add(button);
+		goBackButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		goBackButton.setBounds(10, 11, 300, 56);
+		headerPanel.add(goBackButton);
 		
-		JLabel label_1 = new JLabel("Actions: " + (2 - manager.getActionsPerformed()) + " remaining");
-		label_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label_1.setBounds(860, 11, 294, 56);
-		panel.add(label_1);
+		JLabel actionsRemainingLabel = new JLabel("Actions: " + (2 - manager.getActionsPerformed()) + " remaining");
+		actionsRemainingLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		actionsRemainingLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		actionsRemainingLabel.setBounds(860, 11, 294, 56);
+		headerPanel.add(actionsRemainingLabel);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(10, 100, 1164, 500);
-		frame.getContentPane().add(panel_1);
+		JPanel feedAnimalsPanel = new JPanel();
+		feedAnimalsPanel.setLayout(null);
+		feedAnimalsPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		feedAnimalsPanel.setBounds(10, 100, 1164, 500);
+		feedAnimalsScreenFrame.getContentPane().add(feedAnimalsPanel);
 		
-		JLabel label_2 = new JLabel("");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setForeground(Color.RED);
-		label_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label_2.setBounds(10, 116, 190, 36);
-		panel_1.add(label_2);
+		JLabel selectItemLabel = new JLabel("Select item");
+		selectItemLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		selectItemLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+		selectItemLabel.setBounds(425, 11, 316, 36);
+		feedAnimalsPanel.add(selectItemLabel);
 		
-		JLabel label_4 = new JLabel("Select item");
-		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setFont(new Font("Tahoma", Font.BOLD, 24));
-		label_4.setBounds(425, 11, 316, 36);
-		panel_1.add(label_4);
+		JLabel selectItemLabel2 = new JLabel("Select the item you would like to feed all of your animals with:");
+		selectItemLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		selectItemLabel2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectItemLabel2.setBounds(386, 47, 394, 22);
+		feedAnimalsPanel.add(selectItemLabel2);
 		
-		JLabel lblSelectTheItem = new JLabel("Select the item you would like to feed all of your animals with:");
-		lblSelectTheItem.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSelectTheItem.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSelectTheItem.setBounds(386, 47, 394, 22);
-		panel_1.add(lblSelectTheItem);
+		JScrollPane selectItemScrollPane = new JScrollPane();
+		selectItemScrollPane.setBounds(425, 80, 316, 409);
+		feedAnimalsPanel.add(selectItemScrollPane);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(425, 80, 316, 409);
-		panel_1.add(scrollPane_1);
-		
-		JList listItem = new JList();
-		listItem.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		listItem.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listItem.setModel(new AbstractListModel() {
+		JList itemDisplayList = new JList();
+		itemDisplayList.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		itemDisplayList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		itemDisplayList.setModel(new AbstractListModel() 
+		{
 			String[] values = manager.returnCurrentItemsArray("Animal");
-			public int getSize() {
+			public int getSize() 
+			{
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public Object getElementAt(int index) 
+			{
 				return values[index];
 			}
 		});
-		listItem.setSelectedIndex(0);
-		scrollPane_1.setViewportView(listItem);
+		itemDisplayList.setSelectedIndex(0);
+		selectItemScrollPane.setViewportView(itemDisplayList);
 		
-		JButton btnFeedAllAnimals = new JButton("Feed all animals");
-		btnFeedAllAnimals.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, manager.feedAnimals(listItem.getSelectedIndex()));
+		JButton feedAllAnimalsButton = new JButton("Feed all animals");
+		feedAllAnimalsButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				JOptionPane.showMessageDialog(feedAnimalsScreenFrame, manager.feedAnimals(itemDisplayList.getSelectedIndex()));
 				finishWindow();
 				manager.launchFeedAnimalsScreen();
 				
 				
 			}
 		});
-		btnFeedAllAnimals.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnFeedAllAnimals.setBounds(871, 233, 190, 56);
-		panel_1.add(btnFeedAllAnimals);
+		feedAllAnimalsButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		feedAllAnimalsButton.setBounds(871, 233, 190, 56);
+		feedAnimalsPanel.add(feedAllAnimalsButton);
 		
-		JLabel label_6 = new JLabel("Uses one action:");
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label_6.setBounds(871, 200, 190, 22);
-		panel_1.add(label_6);
+		JLabel useActionLabel = new JLabel("Uses one action:");
+		useActionLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		useActionLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		useActionLabel.setBounds(871, 200, 190, 22);
+		feedAnimalsPanel.add(useActionLabel);
 	}
 
 }

@@ -1,6 +1,7 @@
 package main;
 
-public class Farmer {
+public class Farmer 
+{
 
 	/**
 	 * The name of the farmer.

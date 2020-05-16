@@ -1,6 +1,7 @@
 package main;
 
-public interface StoreItem {
+public interface StoreItem 
+{
 
 	/**
 	 * A method to get the purchase price of a store item. Must be implemented in all of the store item Classes.

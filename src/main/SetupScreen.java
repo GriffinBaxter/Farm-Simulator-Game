@@ -17,13 +17,39 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Point;
 
-public class SetupScreen {
+public class SetupScreen 
+{
 
+	/**
+	 * The setup screen Frame, all elements of the frame are in here.
+	 */
 	private JFrame setupScreenFrame;
+	
+	/**
+	 * The manager which is the GameEnviroment Class.
+	 */
 	private GameEnvironment manager;
+	
+	/**
+	 * The text field where the user enters their name into.
+	 * Global variable to check whether the user entered a correct name.
+	 */
 	private JTextField nameTextField;
+	
+	/**
+	 * The button group for the farm types.
+	 */
 	private final ButtonGroup farmTypeButtonGroup = new ButtonGroup();
+	
+	/**
+	 * The text field where the user enters their farm name into.
+	 * Global variable to check whether the user entered a correct farm name.
+	 */
 	private JTextField farmNameTextField;
+	
+	/**
+	 * Warning label that shows a warning message if a user has entered an incorrect farmer name or farm name.
+	 */
 	private JLabel warningLabel;
 
 	/**
@@ -31,7 +57,8 @@ public class SetupScreen {
 	 * Then, the constructor calls initialise to initialise the screen and then makes the frame visible.
 	 * @param incomingManager The manager for the screen.
 	 */
-	public SetupScreen(GameEnvironment incomingManager) {
+	public SetupScreen(GameEnvironment incomingManager) 
+	{
 		manager = incomingManager;
 		initialize();
 		setupScreenFrame.setVisible(true);
@@ -40,27 +67,35 @@ public class SetupScreen {
 	/**
 	 * A function to close the setup screen.
 	 */
-	public void closeWindow() {
+	public void closeWindow() 
+	{
 		setupScreenFrame.dispose();
 	}
 	
 	/**
 	 * A function that calls closeWindow to close the setup screen. call this method if you want to close the screen.
 	 */
-	public void finishWindow() {
+	public void finishWindow() 
+	{
 		manager.closeSetupScreen(this);
 	}
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					SetupScreen window = new SetupScreen();
 					window.setupScreenFrame.setVisible(true);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -70,14 +105,16 @@ public class SetupScreen {
 	/**
 	 * Create the application.
 	 */
-	public SetupScreen() {
+	public SetupScreen() 
+	{
 		initialize();
 	}
 
 	/**
 	 * Initialise the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		setupScreenFrame = new JFrame();
 		setupScreenFrame.setTitle("Farm Simulator");
 		setupScreenFrame.setBounds(100, 100, 1200, 650);
@@ -202,8 +239,10 @@ public class SetupScreen {
 		setupScreenFrame.getContentPane().add(farmerAgeInfoLabel);
 		
 		JButton startGameButton = new JButton("Start Game");
-		startGameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		startGameButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				manager.setupGame(daysSlider.getValue(), nameTextField.getText(), farmerAgeSlider.getValue(), farmTypeButtonGroup.getSelection().getActionCommand(), farmNameTextField.getText());
 			}
 		});
@@ -216,11 +255,14 @@ public class SetupScreen {
 	 * Sets the text of the warningLabel. This is used when the user needs to be notified of an error in their name or farm name.
 	 * @param warningType The type of warning the user needs to know about.
 	 */
-	public void setWarningText(String warningType) {
-		if (warningType == "") {
+	public void setWarningText(String warningType) 
+	{
+		if (warningType == "") 
+		{
 			warningLabel.setText("");
 		}
-		else {
+		else 
+		{
 			warningLabel.setText("Warning: Your " + warningType + " incorrect (must be between 3 and 15 characters and must not include numbers or special characters)");
 		}
 	}
