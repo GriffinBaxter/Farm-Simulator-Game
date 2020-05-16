@@ -33,11 +33,11 @@ class CropTest {
 
 	@Test
 	final void testCanHarvest() {
-		assertEquals(false, testCrop.canHarvest());
+		assertFalse(testCrop.canHarvest());
 		testCrop.grow();
-		assertEquals(false, testCrop.canHarvest());
+		assertFalse(testCrop.canHarvest());
 		testCrop.grow();
-		assertEquals(true, testCrop.canHarvest());
+		assertTrue(testCrop.canHarvest());
 	}
 
 	@Test
