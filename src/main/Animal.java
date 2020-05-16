@@ -53,15 +53,15 @@ public class Animal implements StoreItem
 		animalName = animal.getName();
 		purchasePrice = animal.getPurchasePrice();
 		happiness = animal.getHappiness();
-		dailyMoneyMade = animal.dailyProfit();
+		dailyMoneyMade = animal.getDailyProfit();
 		health = 1.0;
 	}
 	
 	/**
-	 * Calculates the daily profit of an animal by multiplying its daily money made by its happiness and health, then returns it. This is called at the end of each day.
+	 * Calculates and returns the daily profit of an animal by multiplying its daily money made by its happiness and health, then returns it. This is called at the end of each day.
 	 * @return The animal's daily profit.
 	 */
-	public Double dailyProfit()
+	public Double getDailyProfit()
 	{
 		return happiness * health * dailyMoneyMade;
 	}

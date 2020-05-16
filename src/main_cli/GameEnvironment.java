@@ -1,12 +1,7 @@
-/*
- * To-Do (Empty)
- */
-
-
 package main_cli;
+
 import java.util.ArrayList;
 import java.lang.Math;
-//import java.util.ArrayList; // Re-add this if needed, otherwise will delete
 import java.util.Scanner;
 import main.Animal;
 import main.Crop;
@@ -14,7 +9,6 @@ import main.Farm;
 import main.Farmer;
 import main.Item;
 import main.Store;
-import main.StoreItem;
 
 public class GameEnvironment 
 {
@@ -298,7 +292,7 @@ public class GameEnvironment
 			{
 				System.out.println(animal.getName() + " has a happiness level of " + String.format("%.1f", animal.getHappiness())
 					+ " and a healthiness level of " + String.format("%.1f", animal.getHealth())
-					+ ", which equates to $" + returnDollarsCents(animal.dailyProfit()) + " per day");
+					+ ", which equates to $" + returnDollarsCents(animal.getDailyProfit()) + " per day");
 			}
 			System.out.println("");
 			
@@ -413,7 +407,7 @@ public class GameEnvironment
 			{
 				System.out.println("\n" + animal.getName());
 				System.out.println("Purchase price: $" + returnDollarsCents(animal.getPurchasePrice()));
-				System.out.println("Daily profit at base Happiness: $" + returnDollarsCents(animal.dailyProfit()));
+				System.out.println("Daily profit at base Happiness: $" + returnDollarsCents(animal.getDailyProfit()));
 			}
 			System.out.println("");
 			break;

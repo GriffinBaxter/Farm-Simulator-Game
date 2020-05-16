@@ -1,10 +1,8 @@
 package main;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -126,6 +124,7 @@ public class StoreScreen
 	private void initialize() 
 	{
 		storeFrame = new JFrame();
+		storeFrame.setTitle("Farm Simulator - Store");
 		storeFrame.setBounds(100, 100, 1200, 650);
 		storeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		storeFrame.getContentPane().setLayout(null);

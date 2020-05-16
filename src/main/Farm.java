@@ -326,7 +326,7 @@ public class Farm  extends GameEnvironment
 		double moneyMade = 0.0;
 		for(Animal animal: animals) 
 		{
-			moneyMade += animal.dailyProfit();
+			moneyMade += animal.getDailyProfit();
 		}
 		return moneyMade;
 	}

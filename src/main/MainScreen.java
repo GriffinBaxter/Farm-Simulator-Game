@@ -1,32 +1,19 @@
 package main;
 
 import java.awt.EventQueue;
-
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.border.BevelBorder;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.UIManager;
 
 public class MainScreen 
 {
@@ -34,7 +21,7 @@ public class MainScreen
 	/**
 	 * The main screen Frame, all elements of the frame are in here.
 	 */
-	private JFrame MainScreenFrame;
+	private JFrame mainScreenFrame;
 	
 	/**
 	 * The manager which is the GameEnviroment Class.
@@ -50,7 +37,7 @@ public class MainScreen
 	{
 		manager = incomingManager;
 		initialize();
-		MainScreenFrame.setVisible(true);
+		mainScreenFrame.setVisible(true);
 	}
 	
 	/**
@@ -58,7 +45,7 @@ public class MainScreen
 	 */
 	public void closeWindow() 
 	{
-		MainScreenFrame.dispose();
+		mainScreenFrame.dispose();
 	}
 	
 	/**
@@ -81,7 +68,7 @@ public class MainScreen
 				try 
 				{
 					MainScreen window = new MainScreen();
-					window.MainScreenFrame.setVisible(true);
+					window.mainScreenFrame.setVisible(true);
 				} 
 				catch (Exception e) 
 				{
@@ -104,16 +91,16 @@ public class MainScreen
 	 */
 	private void initialize() 
 	{
-		MainScreenFrame = new JFrame();
-		MainScreenFrame.setTitle("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen");
-		MainScreenFrame.setBounds(100, 100, 1200, 650);
-		MainScreenFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		MainScreenFrame.getContentPane().setLayout(null);
+		mainScreenFrame = new JFrame();
+		mainScreenFrame.setTitle("Farm Simulator - Main Screen");
+		mainScreenFrame.setBounds(100, 100, 1200, 650);
+		mainScreenFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainScreenFrame.getContentPane().setLayout(null);
 		
 		JPanel headerPanel = new JPanel();
 		headerPanel.setBounds(10, 11, 1164, 78);
 		headerPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		MainScreenFrame.getContentPane().add(headerPanel);
+		mainScreenFrame.getContentPane().add(headerPanel);
 		headerPanel.setLayout(null);
 		
 		JLabel farmStatusLabel = new JLabel("Farm Status");
@@ -142,7 +129,7 @@ public class MainScreen
 		
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setBounds(10, 100, 288, 500);
-		MainScreenFrame.getContentPane().add(buttonsPanel);
+		mainScreenFrame.getContentPane().add(buttonsPanel);
 		buttonsPanel.setLayout(null);
 		
 		JPanel noActionsRequiredPanel = new JPanel();
@@ -169,10 +156,10 @@ public class MainScreen
 			public void actionPerformed(ActionEvent e) 
 			{
 				manager.nextDay();
-				JOptionPane.showMessageDialog(MainScreenFrame, "You have slept!");
+				JOptionPane.showMessageDialog(mainScreenFrame, "You have slept!");
 				if (manager.gameFinishing())
 				{
-					JOptionPane.showMessageDialog(MainScreenFrame, manager.finishGame());
+					JOptionPane.showMessageDialog(mainScreenFrame, manager.finishGame());
 					finishWindow();
 				}
 				else 
@@ -210,7 +197,7 @@ public class MainScreen
 				}
 				else 
 				{
-					JOptionPane.showMessageDialog(MainScreenFrame, "You have no crops to tend to, so no actions were used");
+					JOptionPane.showMessageDialog(mainScreenFrame, "You have no crops to tend to, so no actions were used");
 				}
 			}
 		});
@@ -230,15 +217,15 @@ public class MainScreen
 				}
 				else if (manager.getAnimals().size() > 0) 
 				{
-					JOptionPane.showMessageDialog(MainScreenFrame, "You have no items to feed your animals with, so no actions were used");
+					JOptionPane.showMessageDialog(mainScreenFrame, "You have no items to feed your animals with, so no actions were used");
 				}
 				else if (manager.returnAnimalItemSize() > 0) 
 				{
-					JOptionPane.showMessageDialog(MainScreenFrame, "You have no animals to feed, so no actions were used");
+					JOptionPane.showMessageDialog(mainScreenFrame, "You have no animals to feed, so no actions were used");
 				}
 				else 
 				{
-					JOptionPane.showMessageDialog(MainScreenFrame, "You have no animals to feed nor any items to feed them with, so no actions were used");
+					JOptionPane.showMessageDialog(mainScreenFrame, "You have no animals to feed nor any items to feed them with, so no actions were used");
 				}
 			}
 		});
@@ -251,7 +238,7 @@ public class MainScreen
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				JOptionPane.showMessageDialog(MainScreenFrame, manager.playWithAnimals());
+				JOptionPane.showMessageDialog(mainScreenFrame, manager.playWithAnimals());
 				finishWindow();
 				manager.launchMainScreen();
 			}
@@ -265,7 +252,7 @@ public class MainScreen
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				JOptionPane.showMessageDialog(MainScreenFrame, manager.harvestCrops());
+				JOptionPane.showMessageDialog(mainScreenFrame, manager.harvestCrops());
 				finishWindow();
 				manager.launchMainScreen();
 			}
@@ -279,7 +266,7 @@ public class MainScreen
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				JOptionPane.showMessageDialog(MainScreenFrame, manager.tendFarmLand());
+				JOptionPane.showMessageDialog(mainScreenFrame, manager.tendFarmLand());
 				finishWindow();
 				manager.launchMainScreen();
 			}
@@ -291,7 +278,7 @@ public class MainScreen
 		JPanel statusPanel = new JPanel();
 		statusPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		statusPanel.setBounds(308, 100, 866, 500);
-		MainScreenFrame.getContentPane().add(statusPanel);
+		mainScreenFrame.getContentPane().add(statusPanel);
 		statusPanel.setLayout(null);
 		
 		JLabel statusCropsAnimalsLabel = new JLabel("Status of Crops and Animals");

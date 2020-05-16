@@ -35,7 +35,7 @@ public class Crop implements StoreItem
 	 * @param initSellPrice The initial sell price of the crop.
 	 * @param initDaysToGrow The initial number of days the crop has to grow.
 	 */
-	public Crop(String name, double initPurchasePrice,double initSellPrice, int initDaysToGrow)
+	public Crop(String name, double initPurchasePrice, double initSellPrice, int initDaysToGrow)
 	{
 		cropName = name;
 		purchasePrice = initPurchasePrice;
@@ -116,8 +116,8 @@ public class Crop implements StoreItem
 	}
 	
 	/**
-	 * Returns the days the crop has left to grow by subtracting the <code>daysGrown</code> from <code>daysToGrow</code>.
-	 * @return
+	 * Calculates and returns the days the crop has left to grow by subtracting the <code>daysGrown</code> from <code>daysToGrow</code>.
+	 * @return The days the crop has left to grow.
 	 */
 	public int getDaysLeftToGrow() 
 	{

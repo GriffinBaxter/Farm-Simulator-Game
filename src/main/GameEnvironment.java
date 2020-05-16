@@ -1,14 +1,7 @@
-/*
- * To-Do
- * Edit tendToCrops and feedAnimals doc-strings to make sense for GUI implementation
- */
-
-
 package main;
+
 import java.util.ArrayList;
 import java.lang.Math;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class GameEnvironment 
 {
@@ -77,15 +70,15 @@ public class GameEnvironment
 		
 		if ((farmerName.length() < 3 || farmerName.length() > 15 || !isAlpha(farmerName)) && (farmName.length() < 3 || farmName.length() > 15 || !isAlpha(farmName))) 
 		{
-			setupWindow.setWarningText("farmer name and farm name are");
+			setupWindow.setWarningText("farmer's name and farm's name are");
 		}
 		else if (farmerName.length() < 3 || farmerName.length() > 15 || !isAlpha(farmerName)) 
 		{
-			setupWindow.setWarningText("farmer name is");
+			setupWindow.setWarningText("farmer's name is");
 		}
 		else if (farmName.length() < 3 || farmName.length() > 15 || !isAlpha(farmName)) 
 		{
-			setupWindow.setWarningText("farm name is");
+			setupWindow.setWarningText("farm's name is");
 		}
 		else 
 		{
@@ -257,7 +250,7 @@ public class GameEnvironment
 	 * @return String identifying the action performed.
 	 */
 	public String feedAnimals(int itemIndex) 
-	{ // Need to edit the above doc-string for this method!
+	{
 		if (actionsPerformed >= 2) 
 		{
 			return "You cannot do this as you have no actions left";
@@ -487,7 +480,7 @@ public class GameEnvironment
 		{
 			returnString += animal.getName() + " has a happiness level of " + String.format("%.1f", animal.getHappiness())
 				+ " and a healthiness level of " + String.format("%.1f", animal.getHealth())
-				+ ", which equates to $" + returnDollarsCents(animal.dailyProfit()) + " per day\r\n";
+				+ ", which equates to $" + returnDollarsCents(animal.getDailyProfit()) + " per day\r\n";
 		}
 		return returnString;
 	}
@@ -617,7 +610,7 @@ public class GameEnvironment
 		{
 			animalArrayList.add(animal.getName()
 			+ ", Purchase price: $" + returnDollarsCents(animal.getPurchasePrice())
-			+ ", Daily profit at base Happiness: $" + returnDollarsCents(animal.dailyProfit()));
+			+ ", Daily profit at base Happiness: $" + returnDollarsCents(animal.getDailyProfit()));
 		}
 		String[] animalArray = animalArrayList.toArray(new String[0]);
 		return animalArray;
@@ -756,7 +749,6 @@ public class GameEnvironment
 	 */
 	public static void main(String[] args) 
 	{
-		//System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");
 		GameEnvironment game = new GameEnvironment();
 		game.launchSetupScreen();
 	}

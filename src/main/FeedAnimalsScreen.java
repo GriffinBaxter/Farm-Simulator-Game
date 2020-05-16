@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -94,7 +93,7 @@ public class FeedAnimalsScreen
 	private void initialize() 
 	{
 		feedAnimalsScreenFrame = new JFrame();
-		feedAnimalsScreenFrame.setTitle("Farm Simulator");
+		feedAnimalsScreenFrame.setTitle("Farm Simulator - Feed Animals");
 		feedAnimalsScreenFrame.setBounds(100, 100, 1200, 650);
 		feedAnimalsScreenFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		feedAnimalsScreenFrame.getContentPane().setLayout(null);
