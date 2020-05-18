@@ -1,7 +1,7 @@
 package main;
 import java.util.ArrayList;
 
-public class Farm extends GameEnvironment
+public class Farm
 {
 	
 	/**
@@ -165,7 +165,7 @@ public class Farm extends GameEnvironment
 	
 	/**
 	 * Returns the crops the farm currently has planted from the crops ArrayList.
-	 * @returns An ArrayList of crops owned.
+	 * @return An ArrayList of crops owned.
 	 */
 	public ArrayList<Crop> getCrops() 
 	{
@@ -174,7 +174,7 @@ public class Farm extends GameEnvironment
 	
 	/**
 	 * Returns the animals the farm currently owns from the animals ArrayList.
-	 * @returns An ArrayList of animals owned.
+	 * @return An ArrayList of animals owned.
 	 */
 	public ArrayList<Animal> getAnimals() 
 	{
@@ -183,7 +183,7 @@ public class Farm extends GameEnvironment
 	
 	/**
 	 * Returns the items the farm currently owns from the items ArrayList.
-	 * @returns An ArrayList of items owned.
+	 * @return An ArrayList of items owned.
 	 */
 	public ArrayList<Item> getItems() 
 	{

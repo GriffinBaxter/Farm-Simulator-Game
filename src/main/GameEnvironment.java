@@ -216,7 +216,6 @@ public class GameEnvironment
 		else 
 		{
 			Item itemUsed = farm.getItems().get(itemIndex + returnCropItemSize());
-				
 			farm.increaseHappinessAllAnimals(itemUsed.getBonus());
 			actionsPerformed++;
 			farm.decreaseItems(itemUsed); //Remove the item from the users inventory
