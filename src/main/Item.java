@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * Item class where items are extended from.
+ * Here the user can get the bonus of the Item.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class Item implements StoreItem
 {
 

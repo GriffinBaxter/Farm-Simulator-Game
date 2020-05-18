@@ -1,6 +1,11 @@
 package main;
 import java.util.ArrayList;
 
+/**
+ * Farm class where the users farm gets managed.
+ * Here the user can get set the farm type, tend to their farm and tend to their crops.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class Farm extends GameEnvironment
 {
 	

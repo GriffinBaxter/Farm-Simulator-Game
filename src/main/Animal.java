@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * Animal class where animals are extended from.
+ * Here the user can increase the animal happiness, increase health and get daily profit.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class Animal implements StoreItem 
 {
 

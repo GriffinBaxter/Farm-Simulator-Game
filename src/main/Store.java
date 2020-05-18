@@ -1,6 +1,10 @@
 package main;
 import java.util.ArrayList;
 
+/**
+ * Store class where the user can purchase Crops, Animals and Items from.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class Store
 {
 
@@ -26,22 +30,22 @@ public class Store
 	 */
 	public Store(double initAnimalHappiness)
 	{
-		//Name, buy price, sell price, days to grow(harvestDays)
-		cropsForSale.add(new Crop("Wheat", 10.0, 20.0, 1));
-		cropsForSale.add(new Crop("Corn", 10.0, 25.0, 3));
-		cropsForSale.add(new Crop("Potato", 20.0, 50.0, 3));
-		cropsForSale.add(new Crop("Parsnip", 15.0, 40.0, 2));
-		cropsForSale.add(new Crop("Strawberry", 40.0, 90.0, 3));
-		cropsForSale.add(new Crop("Pumpkin", 20.0, 100.0, 5));
+		//Crops
+		cropsForSale.add(new Wheat());
+		cropsForSale.add(new Corn());
+		cropsForSale.add(new Potato());
+		cropsForSale.add(new Parsnip());
+		cropsForSale.add(new Strawberry());
+		cropsForSale.add(new Pumpkin());
 		
 		
-		//Name, purchase price, initial happiness, initial daily money made
+		//Animals
 		animalsForSale.add(new Animal("Sheep", 30.0, initAnimalHappiness, 20.0));
 		animalsForSale.add(new Animal("Cow", 50.0, initAnimalHappiness, 70.0));
 		animalsForSale.add(new Animal("Goat", 25.0, initAnimalHappiness, 30.0));
+	
 		
-		//Crop items need to be added before Animal items
-		//Name, Type(for crops or animals), price,  Bonus
+		//Items
 		//The bonus for crops is an increase in the days grown.
 		itemsForSale.add(new Item("Organic Fertiliser", "Crop", 10.0, 2.0));
 		itemsForSale.add(new Item("Inorganic Fertiliser", "Crop", 5.0, 1.0));

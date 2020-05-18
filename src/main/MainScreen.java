@@ -15,6 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
+/**
+ * Main screen class.
+ * In this screen the user plays the game with the help of a digital interface.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class MainScreen 
 {
 	

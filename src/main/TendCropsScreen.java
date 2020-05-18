@@ -17,6 +17,11 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.AbstractListModel;
 
+/**
+ * Tend to crops screen class.
+ * In this screen the user can tend to their crops using a digital interface.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class TendCropsScreen 
 {
 	/**
@@ -208,7 +213,7 @@ public class TendCropsScreen
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				JOptionPane.showMessageDialog(tendCropsScreenFrame, manager.tendToCrops(cropDisplayList.getSelectedIndex(), itemDisplayList.getSelectedIndex()));
+				JOptionPane.showMessageDialog(tendCropsScreenFrame, manager.tendToCrops(cropDisplayList.getSelectedIndex(), itemDisplayList.getSelectedValue().toString()));
 				finishWindow();
 				manager.launchTendCropsScreen();
 			}

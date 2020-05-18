@@ -17,6 +17,11 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Feed animals screen class.
+ * In this screen the user can feed their animals using a digital interface.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class FeedAnimalsScreen 
 {
 	/**
@@ -174,7 +179,7 @@ public class FeedAnimalsScreen
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				JOptionPane.showMessageDialog(feedAnimalsScreenFrame, manager.feedAnimals(itemDisplayList.getSelectedIndex()));
+				JOptionPane.showMessageDialog(feedAnimalsScreenFrame, manager.feedAnimals(itemDisplayList.getSelectedValue().toString()));
 				finishWindow();
 				manager.launchFeedAnimalsScreen();
 				

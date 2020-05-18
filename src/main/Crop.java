@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * Crop class where crops are extended from.
+ * Here the user can grow the crop, get days left to grow and get the sell price.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class Crop implements StoreItem
 {
 

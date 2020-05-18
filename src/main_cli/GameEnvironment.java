@@ -10,6 +10,11 @@ import main.Farmer;
 import main.Item;
 import main.Store;
 
+/**
+ * Game Environment class command line form. This is the main Class of the command line program.
+ * In this screen the user can play the farm simulator game.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class GameEnvironment 
 {
 	
@@ -617,7 +622,17 @@ public class GameEnvironment
 			String itemString = "0. Don't use anything\n"
 					+ "1. Water (free)\n";
 			
-			int itemOption = printOptions(farm.returnItemsString(itemString, "Crop", 1), farm.getItems().size() + 1);
+			ArrayList <Item> availCropItems = new ArrayList<Item>();
+			
+			for (Item item: farm.getItems())
+			{
+				if (item.getType() == "Crop")
+					{
+					availCropItems.add(item);
+					}
+			}
+			
+			int itemOption = printOptions(farm.returnItemsString(itemString, "Crop", 1), availCropItems.size() + 1);
 			
 			if (itemOption != 0)
 			{
@@ -630,7 +645,7 @@ public class GameEnvironment
 				}
 				else//If used an item on the crop
 				{
-					Item itemUsed = farm.getItems().get(itemOption-2);
+					Item itemUsed = availCropItems.get(itemOption-2);
 					farm.tendSpecificCrops(cropName, itemUsed.getBonus());
 					//Remove the item from the users inventory
 					farm.decreaseItems(itemUsed);
@@ -649,12 +664,25 @@ public class GameEnvironment
 	public void feedAnimals() 
 	{
 		System.out.println("Please select the item you would like to feed all of your animals with:");
-		int itemOption = printOptions(farm.returnItemsString("0. Don't feed animals\n", "Animal", 0), farm.getItems().size());
+		
+		ArrayList <Item> availAnimalItems = new ArrayList<Item>();
+		
+		for (Item item: farm.getItems())
+		{
+			if (item.getType() == "Animal")
+				{
+				availAnimalItems.add(item);
+				}
+		}
+		
+		
+		
+		int itemOption = printOptions(farm.returnItemsString("0. Don't feed animals\n", "Animal", 0), availAnimalItems.size());
 		
 		if (itemOption != 0)
 		{
 			
-			Item itemUsed = farm.getItems().get(itemOption-1);
+			Item itemUsed = availAnimalItems.get(itemOption-1);
 			
 			if (farm.increaseHappinessAllAnimals(itemUsed.getBonus())) 
 			{

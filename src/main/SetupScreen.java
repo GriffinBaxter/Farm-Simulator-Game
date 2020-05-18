@@ -14,6 +14,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
+/**
+ * Setup screen class.
+ * In this screen the user sets up their farm using a digital interface.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class SetupScreen 
 {
 

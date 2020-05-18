@@ -17,6 +17,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
+/**
+ * Store screen class.
+ * In this screen the user buys crops, animals and items using a digital interface.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class StoreScreen 
 {
 

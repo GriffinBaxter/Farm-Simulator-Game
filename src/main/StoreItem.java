@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * Store Item interface.
+ * This interface specifies what methods classes with StoreItem implemented should have. These classes are Crop, Animal and Item.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public interface StoreItem 
 {
 

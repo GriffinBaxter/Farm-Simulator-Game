@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * Farmer class where the users farmer is.
+ * Here the users farmer gets set up and where the program gets the users age from.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class Farmer 
 {
 

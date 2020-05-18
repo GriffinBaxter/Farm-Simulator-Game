@@ -3,6 +3,11 @@ package main;
 import java.util.ArrayList;
 import java.lang.Math;
 
+/**
+ * Game Environment class. This is the main Class of the program.
+ * In this screen the user can play the farm simulator game.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 public class GameEnvironment 
 {
 	
@@ -172,12 +177,12 @@ public class GameEnvironment
 	}
 	
 	/**
-	 * Tends to all of the crops owned with the specified <code>cropIndex</code> and <code>itemIndex</code>.
+	 * Tends to all of the crops owned with the specified <code>cropIndex</code> and <code>itemName</code>.
 	 * @param cropIndex The crop index
-	 * @param itemIndex The item index
+	 * @param itemName The item name
 	 * @return String identifying the action performed.
 	 */
-	public String tendToCrops(int cropIndex, int itemIndex)
+	public String tendToCrops(int cropIndex, String itemName)
 	{
 		if (actionsPerformed >= 2) 
 		{
@@ -187,14 +192,24 @@ public class GameEnvironment
 		{
 			String cropName = returnCropTypeArray()[cropIndex];
 			actionsPerformed++; //Increase the actions performed by 1 after the player has chosen to tend to their crops
-			if (itemIndex == 0) //Watered crops
+			if (itemName == "Water (free)") //Watered crops
 			{
 				farm.tendSpecificCrops(cropName, 1.0);
 				return "Tended to every " + cropName + " by watering them";
 			}
 			else //If used an item on the crop
 			{
-				Item itemUsed = farm.getItems().get(itemIndex - 1);
+				int count = 0;
+				int index = 0;
+				for (Item item: farm.getItems())
+				{
+					if (item.getName() == itemName)
+						{
+							index = count;
+						}
+					count++;
+				}
+				Item itemUsed = farm.getItems().get(index);
 				farm.tendSpecificCrops(cropName, itemUsed.getBonus());
 				farm.decreaseItems(itemUsed); //Remove the item from the users inventory
 				return "Tended to every " + cropName + " by using " + itemUsed.getName() + " on them";
@@ -203,11 +218,11 @@ public class GameEnvironment
 	}
 	
 	/**
-	 * Feed to all of the animals owned with the item at <code>itemIndex</code>.
-	 * @param itemIndex The item index
+	 * Feed to all of the animals owned with the item <code>itemName</code>.
+	 * @param itemName The name of the item used.
 	 * @return String identifying the action performed.
 	 */
-	public String feedAnimals(int itemIndex)
+	public String feedAnimals(String itemName)
 	{
 		if (actionsPerformed >= 2) 
 		{
@@ -215,7 +230,18 @@ public class GameEnvironment
 		}
 		else 
 		{
-			Item itemUsed = farm.getItems().get(itemIndex + returnCropItemSize());
+			int count = 0;
+			int index = 0;
+			for (Item item: farm.getItems())
+			{
+				if (item.getName() == itemName)
+					{
+						index = count;
+					}
+				count++;
+			}
+			
+			Item itemUsed = farm.getItems().get(index);
 				
 			farm.increaseHappinessAllAnimals(itemUsed.getBonus());
 			actionsPerformed++;
