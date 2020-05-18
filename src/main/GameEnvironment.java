@@ -91,48 +91,6 @@ public class GameEnvironment
 		
 	}
 	
-	
-	
-	/**
-	 * ARCHIVED from printOptions method
-	 * A modular method that takes a String <code>optionString</code> and an int <code>numOptions</code>,
-	 * prints out the <code>optionString</code> and takes in an input of an int from the user
-	 * the optionString must have format: 
-	 * 0. exit
-	 * 1. option1
-	 * 2. option2
-	 * etc.
-	 * the integer inputed by the user must be an option from the <code>optionString</code>,
-	 * if it is not the method will ask again
-     */
-
-	
-	
-	/**
-	 * ARCHIVED from MainGame method
-	 * The main command line application, here the player can control the game and manage their farm.
-	 * Gets an input from the user
-	 */
-	
-	
-	/**
-	 * ARCHIVED from VisitStore method
-	 * The general store in the game.
-	 * The player goes here to buy crops, animals and items.
-	 * Gets an input from the user.
-	 */
-	
-	
-	/**
-	 * ARCHIVED from Purchase method
-	 * Called when the user wants to purchase an item from the store.
-	 * Asks what item the user wants to purchase (can still say they don't want to purchase anything).
-	 * The program then increases the farms ArrayList for crops, animals or items depending on what was brought.
-	 * If the user has no space available then the program outputs a message.
-	 * @param purchaseCategory The Purchase category.
-	 */
-	
-	
 	/**
 	 * A simple function to check whether a string has only alphabetical letters.
 	 * Returns false if it does not.
@@ -219,7 +177,7 @@ public class GameEnvironment
 	 * @param itemIndex The item index
 	 * @return String identifying the action performed.
 	 */
-	public String tendToCrops(int cropIndex, int itemIndex) 
+	public String tendToCrops(int cropIndex, int itemIndex)
 	{
 		if (actionsPerformed >= 2) 
 		{
@@ -249,7 +207,7 @@ public class GameEnvironment
 	 * @param itemIndex The item index
 	 * @return String identifying the action performed.
 	 */
-	public String feedAnimals(int itemIndex) 
+	public String feedAnimals(int itemIndex)
 	{
 		if (actionsPerformed >= 2) 
 		{
@@ -270,7 +228,7 @@ public class GameEnvironment
 	 * a function that allows the user to play with the animals owned, doing this will increase their happiness.
 	 * @return String identifying the action performed.
 	 */
-	public String playWithAnimals() 
+	public String playWithAnimals()
 	{
 		if (actionsPerformed >= 2) 
 		{
@@ -292,7 +250,7 @@ public class GameEnvironment
 	 * it does this by calling the harvestAvailableCrops function in the Farm class.
 	 * @return String identifying the action performed.
 	 */
-	public String harvestCrops() 
+	public String harvestCrops()
 	{
 		if (actionsPerformed >= 2) 
 		{
@@ -315,7 +273,7 @@ public class GameEnvironment
 	 * A function to tend to the farm land. tending to the farm land will increase the number of available slots for planting crops.
 	 * @return String identifying the action performed.
 	 */
-	public String tendFarmLand() 
+	public String tendFarmLand()
 	{
 		if (actionsPerformed >= 2) 
 		{
@@ -375,7 +333,7 @@ public class GameEnvironment
 	/**
 	 * A method to launch the main screen where the user controls the game.
 	 */
-	public void launchMainScreen() 
+	public void launchMainScreen()
 	{
 		mainWindow = new MainScreen(this);
 	}
@@ -383,7 +341,7 @@ public class GameEnvironment
 	/**
 	 * A method to close the main screen
 	 */
-	public void closeMainScreen(MainScreen mainWindow) 
+	public void closeMainScreen(MainScreen mainWindow)
 	{
 		mainWindow.closeWindow();
 	}
@@ -391,7 +349,7 @@ public class GameEnvironment
 	/**
 	 * A method to launch the setup screen where the user sets up the game.
 	 */
-	public void launchSetupScreen() 
+	public void launchSetupScreen()
 	{
 		setupWindow = new SetupScreen(this);
 	}
@@ -399,7 +357,7 @@ public class GameEnvironment
 	/**
 	 * A method to close the setup screen.
 	 */
-	public void closeSetupScreen(SetupScreen setupWindow) 
+	public void closeSetupScreen(SetupScreen setupWindow)
 	{
 		setupWindow.closeWindow();
 		launchMainScreen(); // Only here for closing setup screen, as this is used once.
@@ -408,7 +366,7 @@ public class GameEnvironment
 	/**
 	 * A method to launch the store screen where the user buys crops, animals and items.
 	 */
-	public void launchStoreScreen() 
+	public void launchStoreScreen()
 	{
 		storeWindow = new StoreScreen(this);
 	}
@@ -416,14 +374,14 @@ public class GameEnvironment
 	/**
 	 * A method to close the store screen
 	 */
-	public void closeStoreScreen(StoreScreen storeWindow) 
+	public void closeStoreScreen(StoreScreen storeWindow)
 	{
 		storeWindow.closeWindow();
 	}
 	/**
 	 * A method to launch the tend to crops screen where the user tends to crops by using items.
 	 */
-	public void launchTendCropsScreen() 
+	public void launchTendCropsScreen()
 	{
 		tendCropsWindow = new TendCropsScreen(this);
 	}
@@ -431,7 +389,7 @@ public class GameEnvironment
 	/**
 	 * A method to close the tend to crops screen
 	 */
-	public void closeTendCropsScreen(TendCropsScreen tendCropsWindow) 
+	public void closeTendCropsScreen(TendCropsScreen tendCropsWindow)
 	{
 		tendCropsWindow.closeWindow();
 	}
@@ -439,7 +397,7 @@ public class GameEnvironment
 	/**
 	 * A method to launch the feed animals screen where the user feeds animals by feeding them items.
 	 */
-	public void launchFeedAnimalsScreen() 
+	public void launchFeedAnimalsScreen()
 	{
 		feedAnimalsWindow = new FeedAnimalsScreen(this);
 	}
@@ -447,7 +405,7 @@ public class GameEnvironment
 	/**
 	 * A method to close the feed animals screen
 	 */
-	public void closeFeedAnimalsScreen(FeedAnimalsScreen feedAnimalsWindow) 
+	public void closeFeedAnimalsScreen(FeedAnimalsScreen feedAnimalsWindow)
 	{
 		feedAnimalsWindow.closeWindow();
 	}
@@ -530,7 +488,7 @@ public class GameEnvironment
 	 * Returns the age of the farmer. Used to check the number of.
 	 * @return Age of farmer
 	 */
-	public int returnDays()
+	public int returnDaysPassed()
 	{
 		return farmer.getDaysPassed();
 	}
@@ -548,7 +506,7 @@ public class GameEnvironment
 	 * Returns the actions performed.
 	 * @return current actions performed
 	 */
-	public int getActionsPerformed() 
+	public int getActionsPerformed()
 	{
 		return actionsPerformed;
 	}
@@ -557,7 +515,7 @@ public class GameEnvironment
 	 * Returns String Array of crops with the crops formated so that each crop has its details and price on one line.
 	 * @return String Array of crops
 	 */
-	public String[] returnCropArray() 
+	public String[] returnCropArray()
 	{
 		ArrayList<String> cropArrayList = new ArrayList<String>();
 		for(Crop crop: store.getCropsForSale()) 
@@ -576,7 +534,7 @@ public class GameEnvironment
 	 * @param purchaseOption Crop the user chose to buy.
 	 * @return String detailing what the user did.
 	 */
-	public String purchaseCrop(int purchaseOption) 
+	public String purchaseCrop(int purchaseOption)
 	{
 		String purchaseCropString = "";
 			if (farm.calculateFreeSpace() > 0) 
@@ -603,7 +561,7 @@ public class GameEnvironment
 	 * Returns String Array of animals with the animals formated so that each animal has its details and price on one line.
 	 * @return String Array of animals.
 	 */
-	public String[] returnAnimalArray() 
+	public String[] returnAnimalArray()
 	{
 		ArrayList<String> animalArrayList = new ArrayList<String>();
 		for(Animal animal: store.getAnimalsForSale()) 
@@ -621,7 +579,7 @@ public class GameEnvironment
 	 * @param purchaseOption Animal the user chose to buy.
 	 * @return String detailing what the user did.
 	 */
-	public String purchaseAnimal(int purchaseOption) 
+	public String purchaseAnimal(int purchaseOption)
 	{
 		String purchaseAnimalString = "";
 			if (farm.getMoney() < store.getAnimalsForSale().get(purchaseOption).getPurchasePrice()) 
@@ -640,7 +598,7 @@ public class GameEnvironment
 	 * Returns String Array of items with the items formated so that each item has its details and price on one line.
 	 * @return String Array of items
 	 */
-	public String[] returnItemArray() 
+	public String[] returnItemArray()
 	{
 		ArrayList<String> itemArrayList = new ArrayList<String>();
 		for(Item item: store.getItemsForSale()) 
@@ -667,7 +625,7 @@ public class GameEnvironment
 	 * @param purchaseOption Item the user chose to buy.
 	 * @return String detailing what the user did.
 	 */
-	public String purchaseItem(int purchaseOption) 
+	public String purchaseItem(int purchaseOption)
 	{
 		String purchaseItemString = "";
 		if (farm.getMoney() < store.getItemsForSale().get(purchaseOption).getPurchasePrice()) 
@@ -695,7 +653,7 @@ public class GameEnvironment
 	 * Returns the ArrayList crops from the farm class.
 	 * @return ArrayList of crops owned.
 	 */
-	public ArrayList<Crop> getCrops() 
+	public ArrayList<Crop> getCrops()
 	{
 		return farm.getCrops();
 	}
@@ -704,7 +662,7 @@ public class GameEnvironment
 	 * Returns the ArrayList animals from the farm class.
 	 * @return ArrayList of animals owned.
 	 */
-	public ArrayList<Animal> getAnimals() 
+	public ArrayList<Animal> getAnimals()
 	{
 		return farm.getAnimals();
 	}
@@ -713,7 +671,7 @@ public class GameEnvironment
 	 * Returns the number of items the user has that have the type "Crop".
 	 * @return integer of the number of items of type "Crop".
 	 */
-	public int returnCropItemSize() 
+	public int returnCropItemSize()
 	{
 		int size = 0;
 		for (Item item: farm.getItems()) 
@@ -730,7 +688,7 @@ public class GameEnvironment
 	 * Returns the number of items the user has that have the type "Animal".
 	 * @return Integer of the number of items of type "Animal".
 	 */
-	public int returnAnimalItemSize() 
+	public int returnAnimalItemSize()
 	{
 		int size = 0;
 		for (Item item: farm.getItems()) 

@@ -121,7 +121,7 @@ public class MainScreen
 		freeCropSpaceLabel.setBounds(441, 43, 237, 24);
 		headerPanel.add(freeCropSpaceLabel);
 		
-		JLabel dayLabel = new JLabel("Day: " + manager.returnDays() + " out of " + manager.getNumDays());
+		JLabel dayLabel = new JLabel("Day: " + manager.returnDaysPassed() + " out of " + manager.getNumDays());
 		dayLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		dayLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dayLabel.setBounds(898, 43, 185, 24);
