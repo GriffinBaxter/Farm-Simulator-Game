@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Here the user can get set the farm type, tend to their farm and tend to their crops.
  * @author Griffin Baxter and Rutger van Kruiningen
  */
-public class Farm extends GameEnvironment
+public class Farm
 {
 	
 	/**
@@ -170,7 +170,7 @@ public class Farm extends GameEnvironment
 	
 	/**
 	 * Returns the crops the farm currently has planted from the crops ArrayList.
-	 * @returns An ArrayList of crops owned.
+	 * @return An ArrayList of crops owned.
 	 */
 	public ArrayList<Crop> getCrops() 
 	{
@@ -179,7 +179,7 @@ public class Farm extends GameEnvironment
 	
 	/**
 	 * Returns the animals the farm currently owns from the animals ArrayList.
-	 * @returns An ArrayList of animals owned.
+	 * @return An ArrayList of animals owned.
 	 */
 	public ArrayList<Animal> getAnimals() 
 	{
@@ -188,7 +188,7 @@ public class Farm extends GameEnvironment
 	
 	/**
 	 * Returns the items the farm currently owns from the items ArrayList.
-	 * @returns An ArrayList of items owned.
+	 * @return An ArrayList of items owned.
 	 */
 	public ArrayList<Item> getItems() 
 	{

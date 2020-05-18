@@ -40,21 +40,19 @@ public class Store
 		
 		
 		//Animals
-		animalsForSale.add(new Animal("Sheep", 30.0, initAnimalHappiness, 20.0));
-		animalsForSale.add(new Animal("Cow", 50.0, initAnimalHappiness, 70.0));
-		animalsForSale.add(new Animal("Goat", 25.0, initAnimalHappiness, 30.0));
-	
+		animalsForSale.add(new Sheep(initAnimalHappiness));
+		animalsForSale.add(new Cow(initAnimalHappiness));
+		animalsForSale.add(new Goat(initAnimalHappiness));
 		
 		//Items
 		//The bonus for crops is an increase in the days grown.
-		itemsForSale.add(new Item("Organic Fertiliser", "Crop", 10.0, 2.0));
-		itemsForSale.add(new Item("Inorganic Fertiliser", "Crop", 5.0, 1.0));
-		itemsForSale.add(new Item("Compost", "Crop", 100.0, 3.0));
+		itemsForSale.add(new OrganicFertiliser());
+		itemsForSale.add(new InorganicFertiliser());
+		itemsForSale.add(new Compost());
 		//The bonus for Animals is health given from food.
-		itemsForSale.add(new Item("Apples", "Animal", 2.0, 0.2));
-		itemsForSale.add(new Item("Hay Bales", "Animal", 10.0, 0.4));
-		itemsForSale.add(new Item("Lucerne", "Animal", 20.0, 0.6));
-		//5 others
+		itemsForSale.add(new Apples());
+		itemsForSale.add(new HayBales());
+		itemsForSale.add(new Lucerne());
 	}
 	
 	/**
