@@ -66,7 +66,7 @@ public class Crop implements StoreItem
 	 * This is done by checking if the <code>daysGrown</code> is greater than or equal to <code>daysToGrow</code>.
 	 * @return true if the crop can be harvested, false otherwise.
 	 */
-	public Boolean canHarvest() 
+	public boolean canHarvest() 
 	{
 		if (daysGrown >= daysToGrow)
 		{

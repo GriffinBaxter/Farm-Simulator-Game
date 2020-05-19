@@ -79,7 +79,7 @@ public class Item implements StoreItem
 	 * Returns the bonus given by the item.
 	 * @return The bonus of item.
 	 */
-	public Double getBonus()
+	public double getBonus()
 	{
 		return bonus;
 	}

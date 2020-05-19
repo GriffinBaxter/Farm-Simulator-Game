@@ -66,7 +66,7 @@ public class Animal implements StoreItem
 	 * Calculates and returns the daily profit of an animal by multiplying its daily money made by its happiness and health, then returns it. This is called at the end of each day.
 	 * @return The animal's daily profit.
 	 */
-	public Double getDailyProfit()
+	public double getDailyProfit()
 	{
 		return happiness * health * dailyMoneyMade;
 	}
@@ -109,7 +109,7 @@ public class Animal implements StoreItem
 	 * Returns the happiness of an animal.
 	 * @return The animal's happiness.
 	 */
-	public Double getHappiness() {
+	public double getHappiness() {
 		return happiness;
 	}
 	
