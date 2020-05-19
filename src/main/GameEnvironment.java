@@ -90,7 +90,23 @@ public class GameEnvironment
 			setupWindow.setWarningText("");
 			farmer = new Farmer(farmerName, 1, farmerAge); // First day
 			farm = new Farm(farmName, farmType);
-			store = farm.getStore();
+			//Create store
+			if (farmType == "Normal") 
+			{
+				store = new Store(1.1); // Average animal happiness
+			}
+			else if (farmType == "Rich") 
+			{
+				store = new Store(1.0); // Low animal happiness
+			}
+			else if (farmType == "Happy") 
+			{
+				store = new Store(1.2); // High animal happiness
+			}
+			else if (farmType == "Large") 
+			{
+				store = new Store(1.0); // Low animal happiness
+			}
 			closeSetupScreen(setupWindow);
 		}
 		
@@ -141,7 +157,7 @@ public class GameEnvironment
 	 */
 	public String[] returnCropTypeArray() 
 	{
-		ArrayList<Crop> differentCrops = farm.returnDifferentCropsOwned();
+		ArrayList<Crop> differentCrops = returnDifferentCropsOwned();
 		ArrayList<String> differentCropNames = new ArrayList<String>();
 		for(Crop crop: differentCrops) 
 		{
@@ -725,6 +741,26 @@ public class GameEnvironment
 			}
 		}
 		return size;
+	}
+	
+	/**
+	 * Returns the different types of crops owned by their Name.
+	 * @return Crop ArrayList of crops.
+	 */
+	public ArrayList<Crop> returnDifferentCropsOwned()
+	{
+		ArrayList<Crop> differentCrops = new ArrayList<Crop>();
+		for(Crop crop: store.getCropsForSale())
+		{
+			for(Crop cropCheck: farm.getCrops()) 
+			{
+				if (crop.getName() == cropCheck.getName() && !differentCrops.contains(crop))
+				{
+					differentCrops.add(crop);
+				}
+			}
+		}
+		return differentCrops;
 	}
 	
 	/**

@@ -202,7 +202,23 @@ public class GameEnvironment
 		
 		farmer = new Farmer(farmerName, 1, 20); // First day, Default age is 20
 		farm = new Farm(farmName, farmType);
-		store = farm.getStore();
+		//Create store
+		if (farmType == "Normal") 
+		{
+			store = new Store(1.1); // Average animal happiness
+		}
+		else if (farmType == "Rich") 
+		{
+			store = new Store(1.0); // Low animal happiness
+		}
+		else if (farmType == "Happy") 
+		{
+			store = new Store(1.2); // High animal happiness
+		}
+		else if (farmType == "Large") 
+		{
+			store = new Store(1.0); // Low animal happiness
+		}
 		
 	}
 	
@@ -613,7 +629,7 @@ public class GameEnvironment
 	public void tendToCrops()
 	{
 		System.out.println("Please select the type of crop you would like to tend to:");
-		ArrayList<Crop> differentCrops = farm.returnDifferentCropsOwned();
+		ArrayList<Crop> differentCrops = returnDifferentCropsOwned();
 		int tendOption = printOptions(farm.returnCropsString("0. Don't tend to anything\n", differentCrops), farm.getCrops().size());
 		if (tendOption != 0)
 		{
@@ -783,6 +799,26 @@ public class GameEnvironment
 				+ farmer.getFarmerName() + profitString
 				+ "Total Score: " + Math.round(score) + "\n" //rounds score to 0dp
 				+ "Score is able to be increased by the profit, the healthiness and happiness of animals, the percentage of crop slots utilised, and by choosing a lower number of days!");
+	}
+	
+	/**
+	 * Returns the different types of crops owned by their Name.
+	 * @return Crop ArrayList of crops.
+	 */
+	public ArrayList<Crop> returnDifferentCropsOwned()
+	{
+		ArrayList<Crop> differentCrops = new ArrayList<Crop>();
+		for(Crop crop: store.getCropsForSale())
+		{
+			for(Crop cropCheck: farm.getCrops()) 
+			{
+				if (crop.getName() == cropCheck.getName() && !differentCrops.contains(crop))
+				{
+					differentCrops.add(crop);
+				}
+			}
+		}
+		return differentCrops;
 	}
 	
 	/**

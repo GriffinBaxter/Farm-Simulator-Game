@@ -15,11 +15,6 @@ public class Farm
 	private String farmName;
 	
 	/**
-	 * Store class.
-	 */
-	private Store store;
-	
-	/**
 	 * Crops owned ArrayList, gets filled with Crops.
 	 */
 	private ArrayList<Crop> crops = new ArrayList<Crop>();
@@ -62,16 +57,6 @@ public class Farm
     }
 	
 	/**
-	 * Returns the store class, Called from the GameEnvironment Class.
-	 * @return The Store Class.
-	 */
-	public Store getStore()
-	{
-		return store;
-	}
-	
-	
-	/**
 	 * Sets the farm type from the <code>type</code> String, and uses if statements to set the farm type.
 	 * @param type Type of the farm.
 	 */
@@ -81,25 +66,21 @@ public class Farm
 		{
 			initMoney = 150;
 			cropSpace = 10;
-			store = new Store(1.1); // Average animal happiness
 		}
 		else if (type == "Rich") 
 		{
 			initMoney = 200;
 			cropSpace = 10;
-			store = new Store(1.0); // Low animal happiness
 		}
 		else if (type == "Happy") 
 		{
 			initMoney = 100;
 			cropSpace = 10;
-			store = new Store(1.2); // High animal happiness
 		}
 		else if (type == "Large") 
 		{
 			initMoney = 100;
 			cropSpace = 20;
-			store = new Store(1.0); // Low animal happiness
 		}
 		money = initMoney;	
 	}
@@ -411,27 +392,6 @@ public class Farm
 			}
 		}
 		return itemString;
-	}
-	
-	
-	/**
-	 * Returns the different types of crops owned by their Name.
-	 * @return Crop ArrayList of crops.
-	 */
-	public ArrayList<Crop> returnDifferentCropsOwned()
-	{
-		ArrayList<Crop> differentCrops = new ArrayList<Crop>();
-		for(Crop crop: store.getCropsForSale())
-		{
-			for(Crop cropCheck: crops) 
-			{
-				if (crop.getName() == cropCheck.getName() && !differentCrops.contains(crop))
-				{
-					differentCrops.add(crop);
-				}
-			}
-		}
-		return differentCrops;
 	}
 	
 }
