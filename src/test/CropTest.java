@@ -1,38 +1,25 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import main.Crop;
 
-class CropTest {
+class CropTest
+{
 	
 	private Crop testCrop;
-	
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
 
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() throws Exception
+	{
 		testCrop = new Crop("Test Crop", 10.0, 20.0, 2); // Test Crop, $10 purchase price, $20 sell price, 2 days to grow
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-
 	@Test
-	final void testCanHarvest() {
+	final void testCanHarvest()
+	{
 		assertFalse(testCrop.canHarvest());
 		testCrop.grow();
 		assertFalse(testCrop.canHarvest());
@@ -41,7 +28,8 @@ class CropTest {
 	}
 
 	@Test
-	final void testGrow() {
+	final void testGrow()
+	{
 		assertEquals(0, testCrop.getDaysGrown());
 		testCrop.grow();
 		assertEquals(1, testCrop.getDaysGrown());
@@ -50,7 +38,8 @@ class CropTest {
 	}
 
 	@Test
-	final void testTend() {
+	final void testTend()
+	{
 		assertEquals(0, testCrop.getDaysGrown());
 		testCrop.tend(2);
 		assertEquals(2, testCrop.getDaysGrown());

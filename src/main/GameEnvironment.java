@@ -259,7 +259,7 @@ public class GameEnvironment
 			
 			Item itemUsed = farm.getItems().get(index);
 				
-			farm.increaseHappinessAllAnimals(itemUsed.getBonus());
+			farm.increaseHealthAllAnimals(itemUsed.getBonus());
 			actionsPerformed++;
 			farm.decreaseItems(itemUsed); //Remove the item from the users inventory
 			return "Fed every animal with " + itemUsed.getName();
@@ -276,7 +276,7 @@ public class GameEnvironment
 		{
 			return "You cannot do this as you have no actions left";
 		}
-		else if (farm.playWithAllAnimals()) 
+		else if (farm.increaseHappinessAllAnimals()) 
 		{
 			actionsPerformed++;
 			return "Played with every animal (and increased their happiness by doing so)";
@@ -327,7 +327,7 @@ public class GameEnvironment
 			String returnString = "Farm land has been tended to, 1 more crop is able to be grown";
 			if (farm.tendFarm()) 
 			{
-				returnString += ", plus all of your animals now have increased health!";
+				returnString += ", plus all of your animals now have increased happiness!";
 			}
 			return returnString;
 		}

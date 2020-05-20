@@ -85,19 +85,18 @@ public class Farm
 		money = initMoney;	
 	}
 	
-	
-	
 	/**
-	 *	Tends to the Farm to make animals happier and increase space available, returns true if there are animals to increase their health, otherwise returns false
+	 * Tends to the Farm to make animals happier and increase space available, returns true if there are animals to increase their happiness, otherwise returns false.
+	 * @return true if there are animals, false otherwise.
 	 */
 	public boolean tendFarm()
 	{
 		cropSpace++;
-		return increaseHappinessAllAnimals(0.1);
+		return increaseHappinessAllAnimals();
 	}
 	
 	/**
-	 *	Calculates the available free space
+	 * Calculates the available free space
 	 */
 	public int calculateFreeSpace() 
 	{
@@ -263,7 +262,7 @@ public class Farm
 	 * @param healthToIncrease The health increase for the animal.
 	 * @return true if there are animals, false otherwise.
 	 */
-	public boolean increaseHappinessAllAnimals(double healthToIncrease)
+	public boolean increaseHealthAllAnimals(double healthToIncrease)
 	{
 		int index = 0;
 		for(Animal animal: animals)
@@ -285,7 +284,7 @@ public class Farm
 	 * Increases happiness of all animals, returns true if there are animals to play with and returns false if there are no animals.
 	 * @return true if there are animals, false otherwise.
 	 */
-	public boolean playWithAllAnimals()
+	public boolean increaseHappinessAllAnimals()
 	{
 		int index = 0;
 		for(Animal animal: animals)

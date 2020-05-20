@@ -700,7 +700,7 @@ public class GameEnvironment
 			
 			Item itemUsed = availAnimalItems.get(itemOption-1);
 			
-			if (farm.increaseHappinessAllAnimals(itemUsed.getBonus())) 
+			if (farm.increaseHealthAllAnimals(itemUsed.getBonus())) 
 			{
 				actionsPerformed++;
 				farm.decreaseItems(itemUsed); //Remove the item from the users inventory
@@ -718,7 +718,7 @@ public class GameEnvironment
 	 */
 	public void playWithAnimals() 
 	{
-		if (farm.playWithAllAnimals()) 
+		if (farm.increaseHappinessAllAnimals()) 
 		{
 			actionsPerformed++;
 			System.out.println("Played with every animal (and increased their happiness by doing so)");
@@ -757,7 +757,7 @@ public class GameEnvironment
 		System.out.print("Farm land has been tended to, 1 more crop is able to be grown");
 		if (farm.tendFarm()) 
 		{
-			System.out.print(", plus all of your animals now have increased health!");
+			System.out.print(", plus all of your animals now have increased happiness!");
 		}
 		System.out.println();
 	}
