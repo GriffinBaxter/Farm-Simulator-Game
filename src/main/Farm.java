@@ -62,22 +62,22 @@ public class Farm
 	 */
 	public void setFarmType(String type)
 	{
-		if (type == "Normal") 
+		if (type == "Normal") // Normal Farm
 		{
 			initMoney = 150;
 			cropSpace = 10;
 		}
-		else if (type == "Rich") 
+		else if (type == "Rich") // Rich Farm
 		{
 			initMoney = 200;
 			cropSpace = 10;
 		}
-		else if (type == "Happy") 
+		else if (type == "Happy") // Happy Farm
 		{
 			initMoney = 100;
 			cropSpace = 10;
 		}
-		else if (type == "Large") 
+		else // Large Farm
 		{
 			initMoney = 100;
 			cropSpace = 20;

@@ -38,6 +38,8 @@ class CropTest
 		assertFalse(testCrop.canHarvest());
 		testCrop.grow();
 		assertTrue(testCrop.canHarvest());
+		testCrop.grow();
+		assertTrue(testCrop.canHarvest());
 	}
 
 	/**

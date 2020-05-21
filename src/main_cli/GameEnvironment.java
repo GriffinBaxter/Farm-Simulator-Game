@@ -827,7 +827,7 @@ public class GameEnvironment
 	 */
 	public static void main(String[] args) 
 	{
-		System.out.println("SENG 201 Farm Simulator Project - By Griffin Baxter and Rutger van Kruiningen\n");
+		System.out.println("Welcome to Farm Simulator!\n");
 		GameEnvironment game = new GameEnvironment();
 		game.startGame();
 		game.mainGame();
