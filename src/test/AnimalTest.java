@@ -6,17 +6,30 @@ import org.junit.jupiter.api.Test;
 
 import main.Animal;
 
+/**
+ * Test for the main Animal class.
+ * @author Griffin Baxter and Rutger van Kruiningen
+ */
 class AnimalTest
 {
 
+	/**
+	 * Animal for the tests.
+	 */
 	private Animal testAnimal;
 
+	/**
+	 * Constructs a new animal for every test.
+	 */
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		testAnimal = new Animal("Test Animal", 10.0, 1.0, 10.0); // Test Animal, $10 initial purchase price, 1.0 initial happiness, $10 initial daily money made
 	}
 
+	/**
+	 * Test for the increaseHappiness method of the Animal class.
+	 */
 	@Test
 	final void testIncreaseHappiness()
 	{
@@ -25,6 +38,9 @@ class AnimalTest
 		assertEquals(1.1, testAnimal.getHappiness());
 	}
 
+	/**
+	 * Test for the increaseHealth method of the Animal class.
+	 */
 	@Test
 	final void testIncreaseHealth()
 	{
