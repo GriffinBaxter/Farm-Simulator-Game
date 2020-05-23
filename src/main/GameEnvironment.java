@@ -47,26 +47,6 @@ public class GameEnvironment
 	private SetupScreen setupWindow;
 	
 	/**
-	 * The main window.
-	 */
-	private MainScreen mainWindow;
-	
-	/**
-	 * The store window.
-	 */
-	private StoreScreen storeWindow;
-	
-	/**
-	 * The tend to crops window.
-	 */
-	private TendCropsScreen tendCropsWindow;
-	
-	/**
-	 * The feed animals window.
-	 */
-	private FeedAnimalsScreen feedAnimalsWindow;
-	
-	/**
 	 * Starts a new game by getting number of days, farmer name, farm type, and farm name.
 	 * @param initNumDays the number of days the user wants to play for.
 	 * @param farmerName the name of the farmer.
@@ -329,7 +309,7 @@ public class GameEnvironment
 	 */
 	public void launchMainScreen()
 	{
-		mainWindow = new MainScreen(this);
+		new MainScreen(this);
 	}
 	
 	/**
@@ -362,7 +342,7 @@ public class GameEnvironment
 	 */
 	public void launchStoreScreen()
 	{
-		storeWindow = new StoreScreen(this);
+		new StoreScreen(this);
 	}
 	
 	/**
@@ -377,7 +357,7 @@ public class GameEnvironment
 	 */
 	public void launchTendCropsScreen()
 	{
-		tendCropsWindow = new TendCropsScreen(this);
+		new TendCropsScreen(this);
 	}
 	
 	/**
@@ -393,7 +373,7 @@ public class GameEnvironment
 	 */
 	public void launchFeedAnimalsScreen()
 	{
-		feedAnimalsWindow = new FeedAnimalsScreen(this);
+		new FeedAnimalsScreen(this);
 	}
 	
 	/**
