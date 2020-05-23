@@ -39,17 +39,17 @@ public class StoreScreen
 	/**
 	 * List of crops in a Jlist.
 	 */
-	private JList cropsList;
+	private JList<Object> cropsList;
 	
 	/**
 	 * List of animals in a Jlist.
 	 */
-	private JList animalsList;
+	private JList<Object> animalsList;
 	
 	/**
 	 * List of items in a Jlist.
 	 */
-	private JList itemsList;
+	private JList<Object> itemsList;
 	
 	/**
 	 * Label that displays if a crop has been purchased.
@@ -132,6 +132,7 @@ public class StoreScreen
 	/**
 	 * Initialise the contents of the frame.
 	 */
+	@SuppressWarnings("serial")
 	private void initialize() 
 	{
 		storeFrame = new JFrame();
@@ -231,23 +232,23 @@ public class StoreScreen
 		selectCropLabel.setBounds(10, 47, 300, 22);
 		cropsForSalePanel.add(selectCropLabel);
 		selectCropLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		selectCropLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectCropLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel selectCropLabel2 = new JLabel("on the right, then press the buy button below");
 		selectCropLabel2.setBounds(10, 68, 300, 22);
 		cropsForSalePanel.add(selectCropLabel2);
 		selectCropLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-		selectCropLabel2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectCropLabel2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JScrollPane cropsScrollPane = new JScrollPane();
 		cropsScrollPane.setBounds(320, 11, 834, 141);
 		cropsForSalePanel.add(cropsScrollPane);
 		
-		cropsList = new JList();
+		cropsList = new JList<Object>();
 		cropsScrollPane.setViewportView(cropsList);
 		cropsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		cropsList.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		cropsList.setModel(new AbstractListModel() 
+		cropsList.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		cropsList.setModel(new AbstractListModel<Object>() 
 		{
 			String[] values = manager.returnCropArray();
 			public int getSize() 
@@ -307,13 +308,13 @@ public class StoreScreen
 		
 		JLabel selectAnimalLabel = new JLabel("Select which animal you would like to purchase");
 		selectAnimalLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		selectAnimalLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectAnimalLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		selectAnimalLabel.setBounds(10, 47, 300, 22);
 		animalsForSalePanel.add(selectAnimalLabel);
 		
 		JLabel selectAnimalLabel2 = new JLabel("on the right, then press the buy button below");
 		selectAnimalLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-		selectAnimalLabel2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectAnimalLabel2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		selectAnimalLabel2.setBounds(10, 68, 300, 22);
 		animalsForSalePanel.add(selectAnimalLabel2);
 		
@@ -321,11 +322,11 @@ public class StoreScreen
 		animalsScrollPane.setBounds(320, 11, 834, 126);
 		animalsForSalePanel.add(animalsScrollPane);
 		
-		animalsList = new JList();
+		animalsList = new JList<Object>();
 		animalsScrollPane.setViewportView(animalsList);
 		animalsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		animalsList.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		animalsList.setModel(new AbstractListModel() 
+		animalsList.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		animalsList.setModel(new AbstractListModel<Object>() 
 		{
 			String[] values = manager.returnAnimalArray();
 			public int getSize() 
@@ -385,13 +386,13 @@ public class StoreScreen
 		
 		JLabel selectItemLabel = new JLabel("Select which item you would like to purchase");
 		selectItemLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		selectItemLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectItemLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		selectItemLabel.setBounds(10, 47, 300, 22);
 		itemsForSalePanel.add(selectItemLabel);
 		
 		JLabel selectItemLabel2 = new JLabel("on the right, then press the buy button below");
 		selectItemLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-		selectItemLabel2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectItemLabel2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		selectItemLabel2.setBounds(10, 68, 300, 22);
 		itemsForSalePanel.add(selectItemLabel2);
 		
@@ -399,11 +400,11 @@ public class StoreScreen
 		itemsScrollPane.setBounds(320, 11, 834, 141);
 		itemsForSalePanel.add(itemsScrollPane);
 		
-		itemsList = new JList();
+		itemsList = new JList<Object>();
 		itemsScrollPane.setViewportView(itemsList);
 		itemsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		itemsList.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		itemsList.setModel(new AbstractListModel() 
+		itemsList.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		itemsList.setModel(new AbstractListModel<Object>() 
 		{
 			String[] values = manager.returnItemArray();
 			public int getSize() 

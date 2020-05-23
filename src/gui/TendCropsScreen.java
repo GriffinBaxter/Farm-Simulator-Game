@@ -96,6 +96,7 @@ public class TendCropsScreen
 	/**
 	 * Initialise the contents of the frame.
 	 */
+	@SuppressWarnings("serial")
 	private void initialize() 
 	{
 		tendCropsScreenFrame = new JFrame();
@@ -149,7 +150,7 @@ public class TendCropsScreen
 		
 		JLabel selectCropLabel2 = new JLabel("Select the type of crop you would like to tend to:");
 		selectCropLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-		selectCropLabel2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		selectCropLabel2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		selectCropLabel2.setBounds(10, 47, 316, 22);
 		tendCropsPanel.add(selectCropLabel2);
 		
@@ -157,10 +158,10 @@ public class TendCropsScreen
 		selectAnimalScrollPane.setBounds(10, 80, 316, 409);
 		tendCropsPanel.add(selectAnimalScrollPane);
 		
-		JList cropDisplayList = new JList();
+		JList<Object> cropDisplayList = new JList<Object>();
 		cropDisplayList.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		cropDisplayList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		cropDisplayList.setModel(new AbstractListModel() 
+		cropDisplayList.setModel(new AbstractListModel<Object>() 
 		{
 			String[] values = manager.returnCropTypeArray();
 			public int getSize() 
@@ -183,17 +184,17 @@ public class TendCropsScreen
 		
 		JLabel selectItemLabel2 = new JLabel("Select the item you would like to tend all of that crop type with:");
 		selectItemLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-		selectItemLabel2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		selectItemLabel2.setBounds(386, 47, 394, 22);
+		selectItemLabel2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		selectItemLabel2.setBounds(376, 47, 415, 22);
 		tendCropsPanel.add(selectItemLabel2);
 		
 		JScrollPane selectItemScrollPane = new JScrollPane();
 		selectItemScrollPane.setBounds(425, 80, 316, 409);
 		tendCropsPanel.add(selectItemScrollPane);
 		
-		JList itemDisplayList = new JList();
+		JList<Object> itemDisplayList = new JList<Object>();
 		itemDisplayList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		itemDisplayList.setModel(new AbstractListModel() 
+		itemDisplayList.setModel(new AbstractListModel<Object>() 
 		{
 			String[] values = manager.returnCurrentItemsArray("Crop");
 			public int getSize() 

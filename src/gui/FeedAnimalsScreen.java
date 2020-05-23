@@ -96,6 +96,7 @@ public class FeedAnimalsScreen
 	/**
 	 * Initialise the contents of the frame.
 	 */
+	@SuppressWarnings("serial")
 	private void initialize() 
 	{
 		feedAnimalsScreenFrame = new JFrame();
@@ -149,18 +150,18 @@ public class FeedAnimalsScreen
 		
 		JLabel selectItemLabel2 = new JLabel("Select the item you would like to feed all of your animals with:");
 		selectItemLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-		selectItemLabel2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		selectItemLabel2.setBounds(386, 47, 394, 22);
+		selectItemLabel2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		selectItemLabel2.setBounds(376, 47, 415, 22);
 		feedAnimalsPanel.add(selectItemLabel2);
 		
 		JScrollPane selectItemScrollPane = new JScrollPane();
 		selectItemScrollPane.setBounds(425, 80, 316, 409);
 		feedAnimalsPanel.add(selectItemScrollPane);
 		
-		JList itemDisplayList = new JList();
+		JList<Object> itemDisplayList = new JList<Object>();
 		itemDisplayList.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		itemDisplayList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		itemDisplayList.setModel(new AbstractListModel() 
+		itemDisplayList.setModel(new AbstractListModel<Object>() 
 		{
 			String[] values = manager.returnCurrentItemsArray("Animal");
 			public int getSize() 

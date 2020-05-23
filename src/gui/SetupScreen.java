@@ -155,7 +155,7 @@ public class SetupScreen
 		
 		JLabel nameWarningLabel = new JLabel("(must be between 3 and 15 characters and must not include numbers or special characters)");
 		nameWarningLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		nameWarningLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		nameWarningLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		nameWarningLabel.setBounds(10, 153, 586, 27);
 		setupScreenFrame.getContentPane().add(nameWarningLabel);
 		
@@ -176,28 +176,28 @@ public class SetupScreen
 		normalFarmRadioButton.setActionCommand("Normal");
 		farmTypeButtonGroup.add(normalFarmRadioButton);
 		normalFarmRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		normalFarmRadioButton.setBounds(220, 316, 744, 27);
+		normalFarmRadioButton.setBounds(190, 316, 875, 27);
 		setupScreenFrame.getContentPane().add(normalFarmRadioButton);
 		
 		JRadioButton richFarmRadioButton = new JRadioButton("Rich farm: $200 starting money, low animal happiness, 10 crop spaces.");
 		richFarmRadioButton.setActionCommand("Rich");
 		farmTypeButtonGroup.add(richFarmRadioButton);
 		richFarmRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		richFarmRadioButton.setBounds(220, 346, 744, 27);
+		richFarmRadioButton.setBounds(190, 346, 875, 27);
 		setupScreenFrame.getContentPane().add(richFarmRadioButton);
 		
 		JRadioButton happyFarmRadioButton = new JRadioButton("Happy farm: $100 starting money, high animal happiness, 10 crop spaces.");
 		happyFarmRadioButton.setActionCommand("Happy");
 		farmTypeButtonGroup.add(happyFarmRadioButton);
 		happyFarmRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		happyFarmRadioButton.setBounds(220, 376, 744, 27);
+		happyFarmRadioButton.setBounds(190, 376, 875, 27);
 		setupScreenFrame.getContentPane().add(happyFarmRadioButton);
 		
 		JRadioButton largeFarmRadioButton = new JRadioButton("Large farm: $100 starting money, low animal happiness, but hey, at least it has 20 crop spaces!");
 		largeFarmRadioButton.setActionCommand("Large");
 		farmTypeButtonGroup.add(largeFarmRadioButton);
 		largeFarmRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		largeFarmRadioButton.setBounds(220, 406, 744, 27);
+		largeFarmRadioButton.setBounds(190, 406, 875, 27);
 		setupScreenFrame.getContentPane().add(largeFarmRadioButton);
 		
 		JLabel farmNameLabel = new JLabel("What is your farm's name?");
@@ -255,7 +255,7 @@ public class SetupScreen
 		
 		JLabel farmNameWarningLabel = new JLabel("(must be between 3 and 15 characters and must not include numbers or special characters)");
 		farmNameWarningLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		farmNameWarningLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		farmNameWarningLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		farmNameWarningLabel.setBounds(10, 483, 586, 27);
 		setupScreenFrame.getContentPane().add(farmNameWarningLabel);
 	}

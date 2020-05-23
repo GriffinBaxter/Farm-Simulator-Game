@@ -116,21 +116,21 @@ public class MainScreen
 		headerPanel.add(farmStatusLabel);
 		
 		JLabel currentMoneyLabel = new JLabel("Current Money: $" + manager.returnMoneyString());
-		currentMoneyLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		currentMoneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		currentMoneyLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		currentMoneyLabel.setBounds(10, 43, 347, 24);
+		currentMoneyLabel.setBounds(409, 43, 347, 24);
 		headerPanel.add(currentMoneyLabel);
 		
 		JLabel freeCropSpaceLabel = new JLabel("Free crop space: " + manager.returnFreeCropSpace());
 		freeCropSpaceLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		freeCropSpaceLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		freeCropSpaceLabel.setBounds(441, 43, 237, 24);
+		freeCropSpaceLabel.setBounds(10, 43, 237, 24);
 		headerPanel.add(freeCropSpaceLabel);
 		
 		JLabel dayLabel = new JLabel("Day: " + manager.returnDaysPassed() + " out of " + manager.getNumDays());
-		dayLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		dayLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		dayLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		dayLabel.setBounds(898, 43, 185, 24);
+		dayLabel.setBounds(969, 43, 185, 24);
 		headerPanel.add(dayLabel);
 		
 		JPanel buttonsPanel = new JPanel();
@@ -187,7 +187,7 @@ public class MainScreen
 		
 		JLabel requireActionsLabel = new JLabel("Require Actions: (" + (2 - manager.getActionsPerformed()) + " remaining)");
 		requireActionsLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		requireActionsLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		requireActionsLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		requireActionsLabel.setBounds(10, 12, 268, 24);
 		actionsRequiredPanel.add(requireActionsLabel);
 		
