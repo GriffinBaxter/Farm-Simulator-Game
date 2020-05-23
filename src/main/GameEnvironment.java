@@ -770,15 +770,6 @@ public class GameEnvironment
 	}
 	
 	/**
-	 * Returns the money available.
-	 * @return the money currently available
-	 */
-	public double getCurrentMoney()
-	{
-		return farm.getMoney();
-	}
-	
-	/**
 	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.
 	 * @param args
 	 */

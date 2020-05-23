@@ -425,6 +425,6 @@ public class StoreScreen
 	 */
 	public void setCurrentMoneyLabel()
 	{
-		CurrentMoneyLabel.setText("Current Money: $" + manager.returnDollarsCents(manager.getCurrentMoney()));
+		CurrentMoneyLabel.setText("Current Money: $" + manager.returnMoneyString());
 	}
 }
