@@ -15,7 +15,7 @@ import main.Store;
  * In this screen the user can play the farm simulator game.
  * @author Griffin Baxter and Rutger van Kruiningen
  */
-public class GameEnvironment 
+public class GameEnvironmentCLI 
 {
 	
 	/**
@@ -807,7 +807,7 @@ public class GameEnvironment
 	public static void main(String[] args) 
 	{
 		System.out.println("Welcome to Farm Simulator!\n");
-		GameEnvironment game = new GameEnvironment();
+		GameEnvironmentCLI game = new GameEnvironmentCLI();
 		game.startGame();
 		game.mainGame();
 
