@@ -65,6 +65,11 @@ public class StoreScreen
 	 * Label that displays if a item has been purchased.
 	 */
 	private JLabel itemMessageLabel;
+	
+	/**
+	 * Label that displays the money available.
+	 */
+	private JLabel CurrentMoneyLabel;
 
 	/**
 	 * Constructor for the store screen. This constructor takes an incoming manager and makes it the manager of the screen.
@@ -141,10 +146,17 @@ public class StoreScreen
 		storeHeaderPanel.setBounds(10, 11, 1164, 78);
 		storeFrame.getContentPane().add(storeHeaderPanel);
 		
+		CurrentMoneyLabel = new JLabel("Current Money: $<dynamic>");
+		setCurrentMoneyLabel();
+		CurrentMoneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		CurrentMoneyLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		CurrentMoneyLabel.setBounds(408, 43, 347, 24);
+		storeHeaderPanel.add(CurrentMoneyLabel);
+		
 		JLabel storeLabel = new JLabel("Store");
 		storeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		storeLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
-		storeLabel.setBounds(469, 11, 226, 56);
+		storeLabel.setBounds(469, 11, 226, 29);
 		storeHeaderPanel.add(storeLabel);
 		
 		JButton goBackButton = new JButton("Go back");
@@ -208,6 +220,7 @@ public class StoreScreen
 					cropMessageLabel.setText("");
 					JOptionPane.showMessageDialog(storeFrame, printMessage);
 				}
+				setCurrentMoneyLabel();
 			}
 		});
 		buyCropButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -285,6 +298,7 @@ public class StoreScreen
 					animalMessageLabel.setText("");
 					JOptionPane.showMessageDialog(storeFrame, message);
 				}
+				setCurrentMoneyLabel();
 			}
 		});
 		buyAnimalButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -362,6 +376,7 @@ public class StoreScreen
 					itemMessageLabel.setText("");
 					JOptionPane.showMessageDialog(storeFrame, message);
 				}
+				setCurrentMoneyLabel();
 			}
 		});
 		buyItemButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -403,5 +418,13 @@ public class StoreScreen
 		itemsList.setSelectedIndex(0);
 		itemsList.setToolTipText("");
 		
+	}
+	
+	/**
+	 * Sets the current money label <code>CurrentMoneyLabel</code> with the amount of money the farm has.
+	 */
+	public void setCurrentMoneyLabel()
+	{
+		CurrentMoneyLabel.setText("Current Money: $" + manager.returnDollarsCents(manager.getCurrentMoney()));
 	}
 }
