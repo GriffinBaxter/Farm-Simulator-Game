@@ -5,7 +5,7 @@ package main;
  * Here the user can increase the animal happiness, increase health and get daily profit.
  * @author Griffin Baxter and Rutger van Kruiningen
  */
-public class Animal implements StoreItem 
+public class Animal implements StoreProduct 
 {
 
 	/**
@@ -63,15 +63,6 @@ public class Animal implements StoreItem
 	}
 	
 	/**
-	 * Calculates and returns the daily profit of an animal by multiplying its daily money made by its happiness and health, then returns it. This is called at the end of each day.
-	 * @return The animal's daily profit.
-	 */
-	public double getDailyProfit()
-	{
-		return happiness * health * dailyMoneyMade;
-	}
-	
-	/**
 	 * Increases the happiness of an animal by 10%.
 	 */
 	public void increaseHappiness()
@@ -86,6 +77,15 @@ public class Animal implements StoreItem
 	public void increaseHealth(double healthToIncrease)
 	{
 		health += healthToIncrease;
+	}
+	
+	/**
+	 * Calculates and returns the daily profit of an animal by multiplying its daily money made by its happiness and health, then returns it. This is called at the end of each day.
+	 * @return The animal's daily profit.
+	 */
+	public double getDailyProfit()
+	{
+		return happiness * health * dailyMoneyMade;
 	}
 	
 	/**

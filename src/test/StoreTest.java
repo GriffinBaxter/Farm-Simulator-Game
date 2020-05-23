@@ -1,18 +1,10 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import main.Store;
-import main.Animal;
-import main.Crop;
-import main.Item;
-
 
 /**
  * Test for the main Store class.
@@ -29,9 +21,9 @@ class StoreTest {
 	 * Constructs a new store with an initialAnimalHappiness of 1.0.
 	 */
 	@BeforeEach
-	void setUp() throws Exception 
+	void setUp()
 	{
-		testStore = new Store(1.0);//New store with 1.0 initialAnimalHappiness
+		testStore = new Store(1.0); //New store with an initial animal happiness of 1.0
 	}
 
 	/**

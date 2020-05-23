@@ -95,7 +95,8 @@ public class GameEnvironment
 			setupWindow.setWarningText("");
 			farmer = new Farmer(farmerName, 1, farmerAge); // First day
 			farm = new Farm(farmName, farmType);
-			//Create store
+			
+			// Create store
 			if (farmType == "Normal") 
 			{
 				store = new Store(1.1); // Average animal happiness
@@ -118,27 +119,6 @@ public class GameEnvironment
 	}
 	
 	/**
-	 * A simple function to check whether a string has only alphabetical letters.
-	 * Returns false if it does not.
-	 * @param name The name being tested for only Alpha characters.
-	 * @return True or false depending on the characters in <code>name</code>
-	 */
-	public boolean isAlpha(String name) 
-	{
-	    return name.matches("[a-zA-Z ]+");
-	}
-	
-	/**
-	 * Returns a double as a string with two decimal places, for use with dollars and cents.
-	 * @param amount The amount of money owning.
-	 * @return String format of a double with 2dp
-	 */
-	public String returnDollarsCents(double amount) 
-	{
-		return String.format("%.2f", amount);
-	}
-	
-	/**
 	 * A function for moving on to the next day, Called when the player sleeps.
 	 * This function increases the farmers age, reduces the actions performed to 0 and grows the crops owned.
 	 * If the farmers age is equal to the number of days set during startup, the finishing sequence begins.
@@ -156,45 +136,12 @@ public class GameEnvironment
 	}
 	
 	/**
-	 * Returns a String array with the name of all of the crops currently owned.
-	 * @return String Array containing names of Animals
-	 * 
+	 * A function for testing if the game can finish or not by returning true if the farmers age is equal to the number of days + 1, the +1 to have the game finish after the numberOfDays day.
+	 * @return true or false depending on the farmers age.
 	 */
-	public String[] returnCropTypeArray() 
+	public boolean gameFinishing()
 	{
-		ArrayList<Crop> differentCrops = returnDifferentCropsOwned();
-		ArrayList<String> differentCropNames = new ArrayList<String>();
-		for(Crop crop: differentCrops) 
-		{
-			differentCropNames.add(crop.getName());
-		}
-		String[] cropArray = differentCropNames.toArray(new String[0]);
-		return cropArray;
-	}
-	
-	/**
-	 * Returns a String array with the name of all of the items currently owned given the correct String <code>itemType</code>.
-	 * @return String Array containing names of items
-	 */
-	public String[] returnCurrentItemsArray(String itemType) 
-	{
-		ArrayList<String> currentItems = new ArrayList<String>();
-		
-		if (itemType == "Crop") 
-		{
-				currentItems.add("Water (free)");
-		}
-		
-		for(Item item: farm.getItems()) 
-		{
-			if (item.getType() == itemType)
-			{
-				currentItems.add(item.getName());
-			}
-		}
-		
-		String[] currentItemsArray = currentItems.toArray(new String[0]);
-		return currentItemsArray;
+		return farmer.getDaysPassed() == numDays + 1;
 	}
 	
 	/**
@@ -212,27 +159,27 @@ public class GameEnvironment
 		else
 		{
 			String cropName = returnCropTypeArray()[cropIndex];
-			actionsPerformed++; //Increase the actions performed by 1 after the player has chosen to tend to their crops
-			if (itemName == "Water (free)") //Watered crops
+			actionsPerformed++;
+			if (itemName == "Water (free)") // Watered crops
 			{
 				farm.tendSpecificCrops(cropName, 1.0);
 				return "Tended to every " + cropName + " by watering them";
 			}
-			else //If used an item on the crop
+			else // If an item was used on the crop
 			{
 				int count = 0;
 				int index = 0;
 				for (Item item: farm.getItems())
 				{
 					if (item.getName() == itemName)
-						{
-							index = count;
-						}
+					{
+						index = count;
+					}
 					count++;
 				}
 				Item itemUsed = farm.getItems().get(index);
 				farm.tendSpecificCrops(cropName, itemUsed.getBonus());
-				farm.decreaseItems(itemUsed); //Remove the item from the users inventory
+				farm.decreaseItems(itemUsed);
 				return "Tended to every " + cropName + " by using " + itemUsed.getName() + " on them";
 			}
 		}
@@ -256,9 +203,9 @@ public class GameEnvironment
 			for (Item item: farm.getItems())
 			{
 				if (item.getName() == itemName)
-					{
-						index = count;
-					}
+				{
+					index = count;
+				}
 				count++;
 			}
 			
@@ -266,7 +213,7 @@ public class GameEnvironment
 				
 			farm.increaseHealthAllAnimals(itemUsed.getBonus());
 			actionsPerformed++;
-			farm.decreaseItems(itemUsed); //Remove the item from the users inventory
+			farm.decreaseItems(itemUsed);
 			return "Fed every animal with " + itemUsed.getName();
 		}
 	}
@@ -407,7 +354,7 @@ public class GameEnvironment
 	public void closeSetupScreen(SetupScreen setupWindow)
 	{
 		setupWindow.closeWindow();
-		launchMainScreen(); // Only here for closing setup screen, as this is used once.
+		launchMainScreen(); // Only here for closing the setup screen, as this is used once.
 	}
 	
 	/**
@@ -455,6 +402,48 @@ public class GameEnvironment
 	public void closeFeedAnimalsScreen(FeedAnimalsScreen feedAnimalsWindow)
 	{
 		feedAnimalsWindow.closeWindow();
+	}
+	
+	/**
+	 * Returns a String array with the name of all of the crops currently owned.
+	 * @return String Array containing names of Animals
+	 * 
+	 */
+	public String[] returnCropTypeArray() 
+	{
+		ArrayList<Crop> differentCrops = returnDifferentCropsOwned();
+		ArrayList<String> differentCropNames = new ArrayList<String>();
+		for(Crop crop: differentCrops) 
+		{
+			differentCropNames.add(crop.getName());
+		}
+		String[] cropArray = differentCropNames.toArray(new String[0]);
+		return cropArray;
+	}
+	
+	/**
+	 * Returns a String array with the name of all of the items currently owned given the correct String <code>itemType</code>.
+	 * @return String Array containing names of items
+	 */
+	public String[] returnCurrentItemsArray(String itemType) 
+	{
+		ArrayList<String> currentItems = new ArrayList<String>();
+		
+		if (itemType == "Crop") 
+		{
+				currentItems.add("Water (free)");
+		}
+		
+		for(Item item: farm.getItems()) 
+		{
+			if (item.getType() == itemType)
+			{
+				currentItems.add(item.getName());
+			}
+		}
+		
+		String[] currentItemsArray = currentItems.toArray(new String[0]);
+		return currentItemsArray;
 	}
 	
 	/**
@@ -538,24 +527,6 @@ public class GameEnvironment
 	public int returnDaysPassed()
 	{
 		return farmer.getDaysPassed();
-	}
-	
-	/**
-	 * Returns the number of days user wants to play for.
-	 * @return Number of days
-	 */
-	public int getNumDays()
-	{
-		return numDays;
-	}
-	
-	/**
-	 * Returns the actions performed.
-	 * @return current actions performed
-	 */
-	public int getActionsPerformed()
-	{
-		return actionsPerformed;
 	}
 	
 	/**
@@ -688,33 +659,6 @@ public class GameEnvironment
 	}
 	
 	/**
-	 * A function for testing if the game can finish or not by returning true if the farmers age is equal to the number of days + 1, the +1 to have the game finish after the numberOfDays day.
-	 * @return true or false depending on the farmers age.
-	 */
-	public boolean gameFinishing()
-	{
-		return farmer.getDaysPassed() == numDays + 1;
-	}
-	
-	/**
-	 * Returns the ArrayList crops from the farm class.
-	 * @return ArrayList of crops owned.
-	 */
-	public ArrayList<Crop> getCrops()
-	{
-		return farm.getCrops();
-	}
-	
-	/**
-	 * Returns the ArrayList animals from the farm class.
-	 * @return ArrayList of animals owned.
-	 */
-	public ArrayList<Animal> getAnimals()
-	{
-		return farm.getAnimals();
-	}
-	
-	/**
 	 * Returns the number of items the user has that have the type "Crop".
 	 * @return integer of the number of items of type "Crop".
 	 */
@@ -769,15 +713,70 @@ public class GameEnvironment
 	}
 	
 	/**
+	 * A simple function to check whether a string has only alphabetical letters.
+	 * Returns false if it does not.
+	 * @param name The name being tested for only Alpha characters.
+	 * @return True or false depending on the characters in <code>name</code>
+	 */
+	public boolean isAlpha(String name)
+	{
+	    return name.matches("[a-zA-Z ]+");
+	}
+	
+	/**
+	 * Returns a double as a string with two decimal places, for use with dollars and cents.
+	 * @param amount The amount of money owning.
+	 * @return String format of a double with 2dp
+	 */
+	public String returnDollarsCents(double amount)
+	{
+		return String.format("%.2f", amount);
+	}
+	
+	/**
+	 * Returns the ArrayList crops from the farm class.
+	 * @return ArrayList of crops owned.
+	 */
+	public ArrayList<Crop> getCrops()
+	{
+		return farm.getCrops();
+	}
+	
+	/**
+	 * Returns the ArrayList animals from the farm class.
+	 * @return ArrayList of animals owned.
+	 */
+	public ArrayList<Animal> getAnimals()
+	{
+		return farm.getAnimals();
+	}
+	
+	/**
+	 * Returns the number of days user wants to play for.
+	 * @return Number of days
+	 */
+	public int getNumDays()
+	{
+		return numDays;
+	}
+	
+	/**
+	 * Returns the actions performed.
+	 * @return current actions performed
+	 */
+	public int getActionsPerformed()
+	{
+		return actionsPerformed;
+	}
+	
+	/**
 	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.
 	 * @param args
 	 */
-	public static void main(String[] args) 
+	public static void main(String[] args)
 	{
 		GameEnvironment game = new GameEnvironment();
 		game.launchSetupScreen();
 	}
-	
-
 
 }

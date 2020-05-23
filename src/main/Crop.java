@@ -5,7 +5,7 @@ package main;
  * Here the user can grow the crop, get days left to grow and get the sell price.
  * @author Griffin Baxter and Rutger van Kruiningen
  */
-public class Crop implements StoreItem
+public class Crop implements StoreProduct
 {
 
 	/**
@@ -76,6 +76,31 @@ public class Crop implements StoreItem
 	}
 	
 	/**
+	 * Grows the crop by increasing its <code>daysGrown</code> only if the days left to grow is greater than 0.
+	 */
+	public void grow()
+	{
+		if (getDaysLeftToGrow() > 0)
+		{
+			daysGrown++;
+		}
+		
+	}
+	
+	/**
+	 * Tends to the crop by the specified double <code>daysToIncrease</code>, only if the days left to grow is greater than 0.
+	 * @param daysToIncrease Number of days to increase growth by.
+	 */
+	public void tend(double daysToIncrease)
+	{
+		daysGrown += daysToIncrease;
+		if (getDaysLeftToGrow() < 0)
+		{
+			daysGrown = daysToGrow;
+		}
+	}
+	
+	/**
 	 * Returns the purchase price of the crop.
 	 * @return the purchase price.
 	 */
@@ -128,31 +153,5 @@ public class Crop implements StoreItem
 	{
 		return daysToGrow - daysGrown;
 	}
-	
-	/**
-	 * Grows the crop by increasing its <code>daysGrown</code> only if the days left to grow is greater than 0.
-	 */
-	public void grow()
-	{
-		if (getDaysLeftToGrow() > 0)
-		{
-			daysGrown++;
-		}
-		
-	}
-	
-	/**
-	 * Tends to the crop by the specified double <code>daysToIncrease</code>, only if the days left to grow is greater than 0.
-	 * @param daysToIncrease Number of days to increase growth by.
-	 */
-	public void tend(double daysToIncrease)
-	{
-		daysGrown += daysToIncrease;
-		if (getDaysLeftToGrow() < 0)
-		{
-			daysGrown = daysToGrow;
-		}
-	}
-	
 	
 }

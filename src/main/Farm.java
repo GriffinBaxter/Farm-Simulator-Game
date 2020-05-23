@@ -122,69 +122,6 @@ public class Farm
 	}
 	
 	/**
-	 * Returns the current available money for the farm.
-	 * @return Money available.
-	 */
-	public double getMoney()
-	{
-		return money;
-	}
-	
-	/**
-	 * Returns the profit the farm has made by subtracting <code>initMoney</code> from <code>money</code>.
-	 * @return The profit of the farm.
-	 */
-	public double getProfit()
-	{
-		return money - initMoney;
-	}
-	
-	/**
-	 * Returns the farm name from the <code>farmName</code> variable.
-	 * @return The farm name.
-	 */
-	public String getFarmName() 
-	{
-		return farmName;
-	}
-	
-	/**
-	 * Returns the crops the farm currently has planted from the crops ArrayList.
-	 * @return An ArrayList of crops owned.
-	 */
-	public ArrayList<Crop> getCrops() 
-	{
-		return crops;
-	}
-	
-	/**
-	 * Returns the animals the farm currently owns from the animals ArrayList.
-	 * @return An ArrayList of animals owned.
-	 */
-	public ArrayList<Animal> getAnimals() 
-	{
-		return animals;
-	}
-	
-	/**
-	 * Returns the items the farm currently owns from the items ArrayList.
-	 * @return An ArrayList of items owned.
-	 */
-	public ArrayList<Item> getItems() 
-	{
-		return items;
-	}
-	
-	/**
-	 * Returns the total crop space the farm has.
-	 * @return The crop space.
-	 */
-	public int getCropSpace() 
-	{
-		return cropSpace;
-	}
-	
-	/**
 	 * Returns true if any of the crops owned can be harvested, false otherwise. Used to determine whether to harvest crops or not.
 	 * @return true if crops can be harvested, false otherwise.
 	 */
@@ -216,7 +153,6 @@ public class Farm
 		{
 			if (crop.canHarvest())
 			{
-				//Harvest here
 				cropsToRemove.add(crop);
 				moneyMade += crop.getSellPrice();
 			}
@@ -322,7 +258,7 @@ public class Farm
 	 */
 	public void increaseCrops(Crop crop)
 	{
-		crops.add(new Crop(crop));//Creates a new instance of the crop as i was  having problems with crops linking to the same class
+		crops.add(new Crop(crop));
 		money -= crop.getPurchasePrice();
 	}
 	
@@ -391,6 +327,69 @@ public class Farm
 			}
 		}
 		return itemString;
+	}
+	
+	/**
+	 * Returns the current available money for the farm.
+	 * @return Money available.
+	 */
+	public double getMoney()
+	{
+		return money;
+	}
+	
+	/**
+	 * Returns the profit the farm has made by subtracting <code>initMoney</code> from <code>money</code>.
+	 * @return The profit of the farm.
+	 */
+	public double getProfit()
+	{
+		return money - initMoney;
+	}
+	
+	/**
+	 * Returns the farm name from the <code>farmName</code> variable.
+	 * @return The farm name.
+	 */
+	public String getFarmName() 
+	{
+		return farmName;
+	}
+	
+	/**
+	 * Returns the crops the farm currently has planted from the crops ArrayList.
+	 * @return An ArrayList of crops owned.
+	 */
+	public ArrayList<Crop> getCrops() 
+	{
+		return crops;
+	}
+	
+	/**
+	 * Returns the animals the farm currently owns from the animals ArrayList.
+	 * @return An ArrayList of animals owned.
+	 */
+	public ArrayList<Animal> getAnimals() 
+	{
+		return animals;
+	}
+	
+	/**
+	 * Returns the items the farm currently owns from the items ArrayList.
+	 * @return An ArrayList of items owned.
+	 */
+	public ArrayList<Item> getItems() 
+	{
+		return items;
+	}
+	
+	/**
+	 * Returns the total crop space the farm has.
+	 * @return The crop space.
+	 */
+	public int getCropSpace() 
+	{
+		return cropSpace;
 	}
 	
 }

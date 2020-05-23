@@ -5,7 +5,7 @@ package main;
  * Here the user can get the bonus of the Item.
  * @author Griffin Baxter and Rutger van Kruiningen
  */
-public class Item implements StoreItem
+public class Item implements StoreProduct
 {
 
 	/**

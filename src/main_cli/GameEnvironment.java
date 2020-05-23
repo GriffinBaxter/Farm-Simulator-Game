@@ -202,6 +202,7 @@ public class GameEnvironment
 		
 		farmer = new Farmer(farmerName, 1, 20); // First day, Default age is 20
 		farm = new Farm(farmName, farmType);
+		
 		//Create store
 		if (farmType == "Normal") 
 		{
@@ -222,8 +223,6 @@ public class GameEnvironment
 		
 	}
 	
-	
-	
 	/**
 	 * A modular method that takes a String <code>optionString</code> and an int <code>numOptions</code>,
 	 * Prints out the <code>optionString</code> and takes in an input of an int from the user.
@@ -239,7 +238,7 @@ public class GameEnvironment
      */
 	public int printOptions(String optionsString, int numOptions)
 	{
-		int option = -1; //nothing chosen yet
+		int option = -1; // No option chosen
 		do
 		{
 			scanner = new Scanner(System.in);
@@ -269,15 +268,12 @@ public class GameEnvironment
 	 */
 	public void mainGame()
 	{
-
-		//Command line Application
 		String optionsString = "Please chose an option from below:\n"
 				+ "0. Exit Game\n"
 				+ "1. View status of Crops and Animals\n"
 				+ "2. View status of Farm\n"
 				+ "3. Visit Store\n"
 				+ "4. Sleep (Move to the next day)\n"
-				//Actions required
 				+ "5. Tend to Crops\n"
 				+ "6. Feed Animals\n"
 				+ "7. Play with Animals\n"
@@ -290,7 +286,7 @@ public class GameEnvironment
 		{
 		case 0: // Exit game
 			System.exit(0);
-		case 1: //View status of Crops and Animals
+		case 1: // View status of Crops and Animals
 			
 			System.out.println("\n" + farm.getFarmName() + " has " + farm.getCrops().size() + " crops");
 			for(Crop crop: farm.getCrops()) 
@@ -319,56 +315,56 @@ public class GameEnvironment
 			
 			break;
 			
-		case 2: //View status of Farm
+		case 2: // View status of Farm
 			System.out.println(farm.getFarmName() + " currently has $" + returnDollarsCents(farm.getMoney()) + " available and " + farm.calculateFreeSpace() + " free spaces for new crops");
 			break;
-		case 3: //Visit Store
+		case 3: // Visit Store
 			visitStore();
 			break;
-		case 4: //Sleep
+		case 4: // Sleep
 			nextDay();
 			break;
-		case 5: //Tend to Crops
+		case 5: // Tend to Crops
 			if(actionsPerformed >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
 			}
 			else 
 			{
-				tendToCrops(); //actionsPerformed is incremented in the tendToCrops() function
+				tendToCrops();
 			}
 			break;
-		case 6: //Feed Animals
+		case 6: // Feed Animals
 			if(actionsPerformed >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
 			}
 			else 
 			{
-				feedAnimals(); //actionsPerformed is incremented in the feedAnimals() function
+				feedAnimals();
 			}
 			break;
-		case 7: //Play with Animals
+		case 7: // Play with Animals
 			if(actionsPerformed >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
 			}
 			else 
 			{
-				playWithAnimals(); //actionsPerformed is incremented in the playWithAnimals() function
+				playWithAnimals();
 			}
 			break;
-		case 8: //Harvest Crops
+		case 8: // Harvest Crops
 			if(actionsPerformed >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
 			}
 			else 
 			{
-				harvestCrops(); //actionsPerformed is incremented in the harvestCrops() function
+				harvestCrops();
 			}
 			break;
-		case 9: //Tend to the Farm land
+		case 9: // Tend to the Farm land
 			if(actionsPerformed >= 2)
 			{
 				System.out.println("You can not do this as you have no actions left");
@@ -408,7 +404,7 @@ public class GameEnvironment
 		int option = printOptions(optionsString, numOptions);
 		switch(option)
 		{
-		case 0: //Exit store
+		case 0: // Exit store
 			stayInStore = false;
 			break;
 		case 1: //View Crops for sale
@@ -455,7 +451,6 @@ public class GameEnvironment
 			System.out.println("You own " + farm.getItems().size() + " items. They are:");
 			for(Item item: store.getItemsForSale()) 
 			{
-				//Getting the quantities of items brought
 				int numOwned = 0;
 				for(Item checkItem: farm.getItems()) 
 				{
@@ -464,7 +459,7 @@ public class GameEnvironment
 						numOwned++;
 					}
 				}
-				if (numOwned != 0)//If you own this item
+				if (numOwned != 0) // If the item is already owned
 				{
 					System.out.println(item.getName());
 					System.out.println("You own " + numOwned + " of these");
@@ -495,8 +490,6 @@ public class GameEnvironment
 		{
 			visitStore();
 		}
-		
-		
 	}
 	
 	/**
@@ -524,7 +517,7 @@ public class GameEnvironment
 				{
 					System.out.println("You don't have enough money to buy " + store.getCropsForSale().get(purchaseOption - 1).getName() + "!");
 				}
-				else if (purchaseOption != 0) //If the player did not choose None
+				else if (purchaseOption != 0) // If the player did not choose None
 				{
 					farm.increaseCrops(store.getCropsForSale().get(purchaseOption - 1));
 					System.out.println(store.getCropsForSale().get(purchaseOption - 1).getName() + " bought!");
@@ -551,7 +544,7 @@ public class GameEnvironment
 			{
 				System.out.println("You don't have enough money to buy " + store.getAnimalsForSale().get(purchaseOption - 1).getName() + "!");
 			}
-			else if (purchaseOption != 0) //If the player did not choose None
+			else if (purchaseOption != 0) // If the player did not choose None
 			{
 				farm.increaseAnimals(store.getAnimalsForSale().get(purchaseOption - 1));
 				System.out.println(store.getAnimalsForSale().get(purchaseOption - 1).getName() + " bought!");
@@ -571,7 +564,7 @@ public class GameEnvironment
 			{
 				System.out.println("You don't have enough money to buy " + store.getItemsForSale().get(purchaseOption - 1).getName() + "!");
 			}
-			else if (purchaseOption != 0) //If the player did not choose None
+			else if (purchaseOption != 0) // If the player did not choose None
 			{
 				farm.increaseItems(store.getItemsForSale().get(purchaseOption - 1));
 				System.out.println(store.getItemsForSale().get(purchaseOption - 1).getName() + " bought!");
@@ -606,13 +599,11 @@ public class GameEnvironment
 	 */
 	public void nextDay() 
 	{
-		//if the game is finished
 		System.out.println(farmer.getFarmerName() + " has slept.\n");
 		farmer.increaseDaysPassed();
 		actionsPerformed = 0;
 		if (farmer.getDaysPassed() != numDays)
 		{
-			//Grow crops
 			farm.growCrops();
 			farm.increaseMoney(farm.collectAnimalMoney());
 		}
@@ -633,7 +624,7 @@ public class GameEnvironment
 		int tendOption = printOptions(farm.returnCropsString("0. Don't tend to anything\n", differentCrops), farm.getCrops().size());
 		if (tendOption != 0)
 		{
-			String cropName = differentCrops.get(tendOption-1).getName();
+			String cropName = differentCrops.get(tendOption - 1).getName();
 			System.out.println("Please select the item you would like to tend all of your " + cropName + " with:");
 			String itemString = "0. Don't use anything\n"
 					+ "1. Water (free)\n";
@@ -652,20 +643,18 @@ public class GameEnvironment
 			
 			if (itemOption != 0)
 			{
-				actionsPerformed++;//Increase the actions performed by 1 after the player has chosen to tend to their crops
-				if (itemOption == 1)//Watered crops
+				actionsPerformed++;
+				if (itemOption == 1) // Watered crops
 				{
 					farm.tendSpecificCrops(cropName, 1.0);
 					System.out.println("Tended to every " + differentCrops.get(tendOption-1).getName() 
 							+ " by watering them");
 				}
-				else//If used an item on the crop
+				else // If an item was used on the crop
 				{
-					Item itemUsed = availCropItems.get(itemOption-2);
+					Item itemUsed = availCropItems.get(itemOption - 2);
 					farm.tendSpecificCrops(cropName, itemUsed.getBonus());
-					//Remove the item from the users inventory
 					farm.decreaseItems(itemUsed);
-
 					System.out.println("Tended to every " + differentCrops.get(tendOption-1).getName() 
 							+ " by using " + itemUsed.getName() + " on them");
 				}
@@ -680,30 +669,22 @@ public class GameEnvironment
 	public void feedAnimals() 
 	{
 		System.out.println("Please select the item you would like to feed all of your animals with:");
-		
 		ArrayList <Item> availAnimalItems = new ArrayList<Item>();
-		
 		for (Item item: farm.getItems())
 		{
 			if (item.getType() == "Animal")
-				{
+			{
 				availAnimalItems.add(item);
-				}
+			}
 		}
-		
-		
-		
 		int itemOption = printOptions(farm.returnItemsString("0. Don't feed animals\n", "Animal", 0), availAnimalItems.size());
-		
 		if (itemOption != 0)
 		{
-			
-			Item itemUsed = availAnimalItems.get(itemOption-1);
-			
+			Item itemUsed = availAnimalItems.get(itemOption - 1);
 			if (farm.increaseHealthAllAnimals(itemUsed.getBonus())) 
 			{
 				actionsPerformed++;
-				farm.decreaseItems(itemUsed); //Remove the item from the users inventory
+				farm.decreaseItems(itemUsed);
 				System.out.println("Fed every animal with " + itemUsed.getName());
 			}
 			else 
@@ -791,8 +772,6 @@ public class GameEnvironment
 			score += animal.getHappiness() * animal.getHealth();
 		}
 		
-		
-
 		System.out.println("The game has finished!\n"
 				+ "Stats for " + farmer.getFarmerName() + " on the farm " + farm.getFarmName() + ":\n"
 				+ farmer.getDaysPassed() + " days have passed.\n"
@@ -833,7 +812,4 @@ public class GameEnvironment
 		game.mainGame();
 
 	}
-	
-
-
 }

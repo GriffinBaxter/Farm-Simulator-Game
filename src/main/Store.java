@@ -46,7 +46,7 @@ public class Store
 	 */
 	public Store(double initAnimalHappiness)
 	{
-		//Crops
+		// Crops
 		cropsForSale.add(new Wheat());
 		cropsForSale.add(new Corn());
 		cropsForSale.add(new Potato());
@@ -54,14 +54,13 @@ public class Store
 		cropsForSale.add(new Strawberry());
 		cropsForSale.add(new Pumpkin());
 		
-		
-		//Animals
+		// Animals
 		animalsForSale.add(new Sheep(initAnimalHappiness));
 		animalsForSale.add(new Cow(initAnimalHappiness));
 		animalsForSale.add(new Goat(initAnimalHappiness));
 		
-		//Items
-		//The bonus for crops is an increase in the days grown.
+		// Items
+		// The bonus for crops is an increase in the days grown.
 		itemsForSale.add(new OrganicFertiliser());
 		itemsForSale.add(new InorganicFertiliser());
 		itemsForSale.add(new Compost());
