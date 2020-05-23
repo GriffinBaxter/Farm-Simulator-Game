@@ -218,7 +218,7 @@ public class TendCropsScreen
 			{
 				JOptionPane.showMessageDialog(tendCropsScreenFrame, manager.tendToCrops(cropDisplayList.getSelectedIndex(), itemDisplayList.getSelectedValue().toString()));
 				finishWindow();
-				manager.launchTendCropsScreen();
+				manager.launchMainScreen();
 			}
 		});
 		tendCropsButton.setBounds(871, 233, 190, 56);

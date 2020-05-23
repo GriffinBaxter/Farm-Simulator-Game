@@ -184,7 +184,7 @@ public class FeedAnimalsScreen
 			{
 				JOptionPane.showMessageDialog(feedAnimalsScreenFrame, manager.feedAnimals(itemDisplayList.getSelectedValue().toString()));
 				finishWindow();
-				manager.launchFeedAnimalsScreen();
+				manager.launchMainScreen();
 				
 				
 			}
