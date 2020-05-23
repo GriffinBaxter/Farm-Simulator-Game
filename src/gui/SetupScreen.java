@@ -155,7 +155,7 @@ public class SetupScreen
 		
 		JLabel nameWarningLabel = new JLabel("(must be between 3 and 15 characters and must not include numbers or special characters)");
 		nameWarningLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		nameWarningLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		nameWarningLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		nameWarningLabel.setBounds(10, 153, 586, 27);
 		setupScreenFrame.getContentPane().add(nameWarningLabel);
 		
@@ -250,12 +250,12 @@ public class SetupScreen
 			}
 		});
 		startGameButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-		startGameButton.setBounds(528, 555, 128, 45);
+		startGameButton.setBounds(512, 555, 160, 45);
 		setupScreenFrame.getContentPane().add(startGameButton);
 		
 		JLabel farmNameWarningLabel = new JLabel("(must be between 3 and 15 characters and must not include numbers or special characters)");
 		farmNameWarningLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		farmNameWarningLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		farmNameWarningLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		farmNameWarningLabel.setBounds(10, 483, 586, 27);
 		setupScreenFrame.getContentPane().add(farmNameWarningLabel);
 	}

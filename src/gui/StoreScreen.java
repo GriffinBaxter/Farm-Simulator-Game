@@ -247,7 +247,7 @@ public class StoreScreen
 		cropsList = new JList<Object>();
 		cropsScrollPane.setViewportView(cropsList);
 		cropsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		cropsList.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		cropsList.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		cropsList.setModel(new AbstractListModel<Object>() 
 		{
 			String[] values = manager.returnCropArray();
@@ -325,7 +325,7 @@ public class StoreScreen
 		animalsList = new JList<Object>();
 		animalsScrollPane.setViewportView(animalsList);
 		animalsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		animalsList.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		animalsList.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		animalsList.setModel(new AbstractListModel<Object>() 
 		{
 			String[] values = manager.returnAnimalArray();
@@ -403,7 +403,7 @@ public class StoreScreen
 		itemsList = new JList<Object>();
 		itemsScrollPane.setViewportView(itemsList);
 		itemsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		itemsList.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		itemsList.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		itemsList.setModel(new AbstractListModel<Object>() 
 		{
 			String[] values = manager.returnItemArray();

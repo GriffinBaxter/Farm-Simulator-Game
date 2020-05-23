@@ -295,11 +295,11 @@ public class GameEnvironment
 			score += animal.getHappiness() * animal.getHealth();
 		}
 		
-		 String returnString = "The game has finished!\n"
+		 String returnString = "The game has finished!\n\n"
 				+ "Stats for " + farmer.getFarmerName() + ", age: " + farmer.getFarmerAge() + ", on the farm " + farm.getFarmName() + ":\r\n"
 				+ (farmer.getDaysPassed() - 1) + " days have passed.\r\n"
 				+ farmer.getFarmerName() + profitString
-				+ "Total Score: " + Math.round(score) + "\r\n" //rounds score to 0dp
+				+ "Total Score: " + Math.round(score) + "\r\n\n" //rounds score to 0dp
 				+ "Score is able to be increased by the profit, the healthiness and happiness of animals, the percentage of crop slots utilised, and by choosing a lower number of days!";
 		 return returnString;
 	}

@@ -112,7 +112,7 @@ public class MainScreen
 		JLabel farmStatusLabel = new JLabel("Farm Status");
 		farmStatusLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		farmStatusLabel.setFont(new Font("Tahoma", Font.BOLD, 22));
-		farmStatusLabel.setBounds(10, 11, 151, 24);
+		farmStatusLabel.setBounds(10, 11, 185, 24);
 		headerPanel.add(farmStatusLabel);
 		
 		JLabel currentMoneyLabel = new JLabel("Current Money: $" + manager.returnMoneyString());
@@ -186,7 +186,7 @@ public class MainScreen
 		actionsRequiredPanel.setLayout(null);
 		
 		JLabel requireActionsLabel = new JLabel("Require Actions: (" + (2 - manager.getActionsPerformed()) + " remaining)");
-		requireActionsLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		requireActionsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		requireActionsLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		requireActionsLabel.setBounds(10, 12, 268, 24);
 		actionsRequiredPanel.add(requireActionsLabel);
