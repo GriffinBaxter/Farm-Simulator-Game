@@ -235,6 +235,7 @@ public class GameEnvironmentCLI
 	 * if it is not the method will ask again.
 	 * @param optionsString String of options the user has.
 	 * @param numOptions Number of options in optionString.
+	 * @return The option as an integer.
      */
 	public int printOptions(String optionsString, int numOptions)
 	{
@@ -586,6 +587,7 @@ public class GameEnvironmentCLI
 	/**
 	 * Returns a double as a string with two decimal places, for use with dollars and cents.
 	 * @param amount The amount of money wanting to be converted to 2dp.
+	 * @return String as dollars and cents.
 	 */
 	public String returnDollarsCents(double amount) 
 	{
@@ -802,7 +804,7 @@ public class GameEnvironmentCLI
 	
 	/**
 	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.
-	 * @param args
+	 * @param args An array of command line arguments for the application.
 	 */
 	public static void main(String[] args) 
 	{

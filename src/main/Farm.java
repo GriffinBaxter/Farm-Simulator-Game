@@ -96,7 +96,8 @@ public class Farm
 	}
 	
 	/**
-	 * Calculates the available free space
+	 * Calculates the available free space.
+	 * @return Returns the available free space.
 	 */
 	public int calculateFreeSpace() 
 	{

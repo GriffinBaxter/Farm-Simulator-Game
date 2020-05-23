@@ -85,6 +85,7 @@ public class SetupScreen
 	
 	/**
 	 * Launch the application.
+	 * @param args An array of command line arguments for the application.
 	 */
 	public static void main(String[] args) 
 	{

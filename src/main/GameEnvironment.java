@@ -314,6 +314,7 @@ public class GameEnvironment
 	
 	/**
 	 * A method to close the main screen
+	 * @param mainWindow The main screen.
 	 */
 	public void closeMainScreen(MainScreen mainWindow)
 	{
@@ -330,6 +331,7 @@ public class GameEnvironment
 	
 	/**
 	 * A method to close the setup screen.
+	 * @param setupWindow The setup screen.
 	 */
 	public void closeSetupScreen(SetupScreen setupWindow)
 	{
@@ -347,6 +349,7 @@ public class GameEnvironment
 	
 	/**
 	 * A method to close the store screen
+	 * @param storeWindow The store screen.
 	 */
 	public void closeStoreScreen(StoreScreen storeWindow)
 	{
@@ -362,6 +365,7 @@ public class GameEnvironment
 	
 	/**
 	 * A method to close the tend to crops screen
+	 * @param tendCropsWindow The tend crops screen.
 	 */
 	public void closeTendCropsScreen(TendCropsScreen tendCropsWindow)
 	{
@@ -378,6 +382,7 @@ public class GameEnvironment
 	
 	/**
 	 * A method to close the feed animals screen
+	 * @param feedAnimalsWindow The feed animals screen.
 	 */
 	public void closeFeedAnimalsScreen(FeedAnimalsScreen feedAnimalsWindow)
 	{
@@ -403,6 +408,7 @@ public class GameEnvironment
 	
 	/**
 	 * Returns a String array with the name of all of the items currently owned given the correct String <code>itemType</code>.
+	 * @param itemType The item's type as a String.
 	 * @return String Array containing names of items
 	 */
 	public String[] returnCurrentItemsArray(String itemType) 
@@ -751,7 +757,7 @@ public class GameEnvironment
 	
 	/**
 	 * main function of the program. this is where the game is started by calling the startGame and mainGame methods.
-	 * @param args
+	 * @param args An array of command line arguments for the application.
 	 */
 	public static void main(String[] args)
 	{
