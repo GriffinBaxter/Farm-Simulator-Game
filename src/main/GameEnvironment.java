@@ -1,5 +1,10 @@
 package main;
 
+import gui.FeedAnimalsScreen;
+import gui.MainScreen;
+import gui.SetupScreen;
+import gui.StoreScreen;
+import gui.TendCropsScreen;
 import java.util.ArrayList;
 import java.lang.Math;
 

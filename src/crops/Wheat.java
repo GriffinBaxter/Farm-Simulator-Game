@@ -1,4 +1,6 @@
-package main;
+package crops;
+
+import main.Crop;
 
 /**
  * Wheat class extending the Crop class.

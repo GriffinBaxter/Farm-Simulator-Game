@@ -1,5 +1,6 @@
-package main;
+package gui;
 
+import main.GameEnvironment;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

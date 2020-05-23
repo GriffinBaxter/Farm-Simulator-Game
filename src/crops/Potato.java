@@ -1,4 +1,6 @@
-package main;
+package crops;
+
+import main.Crop;
 
 /**
  * Potato class extending the Crop class.

@@ -1,4 +1,6 @@
-package main;
+package items;
+
+import main.Item;
 
 /**
  * Inorganic Fertiliser class extending the Item class.

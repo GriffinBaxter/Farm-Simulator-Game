@@ -1,4 +1,6 @@
-package main;
+package animals;
+
+import main.Animal;
 
 /**
  * Cow class extending the Animal class.

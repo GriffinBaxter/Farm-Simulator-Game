@@ -1,4 +1,6 @@
-package main;
+package items;
+
+import main.Item;
 
 /**
  * Apples class extending the Item class.

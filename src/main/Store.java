@@ -1,4 +1,20 @@
 package main;
+
+import animals.Cow;
+import animals.Goat;
+import animals.Sheep;
+import crops.Corn;
+import crops.Parsnip;
+import crops.Potato;
+import crops.Pumpkin;
+import crops.Strawberry;
+import crops.Wheat;
+import items.Apples;
+import items.Compost;
+import items.HayBales;
+import items.InorganicFertiliser;
+import items.Lucerne;
+import items.OrganicFertiliser;
 import java.util.ArrayList;
 
 /**

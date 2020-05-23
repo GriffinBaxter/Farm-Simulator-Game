@@ -1,4 +1,6 @@
-package main;
+package items;
+
+import main.Item;
 
 /**
  * HayBales class extending the Item class.

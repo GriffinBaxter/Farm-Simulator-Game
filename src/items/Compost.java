@@ -1,4 +1,6 @@
-package main;
+package items;
+
+import main.Item;
 
 /**
  * Compost class extending the Item class.
