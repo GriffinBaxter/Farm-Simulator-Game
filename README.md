@@ -1,9 +1,9 @@
 # Farm Simulator Game
 A Farm Simulator project made in Java for SENG 201 (Software Engineering I) at the University of Canterbury, as part of a pair.
 
-The source code is in the "src" folder, sorted in their respective Java packages.
+The source code is in the "src" folder, sorted in their respective Java packages. The project is run from GameEnvioronment.java, where the game's GUI version can be found in the "main" package and the command line version can be found in the "main_cli" package.
 
-The JAR file (farm_simulator_game.jar) is the main project path.
+The JAR file (farm_simulator_game.jar) is in the GitHub respository.
 
 ## Running the JAR file
 
